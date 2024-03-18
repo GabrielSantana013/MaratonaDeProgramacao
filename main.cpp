@@ -416,3 +416,264 @@ return 0;
 }
 
 #endif // ex13
+
+#ifdef ex14
+
+using namespace std;
+
+/*
+Escreva um programa que leia três valores com ponto flutuante de dupla precisão: A, B e C. Em seguida, calcule e mostre:
+a) a área do triângulo retângulo que tem A por base e C por altura.
+b) a área do círculo de raio C. (pi = 3.14159)
+c) a área do trapézio que tem A e B por bases e C por altura.
+d) a área do quadrado que tem lado B.
+e) a área do retângulo que tem lados A e B.
+Entrada
+O arquivo de entrada contém três valores com um dígito após o ponto decimal.
+
+Saída
+O arquivo de saída deverá conter 5 linhas de dados.
+Cada linha corresponde a uma das áreas descritas acima, sempre com mensagem correspondente
+e um espaço entre os dois pontos e o valor. O valor calculado deve ser apresentado com 3 dígitos após o ponto decimal.
+*/
+
+#include <iomanip>
+
+int main(){
+    double a, b, c;
+
+    cin >>a>>b>>c;
+
+    cout <<"TRIANGULO: "<<fixed << setprecision(3)<<(a*c)/2<<endl;
+    cout <<"CIRCULO: "<<fixed << setprecision(3)<<(c*c)*3.14159<<endl;
+    cout <<"TRAPEZIO: "<<fixed << setprecision(3)<<(a+b)*c/2<<endl;
+    cout <<"QUADRADO: "<<fixed << setprecision(3)<<b*b<<endl;
+    cout <<"RETANGULO: "<<fixed << setprecision(3)<<a*b<<endl;
+
+return 0;
+}
+
+#endif // ex14
+
+#ifdef ex15
+using namespace std;
+ /*
+ Faça um programa que calcule e mostre o volume de uma esfera sendo fornecido o valor de seu raio (R).
+ A fórmula para calcular o volume é: (4/3) * pi * R3. Considere (atribua) para pi o valor 3.14159.
+
+Dica: Ao utilizar a fórmula, procure usar (4/3.0) ou (4.0/3), pois algumas linguagens (dentre elas o C++),
+assumem que o resultado da divisão entre dois inteiros é outro inteiro.
+
+Entrada
+O arquivo de entrada contém um valor de ponto flutuante (dupla precisão), correspondente ao raio da esfera.
+
+Saída
+A saída deverá ser uma mensagem "VOLUME" conforme o exemplo fornecido abaixo, com um espaço antes e um espaço depois da igualdade. O valor deverá ser apresentado com 3 casas após o ponto.
+ */
+
+#include <iomanip>
+
+
+int main(){
+ double pi = 3.14159, raio;
+ cin >> raio;
+
+ cout <<"VOLUME = "<<fixed << setprecision(3) << 4.0/3*(pi*(raio*raio*raio)) <<endl;
+return 0;
+}
+#endif // ex15
+
+
+#ifdef ex16
+
+/*
+Neste problema, deve-se ler o código de uma peça 1, o número de peças 1, o valor unitário de cada peça 1,
+o código de uma peça 2, o número de peças 2 e o valor unitário de cada peça 2. Após, calcule e mostre o valor a ser pago.
+
+Entrada
+O arquivo de entrada contém duas linhas de dados. Em cada linha haverá 3 valores,
+respectivamente dois inteiros e um valor com 2 casas decimais.
+
+Saída
+A saída deverá ser uma mensagem conforme o exemplo fornecido abaixo,
+lembrando de deixar um espaço após os dois pontos e um espaço após o "R$".
+O valor deverá ser apresentado com 2 casas após o ponto.
+*/
+
+#include <iomanip>
+using namespace std;
+
+int main(){
+
+    int codPeca1, codPeca2, nPeca1, nPeca2;
+    double  vPeca1, vPeca2;
+
+    cin >> codPeca1 >> nPeca1 >> vPeca1 >> codPeca2 >> nPeca2 >> vPeca2;
+
+    cout <<"VALOR A PAGAR: R$ " <<fixed << setprecision(2) <<(nPeca1*vPeca1) + (nPeca2*vPeca2) <<endl;
+
+
+
+return 0;
+}
+#endif // ex16
+
+#ifdef ex17
+
+/*
+Leia um valor inteiro.
+A seguir, calcule o menor número de notas possíveis (cédulas) no qual o valor pode ser decomposto.
+As notas consideradas são de 100, 50, 20, 10, 5, 2 e 1. A seguir mostre o valor lido e a relação de notas necessárias.
+
+Entrada
+O arquivo de entrada contém um valor inteiro N (0 < N < 1000000).
+
+Saída
+Imprima o valor lido e, em seguida, a quantidade mínima de notas de cada tipo necessárias, conforme o exemplo fornecido.
+Não esqueça de imprimir o fim de linha após cada linha, caso contrário seu programa apresentará a mensagem: “Presentation Error”.
+*/
+
+using namespace std;
+int main(){
+
+int n, nota100, nota50, nota20, nota10, nota5, nota2, nota1;
+
+    nota100 = nota50 = nota20 = nota10 = nota5 = nota2 = nota1 = 0;
+
+    cin >> n;
+    cout <<n<<endl;
+
+    while(n>=100)
+    {
+        n -=100;
+        nota100++;
+    }
+    while(n>=50)
+    {
+        n-=50;
+        nota50 ++;
+    }
+    while(n>=20)
+    {
+        n-=20;
+        nota20 ++;
+    }
+    while(n>=10)
+    {
+        n-=10;
+        nota10 ++;
+    }
+    while(n>=5)
+    {
+        n-=5;
+        nota5 ++;
+    }
+
+    while(n>=2)
+    {
+        n-=2;
+        nota2 ++;
+    }
+
+    while(n>=1)
+    {
+        n-=1;
+        nota1 ++;
+    }
+
+    cout <<nota100<<" nota(s) de R$ 100,00" <<endl;
+    cout <<nota50<<" nota(s) de R$ 50,00" <<endl;
+    cout <<nota20<<" nota(s) de R$ 20,00" <<endl;
+    cout <<nota10<<" nota(s) de R$ 10,00" <<endl;
+    cout <<nota5<<" nota(s) de R$ 5,00" <<endl;
+    cout <<nota2<<" nota(s) de R$ 2,00" <<endl;
+    cout <<nota1<<" nota(s) de R$ 1,00" <<endl;
+
+return 0;
+}
+
+#endif // ex17
+
+#ifdef ex18
+/*
+Joaozinho quer calcular e mostrar a quantidade de litros de combustível gastos em uma viagem,
+ao utilizar um automóvel que faz 12 KM/L. Para isso, ele gostaria que você o auxiliasse através de um simples programa.
+Para efetuar o cálculo, deve-se fornecer o tempo gasto na viagem (em horas) e a velocidade média durante a mesma (em km/h).
+Assim, pode-se obter distância percorrida e, em seguida, calcular quantos litros seriam necessários.
+Mostre o valor com 3 casas decimais após o ponto.
+
+Entrada
+O arquivo de entrada contém dois inteiros. O primeiro é o tempo gasto na viagem (em horas)
+e o segundo é a velocidade média durante a mesma (em km/h).
+
+Saída
+Imprima a quantidade de litros necessária para realizar a viagem, com três dígitos após o ponto decimal
+*/
+
+#include <iomanip>
+
+using namespace std;
+
+int main(){
+
+    int tempo, vm;
+    cin >>tempo >> vm;
+    double litros = (tempo*vm)/12.00;
+
+    cout << fixed << setprecision(3) << litros <<endl;
+
+
+return 0;
+}
+
+#endif // ex18
+
+#ifdef ex19
+
+
+/*
+Leia um valor inteiro correspondente à idade de uma pessoa em dias e informe-a em anos, meses e dias
+
+Obs.: apenas para facilitar o cálculo, considere todo ano com 365 dias e todo mês com 30 dias.
+Nos casos de teste nunca haverá uma situação que permite 12 meses e alguns dias, como 360, 363 ou 364.
+Este é apenas um exercício com objetivo de testar raciocínio matemático simples.
+
+Entrada
+O arquivo de entrada contém um valor inteiro.
+
+Saída
+Imprima a saída conforme exemplo fornecido.
+*/
+using namespace std;
+
+
+
+int main(){
+
+    int dias, anos, meses;
+    dias = anos = meses = 0;
+
+    cin >>dias;
+
+    while(dias>=365)
+    {
+        dias -=365;
+        anos
+        ++;
+    }
+
+        while(dias>=30)
+    {
+        dias -=30;
+        meses ++;
+    }
+
+    cout <<anos <<" ano(s)" <<endl;
+    cout <<meses <<" mes(es)" <<endl;
+    cout <<dias <<" dia(s)" <<endl;
+
+
+return 0;
+}
+
+#endif // ex19
