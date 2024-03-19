@@ -1,59 +1,99 @@
 #include <iostream>
+#include <iomanip>
 
-#define ex13
-
+#define ex10
 
 #ifdef ex01
-using namespace std;
-
-int main() {
-
-    int a, b, x;
-    cin >> a >> b;
-    x = a+b;
-
-    cout << "x = " <<x;
-
-    return 0;
-}
-
-#endif // ex01
-
-#ifdef ex02
-
-/*A fórmula para calcular a área de uma circunferência é: area = π . raio2. Considerando para este problema que π = 3.14159:
-
-- Efetue o cálculo da área, elevando o valor de raio ao quadrado e multiplicando por π.
-
-Entrada
-A entrada contém um valor de ponto flutuante (dupla precisão), no caso, a variável raio.
-
-Saída
-Apresentar a mensagem "A=" seguido pelo valor da variável area, conforme exemplo abaixo, com 4 casas após o ponto decimal.
-Utilize variáveis de dupla precisão (double).
-Como todos os problemas, não esqueça de imprimir o fim de linha após o resultado, caso contrário, você receberá "Presentation Error".*/
-
-#include <iomanip> //lib pra manipular entrada e saida
 
 /*
-    fixed = agora a variavel q eu formatei sempre vai estar com aquelas casa decimais
-    setprecision() usada para determinar o número de casas decimais
+Leia 4 valores inteiros A, B, C e D. A seguir, se B for maior do que C e se D for maior do que A,
+e a soma de C com D for maior que a soma de A e B e se C e D, ambos,
+forem positivos e se a variável A for par escrever a mensagem "Valores aceitos", senão escrever "Valores nao aceitos".
+
+Entrada
+Quatro números inteiros A, B, C e D.
+
+Saída
+Mostre a respectiva mensagem após a validação dos valores.
 */
 
 using namespace std;
 
-
 int main(){
 
-    double pi = 3.14159, raio, area;
-    cin >> raio;
-    area = pi*(raio*raio);
+    int a,b,c,d;
 
-    cout << "A=" << fixed << setprecision(4) << area << endl;
+    cin >>a>>b>>c>>d;
+
+    if(b>c && d>a && c+d > a+b && a>0 && b>0 && a%2 ==0)
+    {
+        cout << "Valores aceitos" <<endl;
+    }
+    else
+    {
+        cout << "Valores nao aceitos" <<endl;
+    }
 
 
     return 0;
 }
+
+
+#endif // ex01
+
+
+
+
+#ifdef ex02
+
+/*
+
+Leia 3 valores de ponto flutuante e efetue o cálculo das raízes da equação de Bhaskara.
+Se não for possível calcular as raízes, mostre a mensagem correspondente “Impossivel calcular”, caso haja uma divisão por 0 ou raiz de numero negativo.
+
+Entrada
+Leia três valores de ponto flutuante (double) A, B e C.
+
+Saída
+Se não houver possibilidade de calcular as raízes, apresente a mensagem "Impossivel calcular".
+Caso contrário, imprima o resultado das raízes com 5 dígitos após o ponto, com uma mensagem correspondente conforme exemplo abaixo.
+Imprima sempre o final de linha após cada mensagem.
+
+*/
+
+#include <math.h>
+
+using namespace std;
+
+int main(){
+
+    double a,b,c, delta;
+
+    cin >>a>>b>>c;
+
+    if(a<=0)
+    {
+        cout <<"Impossivel calcular"<<endl;
+    }
+    else
+    {
+        delta = (b*b)-(4*a*c);
+
+        if(delta < 0)
+        {
+            cout <<"Impossivel calcular"<<endl;
+        }
+        else
+        {
+            cout <<"R1 = " <<fixed << setprecision(5) << ((-b)+(sqrt(delta)))/(2*a) <<endl;
+            cout <<"R2 = " <<fixed << setprecision(5) << ((-b)-(sqrt(delta)))/(2*a)<<endl;
+        }
+    }
+
+
+    return 0;
+}
+
 
 #endif // ex02
 
@@ -61,619 +101,579 @@ int main(){
 #ifdef ex03
 
 /*
-Leia dois valores inteiros, no caso para variáveis A e B. A seguir, calcule a soma entre elas e atribua à variável SOMA. A seguir escrever o valor desta variável.
+Você deve fazer um programa que leia um valor qualquer e apresente uma mensagem dizendo em qual dos seguintes intervalos ([0,25], (25,50], (50,75], (75,100]) este valor se encontra.
+Obviamente se o valor não estiver em nenhum destes intervalos, deverá ser impressa a mensagem “Fora de intervalo”.
 
+O símbolo ( representa "maior que". Por exemplo:
+[0,25]  indica valores entre 0 e 25.0000, inclusive eles.
+(25,50] indica valores maiores que 25 Ex: 25.00001 até o valor 50.0000000
 
 Entrada
-O arquivo de entrada contém 2 valores inteiros.
+O arquivo de entrada contém um número com ponto flutuante qualquer.
 
 Saída
-Imprima a mensagem "SOMA" com todas as letras maiúsculas, com um espaço em branco antes e depois da igualdade seguido pelo valor correspondente à soma de A e B. Como todos os problemas, não esqueça de imprimir o fim de linha após o resultado, caso contrário, você receberá "Presentation Error".
+A saída deve ser uma mensagem conforme exemplo abaixo.
 */
 
 using namespace std;
 
-int main() {
+int main(){
 
-    int a, b, soma;
+    double num;
 
-    cin >> a >> b;
-    soma = a+b;
+    cin >>num;
 
-    cout << "SOMA = "<<soma<<endl;
-
+    if(num>=0 && num <=25)
+    {
+        cout << "Intervalo [0,25]"<<endl;
+    }
+    else if(num>25 && num <=50)
+    {
+        cout << "Intervalo (25,50]"<<endl;
+    }
+    else if(num>50 && num <=75)
+    {
+        cout << "Intervalo (50,75]"<<endl;
+    }
+    else if(num>75 && num <=100)
+    {
+        cout << "Intervalo (75,100]"<<endl;
+    }
+    else
+    {
+        cout << "Fora de intervalo"<<endl;
+    }
 
     return 0;
 }
+
+
 #endif // ex03
+
+
 
 #ifdef ex04
 
 /*
-Leia dois valores inteiros. A seguir, calcule o produto entre estes dois valores e atribua esta operação à variável PROD.
-A seguir mostre a variável PROD com mensagem correspondente.
+Com base na tabela abaixo, escreva um programa que leia o código de um item e a quantidade deste item. A seguir, calcule e mostre o valor da conta a pagar.
 
 
 Entrada
-O arquivo de entrada contém 2 valores inteiros.
+O arquivo de entrada contém dois valores inteiros correspondentes ao código e à quantidade de um item conforme tabela acima.
 
 Saída
-Imprima a mensagem "PROD" e a variável PROD conforme exemplo abaixo, com um espaço em branco antes e depois da igualdade.
-Não esqueça de imprimir o fim de linha após o produto, caso contrário seu programa apresentará a mensagem: “Presentation Error”.
+O arquivo de saída deve conter a mensagem "Total: R$ " seguido pelo valor a ser pago, com 2 casas após o ponto decimal.
 */
 
-    using namespace std;
+using namespace std;
 
-    int main(){
 
-    int a, b, prod;
+int main(){
 
-    cin >> a >> b;
-    prod = a*b;
+    int codigo, qtt;
 
-    cout <<"PROD = " << prod<<endl;;
+    cin >>codigo>>qtt;
 
+    if(codigo==1)
+    {
+        cout <<"Total: R$ "<<fixed << setprecision(2)<<float(qtt*4)<<endl;
+    }
+    else if(codigo==2)
+    {
+        cout <<"Total: R$ "<<fixed << setprecision(2)<<float(qtt*4.5)<<endl;
+    }
+    else if(codigo==3)
+    {
+        cout <<"Total: R$ "<<fixed << setprecision(2)<<float(qtt*5)<<endl;
+    }
+    else if(codigo==4)
+    {
+        cout <<"Total: R$ "<<fixed << setprecision(2)<<float(qtt*2)<<endl;
+    }
+    else
+    {
+        cout <<"Total: R$ "<<fixed << setprecision(2)<<float(qtt*1.5)<<endl;
     }
 
+    return 0;
+}
+
+
 #endif // ex04
+
+
+
 
 
 #ifdef ex05
 
 /*
-Leia 2 valores de ponto flutuante de dupla precisão A e B, que correspondem a 2 notas de um aluno.
-A seguir, calcule a média do aluno, sabendo que a nota A tem peso 3.5 e a nota B tem peso 7.5 (A soma dos pesos portanto é 11).
-Assuma que cada nota pode ir de 0 até 10.0, sempre com uma casa decimal.
+Leia quatro números (N1, N2, N3, N4), cada um deles com uma casa decimal, correspondente às quatro notas de um aluno. Calcule a média com pesos 2, 3, 4 e 1, respectivamente,
+para cada uma destas notas e mostre esta média acompanhada pela mensagem "Media: ". Se esta média for maior ou igual a 7.0, imprima a mensagem "Aluno aprovado.".
+Se a média calculada for inferior a 5.0, imprima a mensagem "Aluno reprovado.".
+Se a média calculada for um valor entre 5.0 e 6.9, inclusive estas, o programa deve imprimir a mensagem "Aluno em exame.".
+
+No caso do aluno estar em exame, leia um valor correspondente à nota do exame obtida pelo aluno.
+Imprima então a mensagem "Nota do exame: " acompanhada pela nota digitada. Recalcule a média (some a pontuação do exame com a média anteriormente calculada e divida por 2).
+e imprima a mensagem "Aluno aprovado." (caso a média final seja 5.0 ou mais ) ou "Aluno reprovado.", (caso a média tenha ficado 4.9 ou menos).
+Para estes dois casos (aprovado ou reprovado após ter pego exame) apresente na última linha uma mensagem "Media final: " seguido da média final para esse aluno.
 
 Entrada
-O arquivo de entrada contém 2 valores com uma casa decimal cada um.
+A entrada contém quatro números de ponto flutuante correspendentes as notas dos alunos.
 
 Saída
-Imprima a mensagem "MEDIA" e a média do aluno conforme exemplo abaixo, com 5 dígitos após o ponto decimal
-e com um espaço em branco antes e depois da igualdade.
-Utilize variáveis de dupla precisão (double) e como todos os problemas, não esqueça de imprimir o fim de linha após o resultado,
-caso contrário, você receberá "Presentation Error".
+Todas as respostas devem ser apresentadas com uma casa decimal. As mensagens devem ser impressas conforme a descrição do problema.
+Não esqueça de imprimir o enter após o final de cada linha, caso contrário obterá "Presentation Error".
 */
-#include <iomanip>
 
 using namespace std;
 
 int main(){
 
-    double a,b, media;
-    cin >> a >> b;
+    double n1,n2,n3,n4, media;
+    cin >>n1>>n2>>n3>>n4;
+    media = ((n1*2)+(n2*3)+(n3*4)+(n4*1))/(2+3+4+1);
 
-    media = ((a*3.5)+(b*7.5))/11;
+    cout <<"Media: "<<fixed<<setprecision(1)<<media <<endl;
 
-    cout << "MEDIA = " << fixed << setprecision(5) << media <<endl;
+    if(media >=7)
+    {
+        cout <<"Aluno aprovado."<<endl;
+    }
+    else if(media>=5 && media<7)
+    {
+        cout <<"Aluno em exame."<<endl;
+        double nExame;
+        cin >>nExame;
+        cout <<"Nota do exame: "<<fixed<<setprecision(1)<<nExame<<endl;
+        media +=nExame;
+        media = media/2;
 
+        if(media>=5)
+        {
+            cout <<"Aluno aprovado."<<endl;
+        }
+        else
+        {
+            cout <<"Aluno reprovado."<<endl;
+        }
 
+        cout <<"Media final: "<<fixed<<setprecision(1)<<media<<endl;
+    }
+    else
+    {
+        cout <<"Aluno reprovado."<<endl;
+    }
 
-return 0;
+    return 0;
 }
+
 
 #endif // ex05
 
 
+
+
 #ifdef ex06
 
-#include<iomanip>
+/*
+Leia 2 valores com uma casa decimal (x e y), que devem representar as coordenadas de um ponto em um plano.
+A seguir, determine qual o quadrante ao qual pertence o ponto, ou se está sobre um dos eixos cartesianos ou na origem (x = y = 0).
+
+Se o ponto estiver na origem, escreva a mensagem “Origem”.
+
+Se o ponto estiver sobre um dos eixos escreva “Eixo X” ou “Eixo Y”, conforme for a situação.
+
+Entrada
+A entrada contem as coordenadas de um ponto.
+
+Saída
+A saída deve apresentar o quadrante em que o ponto se encontra.
+*/
 
 using namespace std;
 
-/*Leia 3 valores, no caso, variáveis A, B e C, que são as três notas de um aluno.
- A seguir, calcule a média do aluno, sabendo que a nota A tem peso 2, a nota B tem peso 3 e a nota C tem peso 5.
- Considere que cada nota pode ir de 0 até 10.0, sempre com uma casa decimal.
-
-Entrada
-O arquivo de entrada contém 3 valores com uma casa decimal, de dupla precisão (double).
-
-Saída
-Imprima a mensagem "MEDIA" e a média do aluno conforme exemplo abaixo,
-com 1 dígito após o ponto decimal e com um espaço em branco antes e depois da igualdade.
-Assim como todos os problemas, não esqueça de imprimir o fim de linha após o resultado, caso contrário, você receberá "Presentation Error".*/
-
 int main(){
 
-    double a,b,c, media;
+    double x,y;
 
-    cin >> a >> b >> c;
+    cin >>x>>y;
 
-    media = ((a*2)+(b*3)+(c*5))/10;
+    if(x ==0 && y ==0)
+    {
+        cout<<"Origem"<<endl;
+    }
+    else if(x>0 &&y>0)
+    {
+        cout<<"Q1"<<endl;
+    }
+     else if(x<0 &&y>0)
+    {
+        cout<<"Q2"<<endl;
+    }
+     else if(x<0 &&y<0)
+    {
+        cout<<"Q3"<<endl;
+    }
+     else if(x>0 &&y<0)
+    {
+        cout<<"Q4"<<endl;
+    }
+     else if(x==0 &&y!=0)
+    {
+        cout<<"Eixo Y"<<endl;
+    }
+    else
+    {
+        cout<<"Eixo X"<<endl;
+    }
 
-    cout << "MEDIA = " <<fixed<< setprecision(1)<<media<<endl;
-
-return 0;
+    return 0;
 }
 
 
 #endif // ex06
 
+
+
+
 #ifdef ex07
 
 /*
-Leia quatro valores inteiros A, B, C e D.
-A seguir, calcule e mostre a diferença do produto de A e B pelo produto de C e D segundo a fórmula: DIFERENCA = (A * B - C * D).
+Leia 3 valores inteiros e ordene-os em ordem crescente.
+No final, mostre os valores em ordem crescente, uma linha em branco e em seguida, os valores na sequência como foram lidos.
 
 Entrada
-O arquivo de entrada contém 4 valores inteiros.
+A entrada contem três números inteiros.
 
 Saída
-Imprima a mensagem DIFERENCA com todas as letras maiúsculas, conforme exemplo abaixo, com um espaço em branco antes e depois da igualdade.
+Imprima a saída conforme foi especificado.
 */
 
 using namespace std;
 
 int main(){
 
-    int a,b,c,d, diferenca;
-
-    cin >> a>>b>>c>>d;
-
-    diferenca = (a * b - c * d);
-
-    cout << "DIFERENCA = " << diferenca<<endl;
+    int a,b,c,a1,b1,c1;
 
 
-return 0;
-}
+    cin >>a>>b>>c;
 
-#endif // ex07
+    a1 = a;
+    b1 = b;
+    c1 = c;
 
-#ifdef ex08
+    if(b<a)
+    {
+        b = a^b;
+        a = a^b;
+        b = a^b;
 
-/*
-Escreva um programa que leia o número de um funcionário, seu número de horas trabalhadas,
-o valor que recebe por hora e calcula o salário desse funcionário.
-A seguir, mostre o número e o salário do funcionário, com duas casas decimais.
+    }
 
-Entrada
-O arquivo de entrada contém 2 números inteiros e 1 número com duas casas decimais, representando o número,
-quantidade de horas trabalhadas e o valor que o funcionário recebe por hora trabalhada, respectivamente.
+    if(c<b)
+    {
+        c = b^c;
+        b = b^c;
+        c = b^c;
+    }
 
-Saída
-Imprima o número e o salário do funcionário, conforme exemplo fornecido, com um espaço em branco antes e depois da igualdade.
-No caso do salário, também deve haver um espaço em branco após o $.
+    if(b<a)
+    {
+        b = a^b;
+        a = a^b;
+        b = a^b;
+    }
 
-*/
-#include <iomanip>
-using namespace std;
 
-int main(){
-
-    int nFuncionario;
-    float horasTrabalhadas, salarioHora;
-
-    cin >> nFuncionario >> horasTrabalhadas >> salarioHora;
-
-    cout << "NUMBER = " <<nFuncionario<<endl;
-    cout << "SALARY = U$ " <<fixed << setprecision(2) << salarioHora*horasTrabalhadas <<endl;
+    cout<<a<<endl;
+    cout<<b<<endl;
+    cout<<c<<endl;
+    cout<<""<<endl;
+    cout<<a1<<endl;
+    cout<<b1<<endl;
+    cout<<c1<<endl;
 
     return 0;
 }
 
+
+#endif // ex7
+
+
+
+#ifdef ex08
+
+/*
+Leia 3 valores reais (A, B e C) e verifique se eles formam ou não um triângulo. Em caso positivo, calcule o perímetro do triângulo e apresente a mensagem:
+
+
+Perimetro = XX.X
+
+
+Em caso negativo, calcule a área do trapézio que tem A e B como base e C como altura, mostrando a mensagem
+
+
+Area = XX.X
+
+Entrada
+A entrada contém três valores reais.
+
+Saída
+O resultado deve ser apresentado com uma casa decimal.
+*/
+
+
+using namespace std;
+
+int main(){
+
+    double a,b,c;
+
+    cin >>a >>b >>c;
+
+    if(a+b>c && b+c>a && c+a> b)
+    {
+        double perimetro = a+b+c;
+        cout <<"Perimetro = "<<fixed<<setprecision(1)<<perimetro<<endl;
+    }
+    else
+    {
+        double area = ((a+b)*c)/2;
+        cout <<"Area = "<<fixed<<setprecision(1)<<area<<endl;
+    }
+
+
+    return 0;
+}
+
+
 #endif // ex08
+
 
 #ifdef ex09
 
 /*
-Faça um programa que leia o nome de um vendedor, o seu salário fixo e o total de vendas efetuadas por ele no mês (em dinheiro).
-Sabendo que este vendedor ganha 15% de comissão sobre suas vendas efetuadas, informar o total a receber no final do mês,
-com duas casas decimais.
+Leia 2 valores inteiros (A e B).
+Após, o programa deve mostrar uma mensagem "Sao Multiplos" ou "Nao sao Multiplos", indicando se os valores lidos são múltiplos entre si.
 
 Entrada
-O arquivo de entrada contém um texto (primeiro nome do vendedor) e 2 valores de dupla precisão (double) com duas casas decimais,
-representando o salário fixo do vendedor e montante total das vendas efetuadas por este vendedor, respectivamente.
+A entrada contém valores inteiros.
 
 Saída
-Imprima o total que o funcionário deverá receber, conforme exemplo fornecido.
+A saída deve conter uma das mensagens conforme descrito acima.
 */
-#include <iomanip>
+
 
 using namespace std;
 
 int main(){
 
-    string name;
-    double salario, totalVendas;
+    int a,b;
+    cin>>a>>b;
 
-    cin >> name >> salario >> totalVendas;
+    if(b>a)
+    {
+        a = b^a;
+        b = b^a;
+        a = b^a;
 
-    cout << "TOTAL = R$ " << fixed <<setprecision(2)<< salario+(totalVendas*0.15) << endl;
+    }
+
+    if(a%b !=0)
+    {
+        cout<<"Nao sao Multiplos"<<endl;
+    }
+    else
+    {
+        cout<<"Sao Multiplos"<<endl;
+    }
+
+    return 0;
 }
+
 #endif // ex09
+
 
 #ifdef ex10
 
-#include <iomanip>
-using namespace std;
+/*
+Leia 3 valores de ponto flutuante A, B e C e ordene-os em ordem decrescente, de modo que o lado A representa o maior dos 3 lados.
+A seguir, determine o tipo de triângulo que estes três lados formam, com base nos seguintes casos, sempre escrevendo uma mensagem adequada:
 
-/*Calcule o consumo médio de um automóvel sendo fornecidos a distância total percorrida (em Km) e o total de combustível gasto (em litros).
-
+se A ≥ B+C, apresente a mensagem: NAO FORMA TRIANGULO
+se A2 = B2 + C2, apresente a mensagem: TRIANGULO RETANGULO
+se A2 > B2 + C2, apresente a mensagem: TRIANGULO OBTUSANGULO
+se A2 < B2 + C2, apresente a mensagem: TRIANGULO ACUTANGULO
+se os três lados forem iguais, apresente a mensagem: TRIANGULO EQUILATERO
+se apenas dois dos lados forem iguais, apresente a mensagem: TRIANGULO ISOSCELES
 Entrada
-O arquivo de entrada contém dois valores: um valor inteiro X representando a distância total percorrida (em Km), e um valor real Y representando o total de combustível gasto,
-com um dígito após o ponto decimal.
+A entrada contem três valores de ponto flutuante de dupla precisão A (0 < A) , B (0 < B) e C (0 < C).
 
 Saída
-Apresente o valor que representa o consumo médio do automóvel com 3 casas após a vírgula, seguido da mensagem "km/l".*/
+Imprima todas as classificações do triângulo especificado na entrada.
+*/
+
+using namespace std;
 
 int main(){
+    double a,b,c;
 
-    int distancia;
-    float combustivel;
+    cin >>a>>b>>c;
 
-    cin >> distancia >> combustivel;
 
-    cout << fixed << setprecision(3)<<distancia/combustivel <<" km/l"<<endl;
+    if(b>a)
+    {
+        b = b+a;
+        a = b-a;
+        b = b-a;
+    }
 
+    if(c>b)
+    {
+        c = c+b;
+        b = c-b;
+        c = c-b;
+    }
+
+    if(b>a)
+    {
+        b = b+a;
+        a = b-a;
+        b = b-a;
+    }
+
+
+
+    if(a>= b+c)
+    {
+      cout<<"NAO FORMA TRIANGULO"<<endl;
+    }
+    else{
+    if((a*a) == (b*b)+(c*c))
+    {
+        cout<<"TRIANGULO RETANGULO"<<endl;
+    }
+    if((a*a)> (b*b)+(c*c))
+    {
+        cout<<"TRIANGULO OBTUSANGULO"<<endl;
+    }
+    if((a*a)<(b*b)+(c*c))
+    {
+        cout<<"TRIANGULO ACUTANGULO"<<endl;
+    }
+    if(a==b && a ==c)
+    {
+       cout<<"TRIANGULO EQUILATERO"<<endl;
+    }
+    else if(a==b || b==c || c==a)
+    {
+        cout<<"TRIANGULO ISOSCELES"<<endl;
+    }
+    }
+
+    return 0;
 }
 
 #endif // ex10
 
+
 #ifdef ex11
 
-/*
-Dois carros (X e Y) partem em uma mesma direção. O carro X sai com velocidade constante de 60 Km/h e o carro Y sai com velocidade constante de 90 Km/h.
-
-Em uma hora (60 minutos) o carro Y consegue se distanciar 30 quilômetros do carro X, ou seja, consegue se afastar um quilômetro a cada 2 minutos.
-
-Leia a distância (em Km) e calcule quanto tempo leva (em minutos) para o carro Y tomar essa distância do outro carro.
-
-Entrada
-O arquivo de entrada contém um número inteiro.
-
-Saída
-Imprima o tempo necessário seguido da mensagem "minutos".
-*/
 
 using namespace std;
 
 int main(){
 
-    int x;
-    cin >> x;
-    cout << x*2 <<" minutos"<< endl;
 
+    return 0;
 }
 
 #endif // ex11
 
 
+
 #ifdef ex12
 
-/*Leia um valor inteiro, que é o tempo de duração em segundos de um determinado evento em uma fábrica, e informe-o expresso no formato horas:minutos:segundos.
-
-Entrada
-O arquivo de entrada contém um valor inteiro N.
-
-Saída
-Imprima o tempo lido no arquivo de entrada (segundos), convertido para horas:minutos:segundos, conforme exemplo fornecido.*/
 
 using namespace std;
 
-int main (){
+int main(){
 
-    int segundos, minutos = 0, horas = 0;
 
-    cin >>segundos;
-
-    while(segundos >=60)
-    {
-        segundos -= 60;
-        minutos ++;
-
-        if(minutos >=60)
-        {
-            minutos -=60;
-            horas ++;
-        }
-    }
-
-    cout << horas<<":"<<minutos<<":"<<segundos<<endl;
-
-return 0;
+    return 0;
 }
 
 #endif // ex12
 
+
+
 #ifdef ex13
 
-/*
-Faça um programa que leia três valores e apresente o maior dos três valores lidos seguido da mensagem “eh o maior”. Utilize a fórmula:
 
-maior ab = (a+b+abs(a-b))/2
-
-Obs.: a fórmula apenas calcula o maior entre os dois primeiros (a e b). Um segundo passo, portanto é necessário para chegar no resultado esperado.
-
-Entrada
-O arquivo de entrada contém três valores inteiros.
-
-Saída
-Imprima o maior dos três valores seguido por um espaço e a mensagem "eh o maior".
-*/
-
-#include <cmath>
 using namespace std;
-
 
 int main(){
 
-int a,b,c, maior;
-    cin >>a >>b >>c;
 
-    maior = ((a+b)+abs(a-b))/2;
-    if(maior > c)
-    {
-        cout <<maior <<" eh o maior"<< endl;
-    }
-
-    else{
-      cout <<c <<" eh o maior"<< endl;
-    }
-
-
-return 0;
+    return 0;
 }
 
 #endif // ex13
 
+
+
 #ifdef ex14
+
 
 using namespace std;
 
-/*
-Escreva um programa que leia três valores com ponto flutuante de dupla precisão: A, B e C. Em seguida, calcule e mostre:
-a) a área do triângulo retângulo que tem A por base e C por altura.
-b) a área do círculo de raio C. (pi = 3.14159)
-c) a área do trapézio que tem A e B por bases e C por altura.
-d) a área do quadrado que tem lado B.
-e) a área do retângulo que tem lados A e B.
-Entrada
-O arquivo de entrada contém três valores com um dígito após o ponto decimal.
-
-Saída
-O arquivo de saída deverá conter 5 linhas de dados.
-Cada linha corresponde a uma das áreas descritas acima, sempre com mensagem correspondente
-e um espaço entre os dois pontos e o valor. O valor calculado deve ser apresentado com 3 dígitos após o ponto decimal.
-*/
-
-#include <iomanip>
-
 int main(){
-    double a, b, c;
 
-    cin >>a>>b>>c;
 
-    cout <<"TRIANGULO: "<<fixed << setprecision(3)<<(a*c)/2<<endl;
-    cout <<"CIRCULO: "<<fixed << setprecision(3)<<(c*c)*3.14159<<endl;
-    cout <<"TRAPEZIO: "<<fixed << setprecision(3)<<(a+b)*c/2<<endl;
-    cout <<"QUADRADO: "<<fixed << setprecision(3)<<b*b<<endl;
-    cout <<"RETANGULO: "<<fixed << setprecision(3)<<a*b<<endl;
-
-return 0;
+    return 0;
 }
 
 #endif // ex14
 
+
 #ifdef ex15
+
+
 using namespace std;
- /*
- Faça um programa que calcule e mostre o volume de uma esfera sendo fornecido o valor de seu raio (R).
- A fórmula para calcular o volume é: (4/3) * pi * R3. Considere (atribua) para pi o valor 3.14159.
-
-Dica: Ao utilizar a fórmula, procure usar (4/3.0) ou (4.0/3), pois algumas linguagens (dentre elas o C++),
-assumem que o resultado da divisão entre dois inteiros é outro inteiro.
-
-Entrada
-O arquivo de entrada contém um valor de ponto flutuante (dupla precisão), correspondente ao raio da esfera.
-
-Saída
-A saída deverá ser uma mensagem "VOLUME" conforme o exemplo fornecido abaixo, com um espaço antes e um espaço depois da igualdade. O valor deverá ser apresentado com 3 casas após o ponto.
- */
-
-#include <iomanip>
-
 
 int main(){
- double pi = 3.14159, raio;
- cin >> raio;
 
- cout <<"VOLUME = "<<fixed << setprecision(3) << 4.0/3*(pi*(raio*raio*raio)) <<endl;
-return 0;
+
+    return 0;
 }
+
 #endif // ex15
 
 
 #ifdef ex16
 
-/*
-Neste problema, deve-se ler o código de uma peça 1, o número de peças 1, o valor unitário de cada peça 1,
-o código de uma peça 2, o número de peças 2 e o valor unitário de cada peça 2. Após, calcule e mostre o valor a ser pago.
 
-Entrada
-O arquivo de entrada contém duas linhas de dados. Em cada linha haverá 3 valores,
-respectivamente dois inteiros e um valor com 2 casas decimais.
-
-Saída
-A saída deverá ser uma mensagem conforme o exemplo fornecido abaixo,
-lembrando de deixar um espaço após os dois pontos e um espaço após o "R$".
-O valor deverá ser apresentado com 2 casas após o ponto.
-*/
-
-#include <iomanip>
 using namespace std;
 
 int main(){
 
-    int codPeca1, codPeca2, nPeca1, nPeca2;
-    double  vPeca1, vPeca2;
 
-    cin >> codPeca1 >> nPeca1 >> vPeca1 >> codPeca2 >> nPeca2 >> vPeca2;
-
-    cout <<"VALOR A PAGAR: R$ " <<fixed << setprecision(2) <<(nPeca1*vPeca1) + (nPeca2*vPeca2) <<endl;
-
-
-
-return 0;
+    return 0;
 }
+
 #endif // ex16
+
 
 #ifdef ex17
 
-/*
-Leia um valor inteiro.
-A seguir, calcule o menor número de notas possíveis (cédulas) no qual o valor pode ser decomposto.
-As notas consideradas são de 100, 50, 20, 10, 5, 2 e 1. A seguir mostre o valor lido e a relação de notas necessárias.
-
-Entrada
-O arquivo de entrada contém um valor inteiro N (0 < N < 1000000).
-
-Saída
-Imprima o valor lido e, em seguida, a quantidade mínima de notas de cada tipo necessárias, conforme o exemplo fornecido.
-Não esqueça de imprimir o fim de linha após cada linha, caso contrário seu programa apresentará a mensagem: “Presentation Error”.
-*/
 
 using namespace std;
+
 int main(){
 
-int n, nota100, nota50, nota20, nota10, nota5, nota2, nota1;
 
-    nota100 = nota50 = nota20 = nota10 = nota5 = nota2 = nota1 = 0;
-
-    cin >> n;
-    cout <<n<<endl;
-
-    while(n>=100)
-    {
-        n -=100;
-        nota100++;
-    }
-    while(n>=50)
-    {
-        n-=50;
-        nota50 ++;
-    }
-    while(n>=20)
-    {
-        n-=20;
-        nota20 ++;
-    }
-    while(n>=10)
-    {
-        n-=10;
-        nota10 ++;
-    }
-    while(n>=5)
-    {
-        n-=5;
-        nota5 ++;
-    }
-
-    while(n>=2)
-    {
-        n-=2;
-        nota2 ++;
-    }
-
-    while(n>=1)
-    {
-        n-=1;
-        nota1 ++;
-    }
-
-    cout <<nota100<<" nota(s) de R$ 100,00" <<endl;
-    cout <<nota50<<" nota(s) de R$ 50,00" <<endl;
-    cout <<nota20<<" nota(s) de R$ 20,00" <<endl;
-    cout <<nota10<<" nota(s) de R$ 10,00" <<endl;
-    cout <<nota5<<" nota(s) de R$ 5,00" <<endl;
-    cout <<nota2<<" nota(s) de R$ 2,00" <<endl;
-    cout <<nota1<<" nota(s) de R$ 1,00" <<endl;
-
-return 0;
+    return 0;
 }
 
 #endif // ex17
-
-#ifdef ex18
-/*
-Joaozinho quer calcular e mostrar a quantidade de litros de combustível gastos em uma viagem,
-ao utilizar um automóvel que faz 12 KM/L. Para isso, ele gostaria que você o auxiliasse através de um simples programa.
-Para efetuar o cálculo, deve-se fornecer o tempo gasto na viagem (em horas) e a velocidade média durante a mesma (em km/h).
-Assim, pode-se obter distância percorrida e, em seguida, calcular quantos litros seriam necessários.
-Mostre o valor com 3 casas decimais após o ponto.
-
-Entrada
-O arquivo de entrada contém dois inteiros. O primeiro é o tempo gasto na viagem (em horas)
-e o segundo é a velocidade média durante a mesma (em km/h).
-
-Saída
-Imprima a quantidade de litros necessária para realizar a viagem, com três dígitos após o ponto decimal
-*/
-
-#include <iomanip>
-
-using namespace std;
-
-int main(){
-
-    int tempo, vm;
-    cin >>tempo >> vm;
-    double litros = (tempo*vm)/12.00;
-
-    cout << fixed << setprecision(3) << litros <<endl;
-
-
-return 0;
-}
-
-#endif // ex18
-
-#ifdef ex19
-
-
-/*
-Leia um valor inteiro correspondente à idade de uma pessoa em dias e informe-a em anos, meses e dias
-
-Obs.: apenas para facilitar o cálculo, considere todo ano com 365 dias e todo mês com 30 dias.
-Nos casos de teste nunca haverá uma situação que permite 12 meses e alguns dias, como 360, 363 ou 364.
-Este é apenas um exercício com objetivo de testar raciocínio matemático simples.
-
-Entrada
-O arquivo de entrada contém um valor inteiro.
-
-Saída
-Imprima a saída conforme exemplo fornecido.
-*/
-using namespace std;
-
-
-
-int main(){
-
-    int dias, anos, meses;
-    dias = anos = meses = 0;
-
-    cin >>dias;
-
-    while(dias>=365)
-    {
-        dias -=365;
-        anos
-        ++;
-    }
-
-        while(dias>=30)
-    {
-        dias -=30;
-        meses ++;
-    }
-
-    cout <<anos <<" ano(s)" <<endl;
-    cout <<meses <<" mes(es)" <<endl;
-    cout <<dias <<" dia(s)" <<endl;
-
-
-return 0;
-}
-
-#endif // ex19
