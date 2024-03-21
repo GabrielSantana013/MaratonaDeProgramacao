@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define ex15
+#define ex18
 
 #ifdef ex01
 
@@ -842,12 +842,12 @@ int main(){
             break;
         }
     }
-    
+
     if(inc ==0)
     {
         cout<<"DDD nao cadastrado"<<endl;
     }
-    
+
 
     return 0;
 }
@@ -858,32 +858,56 @@ int main(){
 #ifdef ex15
 
 /*
-Em um país imaginário denominado Lisarb, todos os habitantes ficam felizes em pagar seus impostos, 
-pois sabem que nele não existem políticos corruptos e os recursos arrecadados são utilizados em benefício da população, sem qualquer desvio. 
+Em um país imaginário denominado Lisarb, todos os habitantes ficam felizes em pagar seus impostos,
+pois sabem que nele não existem políticos corruptos e os recursos arrecadados são utilizados em benefício da população, sem qualquer desvio.
 A moeda deste país é o Rombus, cujo símbolo é o R$.
 
-Leia um valor com duas casas decimais, equivalente ao salário de uma pessoa de Lisarb. 
+Leia um valor com duas casas decimais, equivalente ao salário de uma pessoa de Lisarb.
 Em seguida, calcule e mostre o valor que esta pessoa deve pagar de Imposto de Renda, segundo a tabela abaixo.
 
 
 
-Lembre que, se o salário for R$ 3002.00, a taxa que incide é de 8% apenas sobre R$ 1000.00, pois a faixa de salário que fica de R$ 0.00 
-até R$ 2000.00 é isenta de Imposto de Renda. No exemplo fornecido (abaixo), a taxa é de 8% sobre R$ 1000.00 + 18% sobre R$ 2.00, 
+Lembre que, se o salário for R$ 3002.00, a taxa que incide é de 8% apenas sobre R$ 1000.00, pois a faixa de salário que fica de R$ 0.00
+até R$ 2000.00 é isenta de Imposto de Renda. No exemplo fornecido (abaixo), a taxa é de 8% sobre R$ 1000.00 + 18% sobre R$ 2.00,
 o que resulta em R$ 80.36 no total. O valor deve ser impresso com duas casas decimais.
 
 Entrada
 A entrada contém apenas um valor de ponto flutuante, com duas casas decimais.
 
 Saída
-Imprima o texto "R$" seguido de um espaço e do valor total devido de Imposto de Renda, com duas casas após o ponto. 
+Imprima o texto "R$" seguido de um espaço e do valor total devido de Imposto de Renda, com duas casas após o ponto.
 Se o valor de entrada for menor ou igual a 2000, deverá ser impressa a mensagem "Isento".
 */
 
 using namespace std;
+#include <iomanip>
 
 int main(){
 
+    double salario, imposto=0;
+    cin >> salario;
 
+    if(salario<=2000)
+    {
+        cout << "Isento" <<endl;
+        return 0;
+    }
+    else if(salario > 2000 && salario <=3000)
+    {
+        imposto = (salario - 2000)*0.08;
+    }
+
+    else if(salario>3000 && salario <=4500)
+    {
+       imposto = 1000*0.08 + ((salario-3000)*0.18);
+    }
+
+    else
+    {
+        imposto = (1000*0.08) + (1500*0.18)+((salario-4500)*0.28);
+    }
+
+    cout <<"R$ "<<fixed<<setprecision(2)<<imposto<<endl;
     return 0;
 }
 
@@ -892,11 +916,27 @@ int main(){
 
 #ifdef ex16
 
+/*
+
+Leia um valor inteiro entre 1 e 12, inclusive.
+Correspondente a este valor, deve ser apresentado como resposta o mês do ano por extenso, em inglês, com a primeira letra maiúscula.
+
+Entrada
+A entrada contém um único valor inteiro.
+
+Saída
+Imprima por extenso o nome do mês correspondente ao número existente na entrada, com a primeira letra em maiúscula.
+
+*/
 
 using namespace std;
 
 int main(){
+    int num;
+    cin >>num;
+    string meses[] = {"January","February","March","April","May","June","July","August","September","October","November","December",};
 
+    cout <<meses[num-1]<<endl;
 
     return 0;
 }
@@ -906,6 +946,139 @@ int main(){
 
 #ifdef ex17
 
+/*
+Faça um programa que leia 6 valores. Estes valores serão somente negativos ou positivos (desconsidere os valores nulos).
+A seguir, mostre a quantidade de valores positivos digitados.
+
+Entrada
+Seis valores, negativos e/ou positivos.
+
+Saída
+Imprima uma mensagem dizendo quantos valores positivos foram lidos.
+*/
+
+using namespace std;
+
+int main(){
+
+    double nums[6];
+    int contaPos = 0;
+
+    for(int i = 0; i<6;i++)
+    {
+        cin >> nums[i];
+        if(nums[i]>0)
+        {
+            contaPos++;
+        }
+    }
+
+    cout <<contaPos<<" valores positivos"<<endl;
+
+    return 0;
+}
+
+#endif // ex17
+
+#ifdef ex18
+
+/*
+
+
+Pedrinho está organizando um evento em sua Universidade. O evento deverá ser no mês de Abril, iniciando e terminando dentro do mês.
+O problema é que Pedrinho quer calcular o tempo que o evento vai durar, uma vez que ele sabe quando inicia e quando termina o evento.
+
+Sabendo que o evento pode durar de poucos segundos a vários dias, você deverá ajudar Pedrinho a calcular a duração deste evento.
+
+Entrada
+Como entrada, na primeira linha vai haver a descrição “Dia”, seguido de um espaço e o dia do mês no qual o evento vai começar.
+Na linha seguinte, será informado o momento no qual o evento vai iniciar, no formato hh : mm : ss. Na terceira e quarta linha de entrada haverá outra informação
+no mesmo formato das duas primeiras linhas, indicando o término do evento.
+
+Saída
+Na saída, deve ser apresentada a duração do evento, no seguinte formato:
+
+W dia(s)
+X hora(s)
+Y minuto(s)
+Z segundo(s)
+
+Obs: Considere que o evento do caso de teste para o problema tem duração mínima de 1 minuto.
+
+*/
+
+
+using namespace std;
+
+int main(){
+
+    int diaI, horaI, minutoI, segundoI, diaF, horaF, minutoF, segundoF;
+
+
+    cin >>diaI;
+    cin >>horaI;
+    cin.ignore();
+    cin >>minutoI;
+    cin.ignore();
+    cin >>segundoI;
+    cin.ignore();
+    cin >>diaF;
+    cin >>horaF;
+    cin.ignore();
+    cin >>minutoF;
+    cin.ignore();
+    cin >>segundoF;
+
+    int TotalSegundosI, TotalSegundosF;
+
+    TotalSegundosI  = segundoI+(horaI*(60*60)+(minutoI*60)+(diaI*60*24*60);
+    TotalSegundosF  = segundoF+(horaF*(60*60)+(minutoF*60)+(diaF*60*24*60);
+
+
+    /*
+    int horaI, minutoI, horaF, minutoF, totalH, totalM;
+
+    cin >> horaI>>minutoI>>horaF>>minutoF;
+
+
+
+    int totalMI =  (horaI*60) + minutoI;
+    int totalMF =  (horaF*60) + minutoF;
+
+    int minutosTotais;
+    if(totalMI<totalMF)
+    {
+       minutosTotais = totalMF- totalMI;
+    }
+    else
+    {
+        minutosTotais = (24*60 - totalMI) + totalMF;
+        /*24*60 da 1440, total de minutos no dia,
+        logo se a  gnt tira isso dos minutos iniciais a gnt sabe
+        quantos minutos tinham restantes no dia. por fim, somamos os
+        minutos finais, pra saber os minutos TOTAIS do jogo
+        */
+
+
+    totalH = minutosTotais / 60; //retorna a hora
+    totalM = minutosTotais % 60;  //retorna os minutos
+
+    cout <<"O JOGO DUROU "<<totalH <<" HORA(S) E " <<totalM <<" MINUTO(S)"<<endl;
+
+    return 0;
+}
+    */
+
+
+    return 0;
+}
+#endif // ex18
+
+#ifdef ex19
+
+/*
+
+*/
 
 using namespace std;
 
@@ -914,5 +1087,117 @@ int main(){
 
     return 0;
 }
+#endif // ex19
 
-#endif // ex17
+#ifdef ex20
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex20
+
+#ifdef ex21
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex21
+
+#ifdef ex22
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex22
+
+#ifdef ex23
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex23
+
+#ifdef ex24
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex24
+
+#ifdef ex25
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex25
+
+
+#ifdef ex26
+
+/*
+
+
+*/
+
+using namespace std;
+
+int main(){
+
+
+    return 0;
+}
+#endif // ex26
