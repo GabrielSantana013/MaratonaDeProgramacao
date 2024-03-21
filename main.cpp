@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define ex10
+#define ex15
 
 #ifdef ex01
 
@@ -580,11 +580,53 @@ int main(){
 
 #ifdef ex11
 
+/*
+
+Leia a hora inicial, minuto inicial, hora final e minuto final de um jogo. A seguir calcule a duração do jogo.
+
+Obs: O jogo tem duração mínima de um (1) minuto e duração máxima de 24 horas.
+
+Entrada
+Quatro números inteiros representando a hora de início e fim do jogo.
+
+Saída
+Mostre a seguinte mensagem: “O JOGO DUROU XXX HORA(S) E YYY MINUTO(S)” .
+*/
 
 using namespace std;
 
+
+
 int main(){
 
+    int horaI, minutoI, horaF, minutoF, totalH, totalM;
+
+    cin >> horaI>>minutoI>>horaF>>minutoF;
+
+
+
+    int totalMI =  (horaI*60) + minutoI;
+    int totalMF =  (horaF*60) + minutoF;
+
+    int minutosTotais;
+    if(totalMI<totalMF)
+    {
+       minutosTotais = totalMF- totalMI;
+    }
+    else
+    {
+        minutosTotais = (24*60 - totalMI) + totalMF;
+        /*24*60 da 1440, total de minutos no dia,
+        logo se a  gnt tira isso dos minutos iniciais a gnt sabe
+        quantos minutos tinham restantes no dia. por fim, somamos os
+        minutos finais, pra saber os minutos TOTAIS do jogo
+        */
+    }
+
+    totalH = minutosTotais / 60; //retorna a hora
+    totalM = minutosTotais % 60;  //retorna os minutos
+
+    cout <<"O JOGO DUROU "<<totalH <<" HORA(S) E " <<totalM <<" MINUTO(S)"<<endl;
 
     return 0;
 }
@@ -595,11 +637,75 @@ int main(){
 
 #ifdef ex12
 
+/*
+A empresa ABC resolveu conceder um aumento de salários a seus funcionários de acordo com a tabela abaixo:
 
+
+Salário	Percentual de Reajuste
+0 - 400.00
+400.01 - 800.00
+800.01 - 1200.00
+1200.01 - 2000.00
+Acima de 2000.00
+
+15%
+12%
+10%
+7%
+4%
+
+Leia o salário do funcionário e calcule e mostre o novo salário,
+bem como o valor de reajuste ganho e o índice reajustado, em percentual.
+
+Entrada
+A entrada contém apenas um valor de ponto flutuante, com duas casas decimais.
+
+Saída
+Imprima 3 linhas na saída: o novo salário, o valor ganho de reajuste
+(ambos devem ser apresentados com 2 casas decimais) e o percentual de reajuste ganho, conforme exemplo abaixo.
+
+*/
+#include <iomanip>
 using namespace std;
+
 
 int main(){
 
+    double salario;
+
+    cin >> salario;
+
+    if(salario <= 400)
+    {
+
+        cout<<"Novo salario: "<<fixed<<setprecision(2)<<salario*1.15<<endl;
+        cout<<"Reajuste ganho: "<<fixed<<setprecision(2)<<salario*0.15<<endl;
+        cout<<"Em percentual: 15 %"<<endl;
+    }
+    else if(salario >400 && salario <=800)
+    {
+        cout<<"Novo salario: "<<fixed<<setprecision(2)<<salario*1.12<<endl;
+        cout<<"Reajuste ganho: "<<fixed<<setprecision(2)<<salario*0.12<<endl;
+        cout<<"Em percentual: 12 %"<<endl;
+    }
+        else if(salario >800 && salario <=1200)
+    {
+        cout<<"Novo salario: "<<fixed<<setprecision(2)<<salario*1.10<<endl;
+        cout<<"Reajuste ganho: "<<fixed<<setprecision(2)<<salario*0.10<<endl;
+        cout<<"Em percentual: 10 %"<<endl;
+    }
+        else if(salario >1200 && salario <=2000)
+    {
+        cout<<"Novo salario: "<<fixed<<setprecision(2)<<salario*1.07<<endl;
+        cout<<"Reajuste ganho: "<<fixed<<setprecision(2)<<salario*0.07<<endl;
+        cout<<"Em percentual: 7 %"<<endl;
+    }
+    else
+    {
+        cout<<"Novo salario: "<<fixed<<setprecision(2)<<salario*1.04<<endl;
+        cout<<"Reajuste ganho: "<<fixed<<setprecision(2)<<salario*0.04<<endl;
+        cout<<"Em percentual: 4 %"<<endl;
+    }
 
     return 0;
 }
@@ -610,11 +716,87 @@ int main(){
 
 #ifdef ex13
 
+/*
+Neste problema, você deverá ler 3 palavras que definem o tipo de animal possível segundo o esquema abaixo,
+da esquerda para a direita.  Em seguida conclua qual dos animais seguintes foi escolhido,
+através das três palavras fornecidas.
+
+Entrada
+A entrada contém 3 palavras, uma em cada linha, necessárias para identificar o animal segundo a figura acima, com todas as letras minúsculas.
+
+Saída
+Imprima o nome do animal correspondente à entrada fornecida.
+
+*/
 
 using namespace std;
 
 int main(){
 
+    string esqueleto, classe, habAlimentar;
+
+    cin>>esqueleto;
+
+    if(esqueleto == "vertebrado")
+    {
+        cin >> classe;
+        if(classe == "ave")
+        {
+            cin >>habAlimentar;
+            if(habAlimentar == "carnivoro")
+            {
+                cout << "aguia" <<endl;
+            }
+            else
+            {
+               cout << "pomba" <<endl;
+            }
+        }
+
+        else
+        {
+            cin >>habAlimentar;
+            if(habAlimentar == "onivoro")
+            {
+                cout << "homem" <<endl;
+            }
+            else
+            {
+               cout << "vaca" <<endl;
+            }
+        }
+    }
+
+    else
+    {
+        cin >> classe;
+        if(classe == "inseto")
+        {
+            cin >>habAlimentar;
+            if(habAlimentar == "hematofago")
+            {
+                cout << "pulga" <<endl;
+            }
+            else
+            {
+               cout << "lagarta" <<endl;
+            }
+        }
+
+        else
+        {
+            cin >>habAlimentar;
+            if(habAlimentar == "hematofago")
+            {
+                cout << "sanguessuga" <<endl;
+            }
+            else
+            {
+               cout << "minhoca" <<endl;
+            }
+        }
+
+    }
 
     return 0;
 }
@@ -625,11 +807,47 @@ int main(){
 
 #ifdef ex14
 
+/*
+
+Leia um número inteiro que representa um código de DDD para discagem interurbana.
+Em seguida, informe à qual cidade o DDD pertence, considerando a tabela abaixo:
+
+Se a entrada for qualquer outro DDD que não esteja presente na tabela acima, o programa deverá informar:
+DDD nao cadastrado
+
+Entrada
+A entrada consiste de um único valor inteiro.
+
+Saída
+Imprima o nome da cidade correspondente ao DDD existente na entrada.
+Imprima DDD nao cadastrado caso não existir DDD correspondente ao número digitado.
+
+*/
 
 using namespace std;
 
 int main(){
+    int ddd, inc=0;
 
+    int  listaDDD[] = {61,71,11,21,32,19,27,31};
+    string listaEstados[] = {"Brasilia","Salvador","Sao Paulo","Rio de Janeiro","Juiz de Fora","Campinas","Vitoria","Belo Horizonte"};
+    cin >> ddd;
+
+    for(int i = 0; i<7; i++)
+    {
+        if(ddd==listaDDD[i])
+        {
+            cout <<listaEstados[i]<<endl;
+            inc++;
+            break;
+        }
+    }
+    
+    if(inc ==0)
+    {
+        cout<<"DDD nao cadastrado"<<endl;
+    }
+    
 
     return 0;
 }
@@ -639,6 +857,27 @@ int main(){
 
 #ifdef ex15
 
+/*
+Em um país imaginário denominado Lisarb, todos os habitantes ficam felizes em pagar seus impostos, 
+pois sabem que nele não existem políticos corruptos e os recursos arrecadados são utilizados em benefício da população, sem qualquer desvio. 
+A moeda deste país é o Rombus, cujo símbolo é o R$.
+
+Leia um valor com duas casas decimais, equivalente ao salário de uma pessoa de Lisarb. 
+Em seguida, calcule e mostre o valor que esta pessoa deve pagar de Imposto de Renda, segundo a tabela abaixo.
+
+
+
+Lembre que, se o salário for R$ 3002.00, a taxa que incide é de 8% apenas sobre R$ 1000.00, pois a faixa de salário que fica de R$ 0.00 
+até R$ 2000.00 é isenta de Imposto de Renda. No exemplo fornecido (abaixo), a taxa é de 8% sobre R$ 1000.00 + 18% sobre R$ 2.00, 
+o que resulta em R$ 80.36 no total. O valor deve ser impresso com duas casas decimais.
+
+Entrada
+A entrada contém apenas um valor de ponto flutuante, com duas casas decimais.
+
+Saída
+Imprima o texto "R$" seguido de um espaço e do valor total devido de Imposto de Renda, com duas casas após o ponto. 
+Se o valor de entrada for menor ou igual a 2000, deverá ser impressa a mensagem "Isento".
+*/
 
 using namespace std;
 
