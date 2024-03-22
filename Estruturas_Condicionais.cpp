@@ -1,7 +1,9 @@
 #include <iostream>
 #include <iomanip>
 
-#define ex18
+#define ex24
+
+//REFAZER 24 E 18
 
 #ifdef ex01
 
@@ -1012,7 +1014,7 @@ using namespace std;
 
 int main(){
 
-    int diaI, horaI, minutoI, segundoI, diaF, horaF, minutoF, segundoF;
+    int diaI, horaI, minutoI, segundoI, diaF, horaF, minutoF, segundoF,x;
 
 
     cin >>diaI;
@@ -1029,46 +1031,45 @@ int main(){
     cin.ignore();
     cin >>segundoF;
 
-    int TotalSegundosI, TotalSegundosF;
+    long long TotalSegundosI, TotalSegundosF, duracaoSegundos;
 
-    TotalSegundosI  = segundoI+(horaI*(60*60)+(minutoI*60)+(diaI*60*24*60);
-    TotalSegundosF  = segundoF+(horaF*(60*60)+(minutoF*60)+(diaF*60*24*60);
+    TotalSegundosI  = segundoI+(horaI*(60*60))+(minutoI*60)+(diaI*60*24*60);
+    TotalSegundosF  = segundoF+(horaF*(60*60))+(minutoF*60)+(diaF*60*24*60);
 
+    duracaoSegundos = (TotalSegundosF-TotalSegundosI);
 
-    /*
-    int horaI, minutoI, horaF, minutoF, totalH, totalM;
+    int diaT = 0, horaT = 0, minutoT = 0;
 
-    cin >> horaI>>minutoI>>horaF>>minutoF;
-
-
-
-    int totalMI =  (horaI*60) + minutoI;
-    int totalMF =  (horaF*60) + minutoF;
-
-    int minutosTotais;
-    if(totalMI<totalMF)
+    while(duracaoSegundos>=86400)
     {
-       minutosTotais = totalMF- totalMI;
+        duracaoSegundos-=86400;
+        diaT++;
+
     }
-    else
+
+    while(duracaoSegundos>=3600)
     {
-        minutosTotais = (24*60 - totalMI) + totalMF;
-        /*24*60 da 1440, total de minutos no dia,
-        logo se a  gnt tira isso dos minutos iniciais a gnt sabe
-        quantos minutos tinham restantes no dia. por fim, somamos os
-        minutos finais, pra saber os minutos TOTAIS do jogo
-        */
+        horaT++;
+        duracaoSegundos-=3600;
+    }
+
+    while(duracaoSegundos>=60)
+    {
+        minutoT++;
+        duracaoSegundos-=60;
+    }
 
 
-    totalH = minutosTotais / 60; //retorna a hora
-    totalM = minutosTotais % 60;  //retorna os minutos
+    diaT = (duracaoSegundos/86400);
+    duracaoSegundos=duracaoSegundos-diaT*86400
+    horaT = ((duracaoSegundos%86400)/3600);
+    minutoT = (((duracaoSegundos%86400)%3600)/60);
+    segundoT = (((duracaoSegundos%86400)%3600)%60);
 
-    cout <<"O JOGO DUROU "<<totalH <<" HORA(S) E " <<totalM <<" MINUTO(S)"<<endl;
-
-    return 0;
-}
-    */
-
+    cout <<diaT<<" dia(s)"<<endl;
+    cout <<horaT<<" hora(s)"<<endl;
+    cout <<minutoT<<" minunto(s)"<<endl;
+    cout <<duracaoSegundos<<" segundo(s)"<<endl;
 
     return 0;
 }
@@ -1077,14 +1078,63 @@ int main(){
 #ifdef ex19
 
 /*
+Leia 6 valores. Em seguida, mostre quantos destes valores digitados foram positivos.
+Na próxima linha, deve-se mostrar a média de todos os valores positivos digitados, com um dígito após o ponto decimal.
 
+Entrada
+A entrada contém 6 números que podem ser valores inteiros ou de ponto flutuante.
+Pelo menos um destes números será positivo.
+
+Saída
+O primeiro valor de saída é a quantidade de valores positivos.
+A próxima linha deve mostrar a média dos valores positivos digitados.
 */
 
 using namespace std;
+#include <iomanip>
 
 int main(){
 
+    float n1,n2,n3,n4,n5,n6, numsPos = 0, media = 0;
+    int contador = 0;
 
+    cin>>n1>>n2>>n3>>n4>>n5>>n6;
+
+    if(n1>0)
+    {
+        contador++;
+        numsPos += n1;
+    }
+    if(n2>0)
+    {
+        contador++;
+        numsPos += n2;
+    }
+    if(n3>0)
+    {
+        contador++;
+        numsPos += n3;
+    }
+    if(n4>0)
+    {
+        contador++;
+        numsPos += n4;
+    }
+    if(n5>0)
+    {
+        contador++;
+        numsPos += n5;
+    }
+    if(n6>0)
+    {
+        contador++;
+        numsPos += n6;
+    }
+
+    media = numsPos/contador;
+
+    cout <<contador <<" valores positivos"<<endl;
+    cout <<fixed<<setprecision(1)<<media<<endl;
     return 0;
 }
 #endif // ex19
@@ -1093,6 +1143,13 @@ int main(){
 
 /*
 
+Faça um programa que leia 5 valores inteiros. Conte quantos destes valores digitados são pares e mostre esta informação.
+
+Entrada
+O arquivo de entrada contém 5 valores inteiros quaisquer.
+
+Saída
+Imprima a mensagem conforme o exemplo fornecido, indicando a quantidade de valores pares lidos.
 
 */
 
@@ -1100,6 +1157,33 @@ using namespace std;
 
 int main(){
 
+
+    int n1,n2,n3,n4,n5, contaPar=0;
+
+    cin >>n1>>n2>>n3>>n4>>n5;
+
+    if(n1%2 ==0)
+    {
+       contaPar++;
+    }
+    if(n2%2 ==0)
+    {
+       contaPar++;
+    }
+    if(n3%2 ==0)
+    {
+       contaPar++;
+    }
+    if(n4%2 ==0)
+    {
+       contaPar++;
+    }
+    if(n5%2 ==0)
+    {
+       contaPar++;
+    }
+
+    cout <<contaPar<<" valores pares"<<endl;
 
     return 0;
 }
@@ -1109,6 +1193,14 @@ int main(){
 
 /*
 
+Leia 5 valores Inteiros. A seguir mostre quantos valores digitados foram pares, quantos valores digitados foram ímpares,
+quantos valores digitados foram positivos e quantos valores digitados foram negativos.
+
+Entrada
+O arquivo de entrada contém 5 valores inteiros quaisquer.
+
+Saída
+Imprima a mensagem conforme o exemplo fornecido, uma mensagem por linha, não esquecendo o final de linha após cada uma.
 
 */
 
@@ -1116,6 +1208,37 @@ using namespace std;
 
 int main(){
 
+    int n1,n2,n3,n4,n5, contPos, contNeg,contPar, contImp;
+    int nums[5];
+
+    contImp = contPar = contNeg = contPos = 0;
+
+    for(int i = 0; i < 5 ;i++)
+    {
+        cin>>nums[i];
+        if(nums[i]<0)
+        {
+            contNeg++;
+        }
+        else if (nums[i] != 0)
+        {
+            contPos++;
+        }
+        if(nums[i] %2==0)
+        {
+            contPar++;
+        }
+        else
+        {
+            contImp++;
+        }
+
+    }
+
+    cout<<contPar<<" valor(es) par(es)"<<endl;
+    cout<<contImp<<" valor(es) impar(es)"<<endl;
+    cout<<contPos<<" valor(es) positivo(s)"<<endl;
+    cout<<contNeg<<" valor(es) negativo(s)"<<endl;
 
     return 0;
 }
@@ -1125,6 +1248,14 @@ int main(){
 
 /*
 
+Leia um valor inteiro X (1 <= X <= 1000).
+Em seguida mostre os ímpares de 1 até X, um valor por linha, inclusive o X, se for o caso.
+
+Entrada
+O arquivo de entrada contém 1 valor inteiro qualquer.
+
+Saída
+Imprima todos os valores ímpares de 1 até X, inclusive X, se for o caso.
 
 */
 
@@ -1132,6 +1263,16 @@ using namespace std;
 
 int main(){
 
+    int x;
+    cin>>x;
+
+    for(int i = 0; i<=x;i++)
+    {
+        if(i%2!=0)
+        {
+            cout<<i<<endl;
+        }
+    }
 
     return 0;
 }
@@ -1141,6 +1282,14 @@ int main(){
 
 /*
 
+Leia um valor inteiro X. Em seguida apresente os 6 valores ímpares consecutivos a partir de X,
+um valor por linha, inclusive o X ser for o caso.
+
+Entrada
+A entrada será um valor inteiro positivo.
+
+Saída
+A saída será uma sequência de seis números ímpares.
 
 */
 
@@ -1148,6 +1297,16 @@ using namespace std;
 
 int main(){
 
+    int x;
+    cin >> x;
+
+    for(int i = x; i<x+12;i++)
+    {
+        if(i%2!=0)
+        {
+            cout <<i<<endl;
+        }
+    }
 
     return 0;
 }
@@ -1157,13 +1316,46 @@ int main(){
 
 /*
 
+Leia 2 valores inteiros X e Y. A seguir, calcule e mostre a soma dos números impares entre eles.
+
+Entrada
+O arquivo de entrada contém dois valores inteiros.
+
+Saída
+O programa deve imprimir um valor inteiro. Este valor é a soma dos valores ímpares que estão entre os valores fornecidos
+na entrada que deverá caber em um inteiro.
 
 */
 
 using namespace std;
 
 int main(){
+    int x,y,maiorNum,menorNum, totalImp = 0;
 
+    cin>>x>>y;
+
+    if(x>y)
+    {
+        maiorNum = x;
+        menorNum = y;
+    }
+    else
+    {
+        menorNum= x;
+        maiorNum = y;
+    }
+
+    if(menorNum %2 !=0)
+    {
+        menorNum++;
+    }
+
+    for(int i = menorNum; i<maiorNum;i+=2)
+    {
+        totalImp += i;
+    }
+
+    cout <<totalImp<<endl;
 
     return 0;
 }
