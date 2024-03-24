@@ -1,9 +1,9 @@
 #include <iostream>
 #include <iomanip>
 
-#define ex24
+#define ex18
 
-//REFAZER 24 E 18
+//REFAZER 18
 
 #ifdef ex01
 
@@ -1031,40 +1031,59 @@ int main(){
     cin.ignore();
     cin >>segundoF;
 
-    long long TotalSegundosI, TotalSegundosF, duracaoSegundos;
+    cout<<diaI<<horaI<<minutoI<<segundoI<<endl;
+    cout<<diaF<<horaF<<minutoF<<segundoF<<endl;
+
+    int TotalSegundosI, TotalSegundosF, duracaoSegundos;
 
     TotalSegundosI  = segundoI+(horaI*(60*60))+(minutoI*60)+(diaI*60*24*60);
     TotalSegundosF  = segundoF+(horaF*(60*60))+(minutoF*60)+(diaF*60*24*60);
 
+
     duracaoSegundos = (TotalSegundosF-TotalSegundosI);
 
-    int diaT = 0, horaT = 0, minutoT = 0;
 
-    while(duracaoSegundos>=86400)
+    int diaT = 0, horaT = 0, minutoT = 0, segundoT=0;
+
+  /*  diaT = (duracaoSegundos/86400);
+
+    duracaoSegundos=(duracaoSegundos)-(diaT*86400);
+
+    if(duracaoSegundos>0)
     {
-        duracaoSegundos-=86400;
-        diaT++;
-
+      horaT = (duracaoSegundos/3600);
     }
 
-    while(duracaoSegundos>=3600)
+    duracaoSegundos=(duracaoSegundos)-(horaT*3600);
+
+    if(duracaoSegundos>0)
     {
-        horaT++;
-        duracaoSegundos-=3600;
+      minutoT = (duracaoSegundos/60);
     }
+
+    duracaoSegundos=(duracaoSegundos)-(minutoT*60);
+
+    if(duracaoSegundos>0)
+    {
+      segundoT = duracaoSegundos;
+    }
+*/
 
     while(duracaoSegundos>=60)
     {
-        minutoT++;
         duracaoSegundos-=60;
+        minutoT++;
+        if(minutoT>59)
+        {
+            minutoT = 0;
+            horaT++;
+        }
+        if(horaT>=24)
+        {
+            horaT=0;
+            diaT++;
+        }
     }
-
-
-    diaT = (duracaoSegundos/86400);
-    duracaoSegundos=duracaoSegundos-diaT*86400
-    horaT = ((duracaoSegundos%86400)/3600);
-    minutoT = (((duracaoSegundos%86400)%3600)/60);
-    segundoT = (((duracaoSegundos%86400)%3600)%60);
 
     cout <<diaT<<" dia(s)"<<endl;
     cout <<horaT<<" hora(s)"<<endl;
@@ -1337,25 +1356,26 @@ int main(){
     if(x>y)
     {
         maiorNum = x;
-        menorNum = y;
+        menorNum = y+1;
     }
     else
     {
-        menorNum= x;
         maiorNum = y;
+        menorNum = x+1;
     }
 
-    if(menorNum %2 !=0)
+
+
+    for(int i = menorNum; i<maiorNum; i++)
     {
-        menorNum++;
+        if(i%2!=0)
+        {
+            totalImp= totalImp+(i);
+
+        }
     }
 
-    for(int i = menorNum; i<maiorNum;i+=2)
-    {
-        totalImp += i;
-    }
-
-    cout <<totalImp<<endl;
+   cout <<totalImp<<endl;
 
     return 0;
 }
@@ -1365,12 +1385,45 @@ int main(){
 
 /*
 
+Leia um valor inteiro N. Este valor será a quantidade de valores inteiros X que serão lidos em seguida.
+Mostre quantos destes valores X estão dentro do intervalo [10,20] e quantos estão fora do intervalo,
+mostrando essas informações.
+
+Entrada
+A primeira linha da entrada contém um valor inteiro N (N < 10000), que indica o número de casos de teste.
+Cada caso de teste a seguir é um valor inteiro X (-107 < X <107).
+
+
+Saída
+Para cada caso, imprima quantos números estão dentro (in) e quantos valores estão fora (out) do intervalo.
 
 */
 
 using namespace std;
 
 int main(){
+
+    int N;
+    int intervalo[] = {10,11,12,13,14,15,16,17,18,19,20};
+    int valores[10000];
+    int contaI = 0;
+
+    cin>>N;
+
+    for(int i = 0; i < N; i++)
+    {
+        cin>>valores[i];
+        for(int j = 0; j<11; j++)
+        {
+            if(valores[i] == intervalo[j])
+            {
+                contaI++;
+            }
+        }
+    }
+
+    cout <<contaI<<" in"<<endl;
+    cout <<N-contaI<<" out"<<endl;
 
 
     return 0;
@@ -1378,18 +1431,4 @@ int main(){
 #endif // ex25
 
 
-#ifdef ex26
 
-/*
-
-
-*/
-
-using namespace std;
-
-int main(){
-
-
-    return 0;
-}
-#endif // ex26
