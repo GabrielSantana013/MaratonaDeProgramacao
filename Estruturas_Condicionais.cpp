@@ -3,8 +3,6 @@
 
 #define ex18
 
-//REFAZER 18
-
 #ifdef ex01
 
 /*
@@ -1014,81 +1012,43 @@ using namespace std;
 
 int main(){
 
-    int diaI, horaI, minutoI, segundoI, diaF, horaF, minutoF, segundoF,x;
+    int diaI, horaI, minutoI, segundoI, diaF, horaF, minutoF, segundoF;
+    string teste;
+
+    cin >> teste>> diaI;
+    cin >> horaI>>teste>>minutoI>>teste>>segundoI;
+
+    cin>> teste>>diaF;
+    cin>> horaF>>teste>>minutoF>>teste>>segundoF;
 
 
-    cin >>diaI;
-    cin >>horaI;
-    cin.ignore();
-    cin >>minutoI;
-    cin.ignore();
-    cin >>segundoI;
-    cin.ignore();
-    cin >>diaF;
-    cin >>horaF;
-    cin.ignore();
-    cin >>minutoF;
-    cin.ignore();
-    cin >>segundoF;
+    segundoI = segundoF - segundoI;
+    minutoI = minutoF - minutoI;
+    horaI = horaF - horaI;
+    diaI = diaF-diaI;
 
-    cout<<diaI<<horaI<<minutoI<<segundoI<<endl;
-    cout<<diaF<<horaF<<minutoF<<segundoF<<endl;
-
-    int TotalSegundosI, TotalSegundosF, duracaoSegundos;
-
-    TotalSegundosI  = segundoI+(horaI*(60*60))+(minutoI*60)+(diaI*60*24*60);
-    TotalSegundosF  = segundoF+(horaF*(60*60))+(minutoF*60)+(diaF*60*24*60);
-
-
-    duracaoSegundos = (TotalSegundosF-TotalSegundosI);
-
-
-    int diaT = 0, horaT = 0, minutoT = 0, segundoT=0;
-
-  /*  diaT = (duracaoSegundos/86400);
-
-    duracaoSegundos=(duracaoSegundos)-(diaT*86400);
-
-    if(duracaoSegundos>0)
+    if(segundoI<0)
     {
-      horaT = (duracaoSegundos/3600);
+        segundoI +=60;
+        minutoI --;
     }
 
-    duracaoSegundos=(duracaoSegundos)-(horaT*3600);
-
-    if(duracaoSegundos>0)
+    if(minutoI<0)
     {
-      minutoT = (duracaoSegundos/60);
+        minutoI+=60;
+        horaI--;
     }
 
-    duracaoSegundos=(duracaoSegundos)-(minutoT*60);
-
-    if(duracaoSegundos>0)
+    if(horaI<0)
     {
-      segundoT = duracaoSegundos;
-    }
-*/
-
-    while(duracaoSegundos>=60)
-    {
-        duracaoSegundos-=60;
-        minutoT++;
-        if(minutoT>59)
-        {
-            minutoT = 0;
-            horaT++;
-        }
-        if(horaT>=24)
-        {
-            horaT=0;
-            diaT++;
-        }
+        horaI+=24;
+        diaI--;
     }
 
-    cout <<diaT<<" dia(s)"<<endl;
-    cout <<horaT<<" hora(s)"<<endl;
-    cout <<minutoT<<" minunto(s)"<<endl;
-    cout <<duracaoSegundos<<" segundo(s)"<<endl;
+    cout <<diaI<<" dia(s)"<<endl;
+    cout <<horaI<<" hora(s)"<<endl;
+    cout <<minutoI<<" minuto(s)"<<endl;
+    cout <<segundoI<<" segundo(s)"<<endl;
 
     return 0;
 }
@@ -1429,6 +1389,3 @@ int main(){
     return 0;
 }
 #endif // ex25
-
-
-
