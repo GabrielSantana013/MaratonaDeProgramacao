@@ -24,12 +24,13 @@ Apresente o total de cobaias utilizadas, o total de cada tipo de cobaia utilizad
 total de cobaias utilizadas, sendo que o percentual deve ser apresentado com dois dígitos após o ponto
 
 */
+#include <iomanip>
 
 using namespace std;
 
 int main()
 {
-    int N, Q, rato, sapo, coelho, cobaiaTotal;
+    int N, Q, rato=0, sapo=0, coelho=0, cobaiaTotal=0;
     char animal;
 
     cin>>N;
@@ -53,13 +54,14 @@ int main()
         }
     }
 
+
     cout <<"Total: "<<cobaiaTotal<<" cobaias"<<endl;
     cout <<"Total de coelhos: "<<coelho<<endl;
     cout <<"Total de ratos: "<<rato<<endl;
     cout <<"Total de sapos: "<<sapo<<endl;
-    cout <<"Percentual de coelhos: "<<(coelho/cobaiaTotal)*100  <<endl;
-    cout <<"Percentual de ratos: "<<(rato/cobaiaTotal)*100 <<endl;
-    cout <<"Percentual de sapos: "<<(sapo/cobaiaTotal)*100  <<endl;
+    cout <<"Percentual de coelhos: "<<fixed<<setprecision(2)<<(double(coelho)/double(cobaiaTotal)*100) <<" %" <<endl;
+    cout <<"Percentual de ratos: "<<fixed<<setprecision(2)<<(double(rato)/double(cobaiaTotal)*100) <<" %" <<endl;
+    cout <<"Percentual de sapos: "<<fixed<<setprecision(2)<<(double(sapo)/double(cobaiaTotal)*100) <<" %" <<endl;
 
     return 0;
 }
