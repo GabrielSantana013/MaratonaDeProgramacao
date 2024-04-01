@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-#define ex08
+#define ex19
 
 #ifdef ex01
 
@@ -353,7 +353,7 @@ int main()
 
     if(p!=0)
     {
-        for(int i = 0; i<j; i++)
+        for(int i = 0; i<p; i++)
         {
           cout<<"par["<<i<<"] = "<<pares[i]<<endl;
         }
@@ -366,6 +366,860 @@ int main()
 
 
 #ifdef ex09
+
+/*
+
+Faça um programa que leia um valor N. Este N será o tamanho de um vetor X[N].
+A seguir, leia cada um dos valores de X, encontre o menor elemento deste vetor e a sua posição dentro do vetor, mostrando esta informação.
+
+Entrada
+A primeira linha de entrada contem um único inteiro N (1 < N < 1000), indicando o número de elementos que deverão ser lidos em seguida para o vetor X[N] de inteiros.
+A segunda linha contém cada um dos N valores, separados por um espaço. Vale lembrar que nenhuma entrada haverá números repetidos.
+
+Saída
+A primeira linha apresenta a mensagem “Menor valor:” seguida de um espaço e do menor valor lido na entrada.
+A segunda linha apresenta a mensagem “Posicao:” seguido de um espaço e da posição do vetor na qual se encontra o menor valor lido, lembrando que o vetor inicia na posição zero.
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    int N, menorNum, posMenor;
+
+    cin>>N;
+    int x[N];
+
+    for(int i = 0; i<N; i++)
+    {
+        cin>>x[i];
+        if(i == 0)
+        {
+            menorNum = x[0];
+            posMenor = i;
+        }
+
+        if(x[i]<menorNum)
+        {
+            menorNum = x[i];
+            posMenor = i;
+        }
+
+    }
+
+    cout<<"Menor valor: "<<menorNum<<endl;
+    cout<<"Posicao: "<<posMenor<<endl;
+    return 0;
+}
+
+#endif
+
+
+#ifdef ex10
+
+/*
+
+Neste problema você deve ler um número, indicando uma linha da matriz na qual uma operação deve ser realizada, um caractere maiúsculo, indicando a operação que será realizada,
+e todos os elementos de uma matriz M[12][12]. Em seguida, calcule e mostre a soma ou a média dos elementos que estão na área verde da matriz, conforme for o caso.
+A imagem abaixo ilustra o caso da entrada do valor 2 para a linha da matriz, demonstrando os elementos que deverão ser considerados na operação.
+
+
+
+
+Entrada
+A primeira linha de entrada contem um número L (0 ≤ L ≤ 11) indicando a linha que será considerada para operação.
+A segunda linha de entrada contém um único caractere Maiúsculo T ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz, sendo que a mesma é preenchida linha por linha, da linha 0 até a linha 11, sempre da esquerda para a direita.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+    int linha;
+    char operacao;
+
+
+    cin>>linha;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao == 'S')
+    {
+        double soma = 0;
+        for(int i = 0; i < 12; i++)
+        {
+            soma += matriz[linha][i];
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media = 0;
+        for(int i = 0; i < 12; i++)
+        {
+            media += matriz[linha][i];
+        }
+        cout<<fixed<<setprecision(1)<<media/12<<endl;
+    }
+
+    return 0;
+}
+
+#endif
+
+
+#ifdef ex11
+
+/*
+
+Neste problema você deve ler um número que indica uma coluna de uma matriz na qual uma operação deve ser realizada, um caractere maiúsculo,
+indicando a operação que será realizada, e todos os elementos de uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média dos elementos que estão na área verde da matriz, conforme for o caso.
+A imagem abaixo ilustra o caso da entrada do valor 5 para a coluna da matriz, demonstrando os elementos que deverão ser considerados na operação.
+
+
+
+
+Entrada
+A primeira linha de entrada contem um número C (0 ≤ C ≤ 11) indicando a coluna que será considerada para operação.
+A segunda linha de entrada contém um único caractere Maiúsculo T ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+    int coluna;
+    char operacao;
+
+
+    cin>>coluna;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao == 'S')
+    {
+        double soma = 0;
+        for(int i = 0; i < 12; i++)
+        {
+            soma += matriz[i][coluna];
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media = 0;
+        for(int i = 0; i < 12; i++)
+        {
+            media += matriz[i][coluna];
+        }
+        cout<<fixed<<setprecision(1)<<media/12<<endl;
+    }
+
+    return 0;
+}
+#endif
+
+#ifdef ex12
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão acima da diagonal principal da matriz, conforme ilustrado abaixo (área verde).
+
+
+
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j>i)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j>i)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex13
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão abaixo da diagonal principal da matriz, conforme ilustrado abaixo (área verde).
+
+
+
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j<i)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j<i)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex14
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão acima da diagonal secundária da matriz, conforme ilustrado abaixo (área verde).
+
+
+
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i+j < 11)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i+j < 11)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex15
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão abaixo da diagonal Secundária da matriz, conforme ilustrado abaixo (área verde).
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i+j > 11)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i+j > 11)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex16
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão na área superior da matriz, conforme ilustrado abaixo (área verde).
+
+
+
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem 144 valores com ponto flutuante de dupla precisão que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j>i && i+j < 11)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j>i && i+j < 11)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex17
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão na área inferior da matriz, conforme ilustrado abaixo (área verde).
+
+
+
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante de dupla precisão (double) que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j<i && i+j > 11)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(j<i && i+j > 11)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+
+#endif
+
+#ifdef ex18
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão na área esquerda da matriz,
+conforme ilustrado abaixo (área verde).
+
+
+
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'), indicando a operação (Soma ou Média)
+que deverá ser realizada com os elementos da matriz. Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i>j && i+j <= 10)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i>j && i+j <= 10)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+
+#endif
+
+#ifdef ex19
+
+/*
+
+Leia um caractere maiúsculo, que indica uma operação que deve ser realizada e uma matriz M[12][12].
+Em seguida, calcule e mostre a soma ou a média considerando somente aqueles elementos que estão na área direita da matriz,
+conforme ilustrado abaixo (área verde).
+
+Entrada
+A primeira linha de entrada contem um único caractere Maiúsculo O ('S' ou 'M'),
+indicando a operação (Soma ou Média) que deverá ser realizada com os elementos da matriz.
+Seguem os 144 valores de ponto flutuante que compõem a matriz.
+
+Saída
+Imprima o resultado solicitado (a soma ou média), com 1 casa após o ponto decimal.
+
+*/
+
+using namespace std;
+#include <iomanip>
+
+int main()
+{
+    double matriz[12][12];
+
+    char operacao;
+    cin>>operacao;
+
+    for(int i = 0; i<12;i++)
+    {
+        for(int j = 0; j<12; j++)
+        {
+            cin>>matriz[i][j];
+        }
+    }
+
+    if(operacao =='S')
+    {
+        double soma=0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i+j >11 && j>i)
+                {
+                    soma+=matriz[i][j];
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<soma<<endl;
+    }
+    else
+    {
+        double media=0, contaMedia = 0;
+        for(int i = 0; i<12; i++)
+        {
+            for(int j = 0; j<12; j++)
+            {
+                if(i+j > 11 && j>i)
+                {
+                    media+=matriz[i][j];
+                    contaMedia++;
+                }
+            }
+        }
+        cout<<fixed<<setprecision(1)<<media/contaMedia<<endl;
+    }
+
+    return 0;
+}
+
+
+#endif
+
+#ifdef ex20
+
+/*
+
+Escreva um algoritmo que leia um inteiro N (0 ≤ N ≤ 15), correspondente a ordem de uma matriz M de inteiros,
+e construa a matriz de acordo com o exemplo abaixo.
+
+Entrada
+A entrada consiste de vários inteiros, um valor por linha, correspondentes as ordens das matrizes a serem construídas.
+O final da entrada é marcado por um valor de ordem igual a zero (0).
+
+Saída
+Para cada inteiro da entrada imprima a matriz correspondente, de acordo com o exemplo.
+Os valores das matrizes devem ser formatados em um campo de tamanho T justificados à direita e separados por espaço, onde T é igual ao
+número de dígitos do maior número da matriz. Após o último caractere de cada linha da matriz não deve haver espaços em branco.
+Após a impressão de cada matriz deve ser deixada uma linha em branco.
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex21
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex22
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex23
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex24
 
 /*
 
@@ -382,7 +1236,104 @@ int main()
 #endif
 
 
-#ifdef ex10
+#ifdef ex25
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+
+#ifdef ex26
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex27
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex28
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex29
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex30
+
+/*
+
+*/
+
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
+
+#endif
+
+#ifdef ex31
 
 /*
 
