@@ -2,7 +2,7 @@
 #include <iomanip>
 
 #define ex12
-// REFAZER O 12
+
 #ifdef ex01
 
 /*
@@ -561,11 +561,11 @@ Imprima a saída conforme o exemplo fornecido.
 
 
 
-1 1 1
-1 2 2
-2 4 8
-2 5 9
-3 9 27
+1 1 1 - impar
+1 2 2 - par
+2 4 8 - impar
+2 5 9 - par
+3 9 27 - impar
 3 10 28
 4 16 64
 4 17 65
@@ -575,52 +575,36 @@ Imprima a saída conforme o exemplo fornecido.
 */
 
 #include <math.h>
+#include <iomanip>
 using namespace std;
 
 int main(){
 
-    int N, n1 = 1, n2 = 1, n3 = 1;
+    double N, n1 = 1, n2 = 1, n3 = 1;
 
     cin>>N;
 
-    cout<<n1<<" "<<n2<<" "<<n3<<endl;
-
     for(int i = 1; i<=N*2; i++)
     {
-        if(i%2!=0)
+        if(i==1)
         {
+            cout<<n1<<" "<<n2<<" "<<n3<<endl;
+        }
 
+        else if(i%2!=0)
+        {
+            n1++;
             n2++;
             n3++;
-            cout<<n1<<" "<<n2<<" "<<n3<<endl;
-
+            cout<<fixed<<setprecision(0)<<pow(n1,1)<<" "<<pow(n2,2)<<" "<<pow(n3,3)<<endl;
 
         }
         else
         {
-
-            cout<<pow(2,n1)<<" "<<pow(2,n2)<<" "<<pow(2,n3)<<endl;
-            n1++;
+            cout<<pow(n1,1)<<" "<<pow(n2,2)+1<<" "<<pow(n3,3)+1<<endl;
         }
 
     }
-
-
-   for(int i = 1; i<=N*2; i++){
-        for(int j = 1; j < N; j++){
-            n1 = j;
-            if(i%2!=0){
-                cout<<pow(2,n1)<<" "<<pow(2,n2)<<" "<<pow(2,n3)<<endl;
-            }
-            else{
-                n2++;
-                n3++;
-                cout<<n1<<" "<<n2<<" "<<n3<<endl;
-            }
-        }
-
-    }
-
 
     return 0;
 }
@@ -632,7 +616,14 @@ int main(){
 
 /*
 
+Escreva um programa que leia dois valores X e Y. A seguir, mostre uma sequência de 1 até Y, passando para a próxima linha a cada X números.
 
+Entrada
+O arquivo de entrada contém dois valores inteiros, (1 < X < 20) e (X < Y < 100000).
+
+Saída
+Cada sequência deve ser impressa em uma linha apenas, com 1 espaço em branco entre cada número, conforme exemplo abaixo.
+Não deve haver espaço em branco após o último valor da linha.
 
 */
 
@@ -654,7 +645,14 @@ int main(){
 
 /*
 
+Faça um algoritmo para ler um valor A e um valor N. Imprimir a soma de A + i para cada i com os valores (0 <= i <= N-1).
+Enquanto N for negativo ou ZERO, um novo N(apenas N) deve ser lido.
 
+Entrada
+A entrada contém somente valores inteiros, podendo ser positivos ou negativos. Todos os valores estão na mesma linha.
+
+Saída
+A saída contém apenas um valor inteiro.
 
 */
 
@@ -663,8 +661,21 @@ using namespace std;
 
 int main(){
 
+    int A, N, i = 0, soma=0;
+    cin>>A>>N;
 
+    while(N<=0)
+    {
+        cin>>N;
+    }
 
+    while(i <= N-1)
+    {
+        soma += A+i;
+        i++;
+    }
+
+cout <<soma<<endl;
     return 0;
 }
 
@@ -676,7 +687,21 @@ int main(){
 
 /*
 
+Faça um programa que leia dois inteiros: X e Z (devem ser lidos tantos valores para Z quantos necessários, até que seja digitado um valor maior do que X para ele).
+Conte quantos números inteiros devem ser somados em sequência (considerando o X nesta soma) para que a soma ultrapasse a Z o mínimo possível.
+Escreva o valor final da contagem.
 
+A entrada pode conter, por exemplo, os valores 21 21 15 30. Neste caso, é então assumido o valor 21 para X enquanto os valores 21 e 15 devem ser desconsiderados
+pois são menores ou iguais a X. Como o valor 30 está dentro da especificação (maior do que X) ele será válido e então deve-se processar os cálculos para apresentar
+na saída o valor 2, pois é a quantidade de valores somados para se produzir um valor maior do que 30 (21 + 22).
+
+Entrada
+A entrada contém somente valores inteiros, um por linha, podendo ser positivos ou negativos.
+O primeiro valor da entrada será o valor de X. A próxima linha da entrada irá conter Z.
+Se Z não atender a especificação do problema, ele deverá ser lido novamente, tantas vezes quantas forem necessárias.
+
+Saída
+Imprima uma linha com um número inteiro que representa a quantidade de números inteiros que devem ser somadas, de acordo com a especificação acima.
 
 */
 
@@ -698,7 +723,22 @@ int main(){
 
 /*
 
+Faça um programa que leia dois inteiros: X e Z (devem ser lidos tantos valores para Z quantos necessários,
+até que seja digitado um valor maior do que X para ele). Conte quantos números inteiros devem ser somados em sequência
+(considerando o X nesta soma) para que a soma ultrapasse a Z o mínimo possível. Escreva o valor final da contagem.
 
+A entrada pode conter, por exemplo, os valores 21 21 15 30. Neste caso, é então assumido o valor 21 para X enquanto os valores
+21 e 15 devem ser desconsiderados pois são menores ou iguais a X. Como o valor 30 está dentro da especificação (maior do que X) ele será válido e
+então deve-se processar os cálculos para apresentar na saída o valor 2, pois é a quantidade de valores somados para se produzir um valor maior do que 30 (21 + 22).
+
+Entrada
+A entrada contém somente valores inteiros, um por linha, podendo ser positivos ou negativos.
+O primeiro valor da entrada será o valor de X. A próxima linha da entrada irá conter Z.
+Se Z não atender a especificação do problema, ele deverá ser lido novamente, tantas vezes quantas forem necessárias.
+
+Saída
+Imprima uma linha com um número inteiro que representa a quantidade de números inteiros que devem ser somadas,
+de acordo com a especificação acima.
 
 */
 
@@ -889,6 +929,5 @@ int main(){
 }
 
 #endif
-
 
 
