@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define ex12
+#define ex22
 
 #ifdef ex01
 
@@ -632,8 +632,27 @@ using namespace std;
 
 int main(){
 
+    int X, Y, i, j;
 
+    cin>>X>>Y;
 
+    for(i = 1; i <Y;)
+    {
+        for(j = 0; j < X; j++)
+        {
+            if(j+1 !=X)
+            {
+             cout<<i<<" ";
+            }
+            else
+            {
+                cout<<i;
+
+            }
+            i++;
+        }
+    cout<<endl;
+    }
     return 0;
 }
 
@@ -710,7 +729,21 @@ using namespace std;
 
 int main(){
 
+    int X,Z, contador = 0, sum = 0;
+    cin>>X>>Z;
 
+    while(Z<=X)
+    {
+        cin>>Z;
+    }
+
+    for(int i = X; sum < Z; i++)
+    {
+        sum += X+1;
+        contador++;
+    }
+
+    cout<<contador<<endl;
 
     return 0;
 }
@@ -723,22 +756,13 @@ int main(){
 
 /*
 
-Faça um programa que leia dois inteiros: X e Z (devem ser lidos tantos valores para Z quantos necessários,
-até que seja digitado um valor maior do que X para ele). Conte quantos números inteiros devem ser somados em sequência
-(considerando o X nesta soma) para que a soma ultrapasse a Z o mínimo possível. Escreva o valor final da contagem.
-
-A entrada pode conter, por exemplo, os valores 21 21 15 30. Neste caso, é então assumido o valor 21 para X enquanto os valores
-21 e 15 devem ser desconsiderados pois são menores ou iguais a X. Como o valor 30 está dentro da especificação (maior do que X) ele será válido e
-então deve-se processar os cálculos para apresentar na saída o valor 2, pois é a quantidade de valores somados para se produzir um valor maior do que 30 (21 + 22).
+Faça um programa que mostre os números pares entre 1 e 100, inclusive.
 
 Entrada
-A entrada contém somente valores inteiros, um por linha, podendo ser positivos ou negativos.
-O primeiro valor da entrada será o valor de X. A próxima linha da entrada irá conter Z.
-Se Z não atender a especificação do problema, ele deverá ser lido novamente, tantas vezes quantas forem necessárias.
+Neste problema extremamente simples de repetição não há entrada.
 
 Saída
-Imprima uma linha com um número inteiro que representa a quantidade de números inteiros que devem ser somadas,
-de acordo com a especificação acima.
+Imprima todos os números pares entre 1 e 100, inclusive se for o caso, um em cada linha.
 
 */
 
@@ -747,7 +771,13 @@ using namespace std;
 
 int main(){
 
-
+    for(int i = 1; i<=100; i++)
+    {
+        if(i%2==0)
+        {
+            cout<<i<<endl;
+        }
+    }
 
     return 0;
 }
@@ -760,7 +790,13 @@ int main(){
 
 /*
 
+O programa deve ler um valor inteiro X indefinidas vezes. (O programa irá parar quando o valor de X for igual a 0). Para cada X lido, imprima a soma dos 5 pares consecutivos a partir de X, inclusive o X , se for par. Se o valor de entrada for 4, por exemplo, a saída deve ser 40, que é o resultado da operação: 4+6+8+10+12, enquanto que se o valor de entrada for 11, por exempo, a saída deve ser 80, que é a soma de 12+14+16+18+20.
 
+Entrada
+O arquivo de entrada contém muitos valores inteiros. O último valor do arquivo é zero.
+
+Saída
+Imprima a saida conforme a explicação acima e o exemplo abaixo.
 
 */
 
@@ -769,7 +805,29 @@ using namespace std;
 
 int main(){
 
+    int X, sum = 0, somaPar = 0;
 
+    while(X!=0)
+    {
+        cin>>X;
+        if(X==0)
+        {
+            return 0;
+        }
+        while(somaPar !=5)
+        {
+            if(X%2==0)
+            {
+                sum+=X;
+                somaPar++;
+            }
+            X++;
+        }
+    cout<<sum<<endl;
+    sum = 0;
+    somaPar = 0;
+
+    }
 
     return 0;
 }
@@ -782,16 +840,34 @@ int main(){
 
 /*
 
+Leia um valor inteiro N. Apresente o quadrado de cada um dos valores pares, de 1 até N, inclusive N, se for o caso.
 
+Entrada
+A entrada contém um valor inteiro N (5 < N < 2000).
+
+Saída
+Imprima o quadrado de cada um dos valores pares, de 1 até N, conforme o exemplo abaixo.
+
+Tome cuidado! Algumas linguagens tem por padrão apresentarem como saída 1e+006 ao invés de 1000000 o que ocasionará resposta errada.
+Neste caso, configure a precisão adequadamente para que isso não ocorra.
 
 */
 
+#include <math.h>
+#include <iomanip>
 
 using namespace std;
 
 int main(){
 
+    int N;
+    cin>>N;
 
+    for(int i = 2; i <=N; i+=2)
+    {
+        cout<<fixed<<setprecision(0)<<i<<"^2 = "<<pow(i,2)<<endl;
+
+    }
 
     return 0;
 }
@@ -804,19 +880,60 @@ int main(){
 
 /*
 
+Leia um valor inteiro N. Este valor será a quantidade de valores que serão lidos em seguida.
+Para cada valor lido, mostre uma mensagem em inglês dizendo se este valor lido é par (EVEN), ímpar (ODD), positivo (POSITIVE) ou negativo (NEGATIVE).
+No caso do valor ser igual a zero (0), embora a descrição correta seja (EVEN NULL), pois por definição zero é par, seu programa deverá imprimir apenas NULL.
 
+Entrada
+A primeira linha da entrada contém um valor inteiro N(N < 10000) que indica o número de casos de teste. Cada caso de teste a seguir é um valor inteiro X (-107 < X <107).
+
+Saída
+Para cada caso, imprima uma mensagem correspondente, de acordo com o exemplo abaixo.
+Todas as letras deverão ser maiúsculas e sempre deverá haver um espaço entre duas palavras impressas na mesma linha.
 
 */
 
 
-using namespace std;
+    using namespace std;
 
-int main(){
+    int main(){
 
+        int N, num;
 
+        cin >> N;
 
-    return 0;
-}
+        for(int i = 0; i <N; i++)
+        {
+          cin>>num;
+
+          if(num == 0)
+          {
+              cout<<"NULL"<<endl;
+              continue;
+          }
+
+          if(num%2==0)
+          {
+              cout<<"EVEN ";
+          }
+          else
+          {
+           cout<<"ODD ";
+          }
+
+          if(num>0)
+          {
+              cout<<"POSITIVE"<<endl;
+          }
+          else
+          {
+              cout<<"NEGATIVE"<<endl;
+          }
+
+        }
+
+        return 0;
+    }
 
 #endif
 
@@ -826,7 +943,13 @@ int main(){
 
 /*
 
+Leia um valor inteiro N. Apresente todos os números entre 1 e 10000 que divididos por N dão resto igual a 2.
 
+Entrada
+A entrada contém um valor inteiro N (N < 10000).
+
+Saída
+Imprima todos valores que quando divididos por N dão resto = 2, um por linha.
 
 */
 
@@ -835,6 +958,17 @@ using namespace std;
 
 int main(){
 
+
+    int N;
+    cin>>N;
+
+    for(int i = 1; i<=10000; i++)
+    {
+        if(i%N == 2)
+        {
+            cout<<i<<endl;
+        }
+    }
 
 
     return 0;
@@ -848,7 +982,14 @@ int main(){
 
 /*
 
+Leia 1 valor inteiro N (2 < N < 1000). A seguir, mostre a tabuada de N:
+1 x N = N      2 x N = 2N        ...       10 x N = 10N
 
+Entrada
+A entrada contém um valor inteiro N (2 < N < 1000).
+
+Saída
+Imprima a tabuada de N, conforme o exemplo fornecido.
 
 */
 
@@ -857,7 +998,14 @@ using namespace std;
 
 int main(){
 
+    int N;
 
+    cin >> N;
+
+    for(int i = 1; i <=10; i++)
+    {
+        cout<<i<<" x "<<N<<" = "<<i * N<<endl;
+    }
 
     return 0;
 }
@@ -870,64 +1018,37 @@ int main(){
 
 /*
 
+Leia 1 valor inteiro N, que representa o número de casos de teste que vem a seguir. Cada caso de teste consiste de 3 valores reais, cada um deles com uma casa decimal.
+Apresente a média ponderada para cada um destes conjuntos de 3 valores, sendo que o primeiro valor tem peso 2, o segundo valor tem peso 3 e o terceiro valor tem peso 5.
 
+Entrada
+O arquivo de entrada contém um valor inteiro N na primeira linha. Cada N linha a seguir contém um caso de teste com três valores com uma casa decimal cada valor.
+
+Saída
+Para cada caso de teste, imprima a média ponderada dos 3 valores, conforme exemplo abaixo.
 
 */
 
+#include <iomanip>
 
 using namespace std;
 
 int main(){
 
 
+    int N;
+    double n1, n2, n3;
+
+    cin>> N;
+
+    for(int i = 0; i<N; i++)
+    {
+        cin>>n1>>n2>>n3;
+
+        cout<<fixed<<setprecision(1)<<((n1*2)+(n2*3)+(n3*5))/10 <<endl;
+    }
 
     return 0;
 }
 
 #endif
-
-
-
-#ifdef ex23
-
-/*
-
-
-
-*/
-
-
-using namespace std;
-
-int main(){
-
-
-
-    return 0;
-}
-
-#endif
-
-
-
-#ifdef ex24
-
-/*
-
-
-
-*/
-
-
-using namespace std;
-
-int main(){
-
-
-
-    return 0;
-}
-
-#endif
-
-
