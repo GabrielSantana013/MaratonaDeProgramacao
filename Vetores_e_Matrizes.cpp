@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-#define ex19
+#define ex23
 
 #ifdef ex01
 
@@ -1162,9 +1162,59 @@ Após a impressão de cada matriz deve ser deixada uma linha em branco.
 */
 
 using namespace std;
+#include <math.h>
+#include <iomanip>
 
 int main()
 {
+
+    int N=1;
+
+    cin>>N;
+    while(N!=0){
+
+
+
+    int matriz[N][N], tamanho;
+
+    string maiorNum;
+
+    int controle = 1;
+
+    for(int i = 0; i < N; i++)
+    {
+
+        for(int j = 0; j < N; j++)
+        {
+            matriz[i][j] = controle;
+            controle *=2;
+        }
+        controle = pow(2, i + 1);
+
+    }
+
+    maiorNum = to_string(matriz[N-1][N-1]);
+    tamanho = maiorNum.size();
+
+    for(int i = 0; i < N; i++)
+    {
+        for(int j = 0; j < N; j++)
+        {
+            if(j+1 == N)
+            {
+                cout<<setw(tamanho)<<matriz[i][j];
+            }
+            else
+            {
+                cout<<setw(tamanho)<<matriz[i][j]<<" ";
+            }
+        }
+        cout<<endl;
+    }
+
+    cout<<endl;
+    cin>>N;
+    }
 
     return 0;
 }
@@ -1175,12 +1225,60 @@ int main()
 
 /*
 
+Um treinador de voleibol gostaria de manter estatísticas sobre sua equipe.
+A cada jogo, seu auxiliar anota quantas tentativas de saques, bloqueios e ataques cada um de seus jogadores fez, bem como quantos desses saques,
+bloqueios e ataques tiveram sucesso (resultaram em pontos). Seu programa deve mostrar qual o percentual de saques, bloqueios e ataques do time todo tiveram sucesso.
+
+Entrada
+A entrada é dada pelo número de jogadores N (1 ≤ N ≤ 100), seguido pelo nome de cada um dos jogadores.
+Abaixo do nome de cada jogador, seguem duas linhas com três inteiros cada. Na primeira linha S, B e A (0 ≤ S,B,A ≤ 10000) representam a quantidade de tentativas de saques,
+bloqueios e ataques e na segunda linha, S1, B1 e A1 (0 ≤ S1 ≤ S; 0 ≤ B1 ≤ B; 0 ≤ A1 ≤ A) com o número de saques, bloqueios e ataques deste jogador que tiveram sucesso.
+
+Saída
+A saída deve conter o percentual total de saques, bloqueios e ataques do time todo que resultaram em pontos, conforme mostrado no exemplo.
+
 */
 
 using namespace std;
+#include <iomanip>
 
 int main()
 {
+
+    int N;
+    double acertoA=0,totalA=0,acertoS=0,totalS=0,acertoB=0,totalB=0;
+
+    cin>>N;
+
+    string nomes[N];
+
+    int dados[3][3];
+
+    for(int k = 0; k <N; k++)
+    {
+        //cout<<"Digite o nome:"<<endl;
+        cin>>nomes[k];
+
+        for(int i = 0; i < 2 ; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+              // cout<<"Digite o dado da posicao "<<i<<" "<<j<<endl;
+               cin>>dados[i][j];
+            }
+        }
+
+        totalS += dados[0][0];
+        totalB += dados[0][1];
+        totalA += dados[0][2];
+        acertoS += dados[1][0];
+        acertoB += dados[1][1];
+        acertoA += dados[1][2];
+    }
+
+    cout<<fixed<<setprecision(2)<<"Pontos de Saque: "<<(acertoS*100)/(totalS)<<" %."<<endl;
+    cout<<fixed<<setprecision(2)<<"Pontos de Bloqueio: "<<(acertoB*100)/(totalB)<<" %."<<endl;
+    cout<<fixed<<setprecision(2)<<"Pontos de Ataque: "<<(acertoA*100)/(totalA)<<" %."<<endl;
 
     return 0;
 }
@@ -1191,15 +1289,75 @@ int main()
 
 /*
 
+Todo ano bissexto é realizado o exame geral de matemática da Nlogônia.
+ Todos os cidadãos da nação são avaliados a fim de se estudar o desenvolvimento lógico e matemático do país ao longo dos anos.
+
+Após as correções, os cidadãos são ordenadados de acordo com suas notas (quanto maior, melhor)
+e recebem descontos no imposto de renda de acordo com sua qualificação.
+
+O Escritório Central de Estatística (ECE) é encarregado de processar os dados das notas obtidas no exame.
+Entretanto este ano, Vasya, um dos responsáveis, está internado no hospital com gripe H1N1 e você foi contratado para realizar o seu trabalho.
+
+Escreva um programa que dado o número de habitantes da Nlogônia e todas as notas obtidas,
+responda as consultas para retornar a nota do cidadão que ficou em determinada posição.
+
+Entrada
+A entrada contém vários casos de teste. A primeira linha de cada caso contém dois inteiros N (1 ≤ N ≤ 100), Q (1 ≤ Q ≤ 100),
+o número de habitantes do país e o número de consultas, respectivamente.
+
+As N linhas seguintes contém, cada uma, a nota ni obtida pelo i-ésimo cidadão (0 ≤ ni ≤ 30000).
+
+As próximas Q linhas contém cada uma uma consulta, a posição pi (1 ≤ pi ≤ N) a qual a ECE está interessada em saber a nota.
+
+A entrada termina com fim-de-arquivo (EOF).
+
+Saída
+Para cada caso de teste, imprima, para cada consulta, uma linha contendo a nota do cidadão que ficou classificado na posição pi.
+
 */
 
 using namespace std;
 
+
 int main()
 {
+    int N, Q, num;
 
+    while(cin>>N>>Q)
+    {
+
+    int notas[N];
+    //while (cin >> n)
+
+    for(int i = 0; i<N; i++)
+    {
+        cin>>notas[i];
+    }
+
+    for(int i = 0; i <N; i++)
+    {
+        for(int j = 0; j<N; j++)
+        {
+            if(notas[i]>notas[j])
+            {
+                int temp = notas[i];
+                notas[i] = notas[j];
+                notas[j] = temp;
+            }
+        }
+    }
+
+    for(int i = 0; i <Q; i++)
+    {
+        cin>>num;
+        cout<<notas[num-1]<<endl;
+    }
+
+    }
     return 0;
 }
+
+
 
 #endif
 
@@ -1207,13 +1365,82 @@ int main()
 
 /*
 
+
+Iu-di-oh! é um jogo de cartas que virou uma verdadeira febre entre os jovens! Todo jogador de Iu-di-oh! tem seu próprio baralho, contendo várias cartas do jogo.
+Cada carta contém N atributos (como força, velocidade, inteligência, etc.). Os atributos são numerados de 1 a N e são dados por inteiros positivos.
+
+Uma partida de Iu-di-oh! é sempre jogada por dois jogadores. Ao iniciar a partida, cada jogador escolhe exatamente uma carta de seu baralho.
+Após as escolhas, um atributo é sorteado. Vence o jogador cujo atributo sorteado em sua carta escolhida é maior que na carta escolhida pelo adversário.
+Caso os atributos sejam iguais, a partida empata.
+
+Marcos e Leonardo estão na grande final do campeonato brasileiro de Iu-di-oh!, cujo prêmio é um Dainavision (que é quase um Plaisteition 2!).
+Dados os baralhos de ambos, a carta escolhida por cada um e o atributo sorteado, determine o vencedor!
+
+Entrada
+A entrada contém vários casos de teste. A primeira linha de cada caso contém um inteiro N (1 ≤ N ≤ 100), o número de atributos de cada carta.
+A segunda linha contém dois inteiros M e L (1 ≤ M, L ≤ 100), o número de cartas no baralho de Marcos e de Leonardo, respectivamente.
+
+As próximas M linhas descrevem o baralho de Marcos. As cartas são numeradas de 1 a M, e a i-ésima linha descreve a i-ésima carta.
+Cada linha contém N inteiros ai,1,ai,2,..., ai,N (1 ≤ ai,j ≤ 109). O inteiro ai,j indica o atributo j da carta i.
+As próximas L linhas descrevem o baralho de Leonardo. As cartas são numeradas de 1 e L e são descritas de maneira análoga.
+
+A próxima linha contém dois inteiros CM e CL (1 ≤ CM ≤ M, 1 ≤ CL ≤ L), as cartas escolhidas por Marcos e Leonardo, respectivamente.
+Por fim, a última linha contém um inteiro A (1 ≤ A ≤ N) indicando o atributo sorteado.
+
+A entrada termina com fim-de-arquivo (EOF).
+
+Saída
+Para cada caso de teste, imprima uma linha contendo “Marcos” se Marcos é o vencedor, “Leonardo” se Leonardo é o vencedor, ou “Empate” caso contrário (sem aspas).
+
+
 */
 
 using namespace std;
 
 int main()
 {
+    int N, M, L,cM,cL,A;
 
+    while(cin>>N)
+    {
+        cin>>M>>L;
+
+        int cMarcos[N][M], cLeo[N][L];
+
+        for(int i = 0; i < N-1; i++)
+        {
+            for(int j = 0; j <= M; j++)
+            {
+
+                cin>>cMarcos[i][j];
+            }
+        }
+
+        for(int i = 0; i < N-1; i++)
+        {
+            for(int j = 0; j <= M; j++)
+            {
+                cin>>cLeo[i][j];
+            }
+        }
+
+        cin>>cM>>cL;
+        cin>>A;
+
+        if(cMarcos[cM][A] < cLeo[cL][A])
+        {
+            cout<<"Marcos"<<endl;
+        }
+        else if(cMarcos[cM][A] > cLeo[cL][A])
+        {
+            cout<<"Leonardo"<<endl;
+        }
+        else
+        {
+            cout<<"Empate"<<endl;
+        }
+
+    }
     return 0;
 }
 
