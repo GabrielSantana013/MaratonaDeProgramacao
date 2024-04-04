@@ -1,8 +1,7 @@
 #include <iostream>
 
 
-#define ex24
-//refazer o 24 e verificar o 23
+#define ex25
 
 #ifdef ex01
 
@@ -1400,39 +1399,36 @@ using namespace std;
 
 int main()
 {
-    int N, M, L,cM,cL,A;
+    int N = 0, M = 0, L = 0,cM = 0,cL = 0,A = 0;
 
     while(cin>>N)
     {
         cin>>M>>L;
 
-        int cMarcos[N][M], cLeo[N][L];
+        int cMarcos[M][N], cLeo[L][N];
 
-        for(int i = 0; i < N-1; i++)
+        for(int i = 0; i < M; i++)
         {
-            for(int j = 0; j <= M; j++)
+            for(int j = 0; j < N; j++)
             {
-
                 cin>>cMarcos[i][j];
             }
         }
 
-        for(int i = 0; i < N-1; i++)
+        for(int i = 0; i < L; i++)
         {
-            for(int j = 0; j <= M; j++)
+            for(int j = 0; j < N; j++)
             {
                 cin>>cLeo[i][j];
             }
         }
+        cin>>cM>>cL>>A;
 
-        cin>>cM>>cL;
-        cin>>A;
-
-        if(cMarcos[cM][A] < cLeo[cL][A])
+        if(cMarcos[cM-1][A-1] > cLeo[cL-1][A-1])
         {
             cout<<"Marcos"<<endl;
         }
-        else if(cMarcos[cM][A] > cLeo[cL][A])
+        else if(cMarcos[cM-1][A-1] < cLeo[cL-1][A-1])
         {
             cout<<"Leonardo"<<endl;
         }
@@ -1467,10 +1463,11 @@ Após a impressão de cada matriz deve ser deixada uma linha em branco.
 */
 
 using namespace std;
+#include<iomanip>
 
 int main()
 {
-    int N, matriz[100][100];
+    int N, matriz[100][100], maior, menor;
     cin>>N;
 
     while(N != 0)
@@ -1479,13 +1476,63 @@ int main()
         {
             for(int j = 0; j <N; j++)
             {
-                matriz[i][j] = 1;
-                cout<<matriz[i][j];
+                    if(i > j)
+                    {
+                        maior = i;
+                        menor = j;
+                    }
+                    else
+                    {
+                        maior = j;
+                        menor = i;
+                    }
+                    if(i+j >= N)
+                    {
+                       matriz[i][j] = N-maior;
+                    }
+                    else
+                    {
+                       matriz[i][j] = menor+1;
+                    }
+                    if(j == N-1)
+                    {
+                        cout<<setw(3)<< matriz[i][j];
+                    }
+                    else
+                    {
+                       cout<<setw(3)<< matriz[i][j]<<" ";
+                    }
             }
             cout<<endl;
+
         }
+
+    cout<<endl;
     cin>>N;
     }
+
+    /*
+
+    00
+
+    00 01       0 1
+    10 11       1 2
+
+    00 01 02    0 1 2
+    10 11 12    1 2 3
+    20 21 22    2 3 4
+
+    00 01 02 03     0 1 2 3
+    10 11 12 13     1 2 3 4
+    20 21 22 23     2 3 4 5
+    30 31 32 33     3 4 5 6
+
+    00 01 02 03 04      0 1 2 3 4
+    10 11 12 13 14      1 2 3 4 5
+    20 21 22 23 24      2 3 4 5 6
+    30 31 32 33 34      3 4 5 6 7
+    40 41 42 43 44      4 5 6 7 8
+    */
 
     return 0;
 }
@@ -1497,15 +1544,106 @@ int main()
 
 /*
 
+Escreva um algoritmo que leia um inteiro N (0 ≤ N ≤ 100), correspondente a ordem de uma matriz M de inteiros, e construa a matriz de acordo com o exemplo abaixo.
+
+Entrada
+A entrada consiste de vários inteiros, um valor por linha, correspondentes as ordens das matrizes a serem construídas.
+O final da entrada é marcado por um valor de ordem igual a zero (0).
+
+Saída
+Para cada inteiro da entrada imprima a matriz correspondente, de acordo com o exemplo.
+(os valores das matrizes devem ser formatados em um campo de tamanho 3 justificados à direita e separados por espaço.
+ Após o último caractere de cada linha da matriz não deve haver espaços em branco.
+ Após a impressão de cada matriz deve ser deixada uma linha em branco.
+
 */
 
+#include <iomanip>
 using namespace std;
 
 int main()
 {
+    int N, matriz[100][100], maior, menor;
+    cin>>N;
+
+    while(N != 0)
+    {
+        for(int i = 0; i <N; i++)
+        {
+            for(int j = 0; j <N; j++)
+            {
+
+                    if(i > j)
+                    {
+                        maior = i;
+                        menor = j;
+                    }
+                    else
+                    {
+                        maior = j;
+                        menor = i;
+                    }
+
+
+                    if(j > i)
+                    {
+                       matriz[i][j] = maior+1;
+                    }
+
+                    else if (j == i)
+                    {
+                        matriz[i][j] = 1;
+                    }
+
+                    else
+                    {
+                       matriz[i][j] = j;
+                    }
+
+
+                    if(j == N-1)
+                    {
+                        cout<<setw(3)<< matriz[i][j];
+                    }
+                    else
+                    {
+                       cout<<setw(3)<< matriz[i][j]<<" ";
+                    }
+            }
+            cout<<endl;
+
+        }
+
+    cout<<endl;
+    cin>>N;
+    }
+
+    /*
+
+    00
+
+    00 01       0 1
+    10 11       1 2
+
+    00 01 02    0 1 2
+    10 11 12    1 2 3
+    20 21 22    2 3 4
+
+    00 01 02 03     0 1 2 3
+    10 11 12 13     1 2 3 4
+    20 21 22 23     2 3 4 5
+    30 31 32 33     3 4 5 6
+
+    00 01 02 03 04      0 1 2 3 4
+    10 11 12 13 14      1 2 3 4 5
+    20 21 22 23 24      2 3 4 5 6
+    30 31 32 33 34      3 4 5 6 7
+    40 41 42 43 44      4 5 6 7 8
+    */
 
     return 0;
 }
+
 
 #endif
 
