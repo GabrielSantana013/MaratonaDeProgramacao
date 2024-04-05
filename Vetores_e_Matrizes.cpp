@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-#define ex25
+#define ex28
 
 #ifdef ex01
 
@@ -1651,13 +1651,47 @@ int main()
 #ifdef ex26
 
 /*
+Leia um valor inteiro N que é o tamanho da matriz que deve ser impressa conforme o modelo fornecido.
 
+Entrada
+A entrada contém vários casos de teste e termina com EOF.
+Cada caso de teste é composto por um único inteiro N (3 ≤ N < 70), que determina o tamanho (linhas e colunas) de uma matriz que deve ser impressa.
+
+Saída
+Para cada N lido, apresente a saída conforme o exemplo fornecido.
 */
 
 using namespace std;
 
 int main()
 {
+    int N, matriz[70][70];
+    while(cin>>N)
+    {
+        for(int i = 0; i < N; i++)
+        {
+            for(int j = 0; j < N; j++)
+            {
+
+                if(i+ j == N-1)
+                {
+                    matriz[i][j] = 2;
+                }
+                else if(i ==j)
+                {
+                    matriz[i][j] = 1;
+                }
+                else
+                {
+                    matriz[i][j] = 3;
+                }
+
+                cout<<matriz[i][j];
+            }
+            cout<<endl;
+        }
+
+    }
 
     return 0;
 }
@@ -1668,6 +1702,32 @@ int main()
 
 /*
 
+Na escola onde você estuda, a hora do recreio é a mais aguardada pela grande maioria dos alunos. Não só porque as vezes as aulas são cansativas, mas sim porque a merenda servida é muito boa,
+preparada por um chefe italiano muito caprichoso.
+
+Quando bate o sinal para a hora do recreio, todos os alunos saem correndo da sua sala para chegar o mais cedo possível na cantina, tanta é a vontade de comer.
+Um de seus professores notou, porém, que havia ali uma oportunidade.
+
+Utilizando um sistema de recompensa, seu professor de matemática disse que a ordem da fila para se servir será dada não pela ordem de chegada,
+mas sim pela soma das notas obtidas em sala de aula. Assim, aqueles com maior nota poderão se servir antes daqueles que tem menor nota.
+
+Sua tarefa é simples: dada a ordem de chegada dos alunos na cantina, e as suas respectivas notas na matéria de matemática,
+reordene a fila de acordo com as notas de matemática, e diga quantos alunos não precisaram trocar de lugar nessa reordenação.
+
+Entrada
+A primeira linha contém um inteiro N, indicando o número de casos de teste a seguir.
+
+Cada caso de teste inicia com um inteiro M (1 ≤ M ≤ 1000), indicando o número de alunos.
+Em seguida haverá M inteiros distintos Pi (1 ≤ Pi ≤ 1000), onde o i-ésimo inteiro indica a nota do i-ésimo aluno.
+
+Os inteiros acima são dados em ordem de chegada, ou seja, o primeiro inteiro diz respeito ao primeiro aluno a chegar na fila,
+o segundo inteiro diz respeito ao segundo aluno, e assim sucessivamente.
+
+Saída
+Para cada caso de teste imprima uma linha, contendo um inteiro, indicando
+o número de alunos que não precisaram trocar de lugar mesmo após a fila ser reordenada.
+
+
 */
 
 using namespace std;
@@ -1675,8 +1735,50 @@ using namespace std;
 int main()
 {
 
+    int N, M, p[1000],v[1000], ntroca = 0;
+
+    cin>>N;
+
+    for(int k = 0; k < N; k++)
+    {
+        cin>>M;
+
+        for(int i = 0; i < M; i++)
+        {
+            cin>>p[i];
+            v[i] = p[i];
+        }
+
+        for(int g = 0; g<M; g++)
+        {
+            for(int y = 0; y<M; y++)
+            {
+                if(p[y]<p[g])
+                {
+                    int temp = 0;
+                    temp = p[y];
+                    p[y] = p[g];
+                    p[g] = temp;
+                }
+            }
+        }
+
+        for(int i = 0; i < M; i++)
+        {
+            if(p[i]==v[i])
+            {
+                ntroca++;
+            }
+        }
+        cout<<ntroca<<endl;
+        ntroca = 0;
+
+    }
+
     return 0;
 }
+
+
 
 #endif
 
@@ -1684,12 +1786,71 @@ int main()
 
 /*
 
+Está chegando a grande final do Campeonato Nlogonense de Surf Aquático, que este ano ocorrerá na cidade de Bonita Horeleninha (BH)!
+Nesta cidade, o jogo PãodeQueijoSweeper é bastante popular!
+
+O tabuleiro do jogo consiste em uma matriz de N linhas e M colunas. Cada célula da matriz contém um pão de queijo ou o número de pães de queijo que existem nas celulas adjacentes a ela.
+Uma célula é adjacente a outra se estiver imediatamente à esquerda, à direita, acima ou abaixo da célula. Note que, se não contiver um pão de queijo, uma célula deve obrigatoriamente conter um número entre 0 e 4, inclusive.
+
+Dadas as posições dos pães de queijo, determine o tabuleiro do jogo!
+
+Entrada
+A entrada contém vários casos de teste. A primeira linha de cada caso contém os inteiros N e M (1 ≤ N, M ≤ 100).
+As próximas N linhas contém M inteiros cada, separados por espaços, descrevendo os pães de queijo no tabuleiro.
+O j-ésimo inteiro da i-ésima linha é 1 se existe um pão de queijo na linha i e coluna j do tabuleiro, ou 0 caso contrário.
+
+A entrada termina com fim-de-arquivo (EOF).
+
+Saída
+Para cada caso de teste, imprima N linhas com M inteiros cada, não separados por espaços, descrevendo a configuração do tabuleiro.
+Se uma posição contém um pão de queijo, imprima 9 para ela; caso contrário, imprima o número cuja posição deve conter.
+
 */
 
 using namespace std;
 
 int main()
 {
+    int N, M, pdq[100][100];
+
+    while(cin>>N>>M)
+    {
+        for(int i = 0; i < N; i++)
+        {
+            for(int j = 0; j< M; j++)
+            {
+                cin>>pdq[i][j];
+            }
+        }
+
+
+        for(int i = 0; i < N; i++)
+        {
+            for(int j = 0; j< M; j++)
+            {
+                if(pdq[i][j] == 1)
+                {
+                    pdq[i][j] = 9;
+                }
+            }
+
+        }
+
+
+
+        //printa
+        for(int i = 0; i < N; i++)
+        {
+            for(int j = 0; j< M; j++)
+            {
+                cout<<pdq[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+
+
+
+    }
 
     return 0;
 }
