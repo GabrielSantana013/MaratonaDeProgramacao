@@ -1587,7 +1587,7 @@ int main()
 
                     if(j > i)
                     {
-                       matriz[i][j] = maior+1;
+                       matriz[i][j] = j+1-i;
                     }
 
                     else if (j == i)
@@ -1597,7 +1597,7 @@ int main()
 
                     else
                     {
-                       matriz[i][j] = j;
+                       matriz[i][j] = i+1-j;
                     }
 
 
