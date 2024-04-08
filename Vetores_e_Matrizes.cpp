@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-#define ex28
+#define ex30
 
 #ifdef ex01
 
@@ -1811,7 +1811,7 @@ using namespace std;
 
 int main()
 {
-    int N, M, pdq[100][100];
+    int N, M, pdq[100][100], adj = 0;
 
     while(cin>>N>>M)
     {
@@ -1836,20 +1836,37 @@ int main()
 
         }
 
-
-
-        //printa
         for(int i = 0; i < N; i++)
         {
             for(int j = 0; j< M; j++)
             {
-                cout<<pdq[i][j]<<" ";
+                if(pdq[i][j-1] == 9 && j>0)
+                {
+                    adj++;
+                }
+                if(pdq[i][j+1] == 9 && j+1!=M)
+                {
+                    adj++;
+                }
+
+                if(pdq[i-1][j] == 9 && i > 0)
+                {
+                    adj++;
+                }
+                if(pdq[i+1][j] == 9 && i+1!=N)
+                {
+                    adj++;
+                }
+                if(pdq[i][j] !=9)
+                {
+                    pdq[i][j] = adj;
+                }
+
+                adj = 0;
+                cout<<pdq[i][j];
             }
             cout<<endl;
         }
-
-
-
     }
 
     return 0;
@@ -1861,12 +1878,68 @@ int main()
 
 /*
 
+Na estação de trem você ainda pode encontrar o último dos “organizadores de vagões”. Um Organizador de vagões um empregado cujo trabalho é apenas reordenar os vagões do trem, trocando-os de posição.
+Uma vez que os vagões são organizados em uma ordem considerada ótima, o condutor pode desconectar cada vagão e colocá-los na estação.
+
+O título “organizador de vagões” é dado à pessoa que realiza esta tarefa, cuja estação fica perto de uma ponte. Ao invés da ponte poder subir ou descer, ela roda sobre um pilar que fica no centro do rio.
+Após rodar 90 graus, os barcos podem passar na esquerda ou direita dela.
+O Primeiro organizador de vagões descobriu que girando a ponte 180 graus com dois vagões em cima dela, é possível a troca de lugar entre os dois vagões.
+Obviamente a ponte pode operar no máximo com dois vagões sobre ela.
+
+Agora que quase todos os organizadores de vagões já faleceram, a estação gostaria de automatizar esta operação.
+Parte do programa a ser desenvolvido é uma rotina que decide para um dado trem com um determinado número de vagões,
+o número de trocas entre trens adjacentes que são necessárias para que o  trem fique ordenado. Sua tarefa é criar tal rotina.
+
+Entrada
+A entrada contém na primeira linha o número de caso de testes (N). Cada caso de teste consiste de duas linhas de entrada.
+A primeira linha de um caso de teste contém um inteiro L, determinando o tamanho do trem (0 ≤ L ≤ 50).
+A segunda linha de um caso de teste contém uma permutação dos números 1 até L, indicando a ordem corrente dos vagões.
+Os vagões devem ser ordenados de forma que o vagão 1 venha por primeiro, depois o 2, etc, com o vagão L vindo por último.
+
+Saída
+Para cada caso de teste imprima a sentença: 'Optimal train swapping takes S swaps.' onde S é um inteiro.
 */
 
 using namespace std;
 
 int main()
 {
+
+    int N, L, vagoes[50], troca = 0, busca = 1;
+
+    cin>>N;
+
+    for(int i = 0; i < N; i ++)
+    {
+        troca = 0;
+        busca = 1;
+        cin >> L;
+
+        for(int i = 0; i < L; i++)
+        {
+            cin>>vagoes[i];
+        }
+
+        for(int i = 0; i < L; i++)
+        {
+                if(vagoes[i] == busca)
+                {
+                    while(busca < i+1)
+                    {
+                        int temp;
+                        temp = vagoes[i-1];
+                        vagoes[i-1] = vagoes[i];
+                        vagoes[i] = temp;
+                        troca++;
+                        i--;
+                    }
+                     busca ++;
+                }
+        }
+
+
+        cout<<"Optimal train swapping takes "<<troca<<" swaps."<<endl;
+    }
 
     return 0;
 }
@@ -1877,30 +1950,72 @@ int main()
 
 /*
 
+A Nlogônia é um país tropical, com muitas belezas naturais internacionalmente famosas; dentre elas, encontram-se as belas praias que compõem o arquipélago do país, que todo verão recebem milhões de turistas estrangeiros.
+
+O Ministério do Turismo da Nlogônia está preparando o país para a chegada dos turistas, mas para fazer seu planejamento, precisa saber a extensão da costa nlogônica.
+Para isso, ele gerou um mapa que divide o território nacional em vários quadrados, que podem ser ocupados por água ou por terra;
+considera-se que um quadrado é parte da costa nlogônica se ele é um quadrado ocupado por terra que tem um lado em comum com um quadrado ocupado por água.
+
+Na figura abaixo, (a) mostra um trecho do mapa gerado e (b) mostra os quadrados do trecho dado que são costa.
+
+
+
+Como a Nlogônia é um país muito grande, o ministro do turismo pediu que você escrevesse um programa que, dado o mapa da Nlogônia, determina a extensão da costa nlogônica.
+
+Entrada
+A primeira linha da entrada contém dois inteiros M e N (1 ≤ M, N ≤ 1000) indicando, respectivamente, o número de linhas e o número de colunas do mapa.
+Cada uma das M linhas seguintes contém N caracteres: um caractere ‘.’ indica que aquele quadrado do território é ocupada por água; um caractere ‘#’ indica que aquele quadrado do território é ocupada por terra.
+
+Considere que todo o espaço fora da área do mapa é ocupado por água.
+
+Saída
+Seu programa deve imprimir uma única linha contendo um único inteiro, indicando quantos quadrados do território fazem parte da costa da Nlogônia.
+
 */
 
 using namespace std;
+//const vector<pair<int, int>> movimentos = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}} ver depois
+
 
 int main()
 {
+
+    int m, n, costa = 0;
+    char nlogonia[1000][1000];
+
+    cin>> m >> n;
+
+    for(int i = 0; i < m; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            cin>>nlogonia[i][j];
+        }
+    }
+
+    for(int i = 0; i < m; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+          if(nlogonia[i][j] == '#')
+          {
+              if(nlogonia[i-1][j] == '.' && i>0 || nlogonia[i+1][j] == '.' && i < m-1 || nlogonia[i][j+1] == '.' && j < n-1 || nlogonia[i][j-1] == '.' && j > 0)
+              {
+                  costa++;
+              }
+              else if(i == 0 || i == m-1 || j == 0 || j ==n-1)
+              {
+                  costa++;
+              }
+          }
+        }
+    }
+
+cout<<costa<<endl;
 
     return 0;
 }
 
 #endif
 
-#ifdef ex31
 
-/*
-
-*/
-
-using namespace std;
-
-int main()
-{
-
-    return 0;
-}
-
-#endif
