@@ -1,6 +1,7 @@
 #include <iostream>
 
-#define ex01
+#define ex03
+
 
 #ifdef ex01
 
@@ -48,7 +49,6 @@ string inverteChar(string M)
 
     invertida = M;
 
-
     while(tamanho>=0)
     {
 
@@ -62,11 +62,12 @@ string inverteChar(string M)
 
 string deslocaMetade(string M)
 {
-    int metade = (M.size())/2;
-
-    for(int i = (M.size()/2); i<M.size(); i++)
+    for(int i = 0; i < M.size(); i++)
     {
-        M[i] -=1;
+        if(i >= M.size()/2)
+        {
+            M[i] -=1;
+        }
 
     }
 
@@ -81,10 +82,10 @@ int main()
     string M;
 
     cin>>N;
-
+    cin.ignore();
     for(int i  = 0; i < N; i++)
     {
-      cin.ignore();
+
       getline(cin, M);
 
       M = deslocaChar(M);
@@ -96,26 +97,110 @@ int main()
     return 0;
 }
 
-
-
 #endif
 
 #ifdef ex02
+
+/*
+A seguinte sequência de números 0 1 1 2 3 5 8 13 21... é conhecida como série de Fibonacci.
+Nessa sequência, cada número, depois dos 2 primeiros, é igual à soma dos 2 anteriores.
+Escreva um algoritmo que leia um inteiro N (N < 46) e mostre os N primeiros números dessa série.
+
+Entrada
+O arquivo de entrada contém um valor inteiro N (0 < N < 46).
+
+Saída
+Os valores devem ser mostrados na mesma linha, separados por um espaço em branco.
+Não deve haver espaço após o último valor.
+
+*/
 using namespace std;
 
-int main()
+int main(){
 
+    int N, a,b,c;
+
+    cin>>N;
+
+   a = 0;
+   b = 1;
+   c = 1;
+
+    for(int i = 0; i < N; i++)
+    {
+        if(i+1 != N)
+        {
+          cout<<a<<" ";
+        }
+        else
+        {
+            cout<<a<<endl;
+        }
+
+       a = b;
+       b = c;
+       c = b+a;
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex03
+
+/*
+
+João quer montar um painel de leds contendo diversos números. Ele não possui muitos leds, e não tem certeza se conseguirá montar o número desejado.
+Considerando a configuração dos leds dos números abaixo, faça um algoritmo que ajude João a descobrir a quantidade de leds necessário para montar o valor.
+
+Obs.: Para programadores de Javascript, recomenda-se o uso de "input.trim().split('\n')" para evitar erros conhecidos.
+
+Entrada
+A entrada contém um inteiro N, (1 ≤ N ≤ 1000) correspondente ao número de casos de teste, seguido de N linhas,
+cada linha contendo um número (1 ≤ V ≤ 10100) correspondente ao valor que João quer montar com os leds.
+
+Saída
+Para cada caso de teste, imprima uma linha contendo o número de leds que João precisa para montar o valor desejado, seguido da palavra "leds".
+
+*/
+#include <iostream>
+#include <map>
+
 using namespace std;
 
 int main()
 {
+    int N, V, totalLeds = 0, aux;
 
+    string leds;
+
+    map<char,int> nled;
+
+    nled[49] = 2;
+    nled[50] = 5;
+    nled[51] = 5;
+    nled[52] = 4;
+    nled[53] = 5;
+    nled[54] = 6;
+    nled[55] = 3;
+    nled[56] = 7;
+    nled[57] = 6;
+    nled[48] = 6;
+
+    cin>>N;
+
+    for(int i = 0; i < N; i++)
+    {
+        totalLeds = 0;
+        cin>>leds;
+
+        for(int j = 0; j <leds.size();j++)
+        {
+             aux = leds[j];
+             totalLeds += nled[aux];
+        }
+        cout<<totalLeds<<" leds"<<endl;
+    }
     return 0;
 }
 #endif
@@ -123,6 +208,10 @@ int main()
 
 #ifdef ex04
 using namespace std;
+
+/*
+
+*/
 
 int main()
 {
