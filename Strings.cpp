@@ -1,6 +1,7 @@
 #include <iostream>
 
-#define ex03
+#define ex05
+//refazer o 5
 
 
 #ifdef ex01
@@ -207,25 +208,123 @@ int main()
 
 
 #ifdef ex04
-using namespace std;
 
 /*
+Uma sentença é chamada de dançante se sua primeira letra for maiúscula e cada letra subsequente for o oposto da letra anterior.
+Espaços devem ser ignorados ao determinar o case (minúsculo/maiúsculo) de uma letra.
+Por exemplo, "A b Cd" é uma sentença dançante porque a primeira letra ('A') é maiúscula, a próxima letra ('b') é minúscula,
+a próxima letra ('C') é maiúscula, e a próxima letra ('d') é minúscula.
 
+Entrada
+A entrada contém vários casos de teste. Cada caso de teste é composto por uma linha que contém uma sentença,
+que é uma string que contém entre 1 e 50 caracteres ('A'-'Z','a'-'z' ou espaço ' '), inclusive, ou no mínimo uma letra ('A'-'Z','a'-'z').
+
+Saída
+Transforme a sentença de entrada em uma sentença dançante (conforme o exemplo abaixo)
+trocando as letras para minúscula ou maiúscula onde for necessário.
+Todos os espaços da sentença original deverão ser preservados, ou seja, " sentence " deverá ser convertido para " SeNtEnCe ".
 */
+
+using namespace std;
 
 int main()
 {
+    int N;
+    string sentence;
+
+    while(getline(cin, sentence))
+    {
+        int k = 0;
+        for(int j  = 0; j < sentence.size(); j++)
+        {
+            if(sentence[j] == ' ')
+            {
+                continue;
+            }
+
+            else if(k%2==0)
+            {
+                if(sentence[j] >= 'a' && sentence[j] <='z')
+                {
+                    sentence[j] -=32;
+                }
+            }
+
+            else
+            {
+                if(sentence[j] >= 'A' && sentence[j] <='Z')
+                {
+                    sentence[j] +=32;
+
+                }
+
+            }
+            k++;
+        }
+        cout<<sentence<<endl;
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex05
+
+/*
+Implemente um programa denominado combinador, que recebe duas strings e deve combiná-las, alternando as letras de cada string,
+começando com a primeira letra da primeira string, seguido pela primeira letra da segunda string, em seguida pela segunda letra da primeira string,
+e assim sucessivamente. As letras restantes da cadeia mais longa devem ser adicionadas ao fim da string resultante e retornada.
+
+Entrada
+A entrada contém vários casos de teste. A primeira linha contém um inteiro N que indica a quantidade de casos de teste que vem a seguir.
+Cada caso de teste é composto por uma linha que contém duas cadeias de caracteres, cada cadeia de caracteres contém entre 1 e 50 caracteres inclusive.
+
+Saída
+Combine as duas cadeias de caracteres da entrada como mostrado no exemplo abaixo e exiba a cadeia resultante.
+
+*/
+
 using namespace std;
 
 int main()
 {
+    int N;
+    string sentence1, sentence2, finalSentence;
 
+    cin>>N;
+
+    while(N>0)
+    {
+        cin>>sentence1>>sentence2;
+
+        int tamanho1 = sentence1.size(), tamanho2 = sentence2.size();
+
+        int tamanhoTotal = tamanho1+tamanho2;
+
+
+        int j1=0, j2=0;
+
+        for(int i = 0; i<tamanhoTotal; i++)
+        {
+            if(i%2==0 && sentence1[j1] != '\0')
+            {
+                finalSentence[i] = sentence1[j1];
+                   // cout<<sentence1[j1];
+                    j1++;
+
+            }
+            else if(i%2!=0 && sentence2[j2] != '\0')
+            {
+                finalSentence[i] = sentence2[j2];
+                //cout<<sentence2[j2];
+                j2++;
+            }
+            cout<<finalSentence;
+        }
+        cout<<endl;
+        N--;
+
+    }
     return 0;
 }
 #endif
@@ -380,4 +479,3 @@ int main()
     return 0;
 }
 #endif
-
