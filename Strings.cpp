@@ -1,7 +1,7 @@
 #include <iostream>
 
-#define ex05
-//refazer o 5
+#define ex06
+//refazer o 6
 
 
 #ifdef ex01
@@ -289,40 +289,39 @@ using namespace std;
 int main()
 {
     int N;
-    string sentence1, sentence2, finalSentence;
+    string sentence1, sentence2;
 
     cin>>N;
 
-    while(N>0)
+    while(N--)
     {
-        cin>>sentence1>>sentence2;
+        cin>> sentence1;
+        cin>> sentence2;
 
         int tamanho1 = sentence1.size(), tamanho2 = sentence2.size();
 
-        int tamanhoTotal = tamanho1+tamanho2;
 
-
-        int j1=0, j2=0;
-
-        for(int i = 0; i<tamanhoTotal; i++)
+        if(tamanho1<tamanho2)
         {
-            if(i%2==0 && sentence1[j1] != '\0')
-            {
-                finalSentence[i] = sentence1[j1];
-                   // cout<<sentence1[j1];
-                    j1++;
+            tamanho1 = tamanho1^tamanho2;
+            tamanho2 = tamanho1^tamanho2;
+            tamanho1 = tamanho1^tamanho2;
+        }
 
-            }
-            else if(i%2!=0 && sentence2[j2] != '\0')
+        for(int i = 0; i <tamanho1;)
+        {
+            if(i<sentence1.size())
             {
-                finalSentence[i] = sentence2[j2];
-                //cout<<sentence2[j2];
-                j2++;
+                cout<<sentence1[i];
             }
-            cout<<finalSentence;
+            if(i<sentence2.size())
+            {
+                cout<<sentence2[i];
+            }
+
+            i++;
         }
         cout<<endl;
-        N--;
 
     }
     return 0;
@@ -330,10 +329,59 @@ int main()
 #endif
 
 #ifdef ex06
+
+/*
+Paulinho tem em suas mãos um novo problema. Agora a sua professora lhe pediu que construísse um programa para verificar,
+à partir de dois valores muito grandes A e B, se B corresponde aos últimos dígitos de A.
+
+Entrada
+A entrada consiste de vários casos de teste. A primeira linha de entrada contém um inteiro N que indica a quantidade de casos de teste.
+Cada caso de teste consiste de dois valores A e B maiores que zero, cada um deles podendo ter até 1000 dígitos.
+
+Saída
+Para cada caso de entrada imprima uma mensagem indicando se o segundo valor encaixa no primeiro valor, confome exemplo abaixo.
+*/
+
 using namespace std;
 
 int main()
 {
+    int N, tamanho1, tamanho2, controle;
+    string A, B;
+
+    cin>>N;
+
+    while(N--)
+    {
+        cin>>A>>B;
+
+        tamanho1 = A.size();
+        tamanho2 = B.size();
+
+        //não pode trocar por causa do if, tenta usar uma terceira variavel
+        
+        if(tamanho2>tamanho1)
+        {
+            tamanho2 = tamanho2^tamanho1;
+            tamanho1 = tamanho2^tamanho1;
+            tamanho2 = tamanho2^tamanho1;
+        }
+
+        controle = 0;
+
+        for(int i = 0; i < tamanho2; i++)
+        {
+            if(B[tamanho2-i] != A[tamanho1-i] && controle ==0)
+            {
+                cout<<"nao encaixa"<<endl;
+                controle++;
+            }
+            else if(controle != 1 && i+1 ==tamanho2)
+            {
+                cout<<"encaixa"<<endl;
+            }
+        }
+    }
 
     return 0;
 }
