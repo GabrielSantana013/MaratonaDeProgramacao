@@ -1,8 +1,6 @@
 #include <iostream>
 
-#define ex06
-//refazer o 6
-
+#define ex10
 
 #ifdef ex01
 
@@ -359,28 +357,28 @@ int main()
         tamanho2 = B.size();
 
         //não pode trocar por causa do if, tenta usar uma terceira variavel
-        
-        if(tamanho2>tamanho1)
-        {
-            tamanho2 = tamanho2^tamanho1;
-            tamanho1 = tamanho2^tamanho1;
-            tamanho2 = tamanho2^tamanho1;
-        }
 
-        controle = 0;
-
-        for(int i = 0; i < tamanho2; i++)
+    if(tamanho1>=tamanho2)
+    {
+        for(int i = 0; i <= tamanho2; i++)
         {
-            if(B[tamanho2-i] != A[tamanho1-i] && controle ==0)
+            if(B[tamanho2-i] != A[tamanho1-i])
             {
                 cout<<"nao encaixa"<<endl;
-                controle++;
+                break;
             }
-            else if(controle != 1 && i+1 ==tamanho2)
+            else if(i == tamanho2)
             {
                 cout<<"encaixa"<<endl;
             }
         }
+    }
+    else
+    {
+        cout<<"nao encaixa"<<endl;
+    }
+
+
     }
 
     return 0;
@@ -389,40 +387,232 @@ int main()
 
 
 #ifdef ex07
+
+/*
+Júlio César usava um sistema de criptografia, agora conhecido como Cifra de César, que trocava cada letra pelo equivalente em duas posições adiante no alfabeto
+(por exemplo, 'A' vira 'C', 'R' vira 'T', etc.). Ao final do alfabeto nós voltamos para o começo, isto é 'Y' vira 'A'.
+Nós podemos, é claro, tentar trocar as letras com quaisquer número de posições.
+
+Entrada
+A entrada contém vários casos de teste. A primeira linha de entrada contém um inteiro N que indica a quantidade de casos de teste.
+Cada caso de teste é composto por duas linhas. A primeira linha contém uma string com até 50 caracteres maiúsculos ('A'-'Z'),
+que é a sentença após ela ter sido codificada através desta Cifra de César modificada. A segunda linha contém um número que varia
+de 0 a 25 e que representa quantas posições cada letra foi deslocada para a direita.
+
+Saída
+Para cada caso de teste de entrada, imprima uma linha de saída com o texto decodificado (transformado novamente para o texto original)
+conforme as regras acima e o exemplo abaixo.
+
+*/
+
 using namespace std;
 
 int main()
 {
+    int N,nCifra;
+    string cifra;
+
+    cin>>N;
+
+    for(int i =0; i<N; i++)
+    {
+        cin>>cifra>>nCifra;
+
+        for(int j = 0; j < cifra.size(); j++)
+        {
+            int charCifra = cifra[j];
+
+            if(charCifra - nCifra >=65)
+            {
+                cifra[j] -= nCifra;
+            }
+            else
+            {
+                cifra[j] +=26;
+                cifra[j] -=nCifra;
+            }
+
+        }
+        cout<<cifra<<endl;
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex08
+
+/*
+Em diversos sistemas de computação, vários processos podem ler de um mesmo recurso durante o mesmo ciclo de máquina,
+mas somente um processo pode escrever no recurso durante o ciclo de máquina. Leituras e gravações não podem se misturar em um mesmo ciclo de máquina.
+Dado um histórico de leituras e gravações que ocorreram durante a execução de um determinado processamento,
+e um número inteiro que representa o número de processos usados, calcule a duração mínima do processamento, em ciclos de máquina.
+O rastro de histórico representa cada leitura por uma letra 'R' e cada gravação por uma letra 'W'.
+
+Por exemplo, se o rastro de histórico é "RWWRRR" e o número de processos é 3, então o número mínimo de ciclos de máquina será 4:
+um para a primeira leitura, um para cada uma das gravações e apenas um para todo o último grupo de leituras.
+
+Entrada
+A entrada contém diversos casos de testes. Cada caso é composto por duas linhas. A primeira linha contém o rastro de processamento
+em uma sequência de caracteres 'R' ou 'W' formando um String de 1 a 50 caracteres. A segunda linha contém um valor inteiro P (1 ≤ P ≤ 10),
+representando o número de processos, ou seja, uma indicação de quantas operações de leitura podem ser processadas simultaneamente. A entrada termina em EOF.
+
+Saída
+Para cada caso de teste determine e imprima o número mínimo de ciclos de máquina necessários para se processar o rastro informado. Vide exemplos abaixo.
+*/
+
 using namespace std;
 
 int main()
 {
+    string rastro;
+    int processos, ciclos = 0, contador = 0;
+
+    while(cin>>rastro)
+    {
+        cin>>processos;
+
+        ciclos = 0;
+        contador = 0;
+
+        for(int i = 0; i < rastro.size(); i++)
+        {
+            if(contador<processos)
+            {
+                if(rastro[i] == 'R' && contador == 0)
+                {
+                    ciclos++;
+                }
+                else if(rastro[i] == 'W')
+                {
+                    ciclos++;
+                    contador = 0;
+                    continue;
+                }
+                if(contador+1 == processos)
+                {
+                    contador = 0;
+                    continue;
+                }
+            contador++;
+
+            } //14 w 16R
+
+        }
+    cout<<ciclos<<endl;
+
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex09
+
+/*
+Uma aliteração ocorre quando duas ou mais palavras consecutivas de um texto possuem a mesma letra inicial (ignorando maiúsculas e minúsculas).
+Sua tarefa é desenvolver um programa que identifique, a partir de uma sequência de palavras, o número de aliterações que essa sequência possui.
+
+Entrada
+A entrada contém diversos casos de testes. Cada caso é expresso como um texto em uma única linha, contendo de 1 a 100 palavras separadas por um único espaço,
+cada palavra tendo de 1 a 50 letras minúsculas ou maiúsculas ('A'-'Z','a'-'z'). A entrada termina em EOF.
+
+Saída
+Para cada caso de teste imprima o número de aliterações existentes no texto informado, conforme exemplos abaixo.
+
+*/
+
 using namespace std;
 
 int main()
 {
+    string frase;
+    char inicial;
+
+    while(getline(cin, frase))
+    {
+        int aliteracao = 0, contaIgual = 0;
+
+        inicial = frase[0];
+
+        for(int i = 0; i < frase.size(); i++)
+        {
+            if(i!=0 && frase[i - 1] == ' ')
+            {
+                if(frase[i] != tolower(inicial) && frase[i] != toupper(inicial))
+                {
+                    contaIgual = 0;
+                }
+                if(toupper(inicial) == frase[i] || tolower(inicial) == frase[i] && contaIgual == 0)
+                {
+                    aliteracao++;
+                    contaIgual++;
+                }
+
+                inicial = frase[i];
+            }
+        }
+        cout<<aliteracao<<endl;
+
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex10
+
+/*
+
+Textos podem conter mensagens ocultas. Neste problema a mensagem oculta em um texto é composto pelas primeiras letras de cada palavra do texto,
+na ordem em que aparecem.
+
+É dado um texto composto apenas por letras minúsculas ou espaços. Pode haver mais de um espaço entre as palavras.
+O texto pode iniciar ou terminar em espaços, ou mesmo conter somente espaços.
+
+Entrada
+A entrada contém vários casos de testes. A primeira linha de entrada contém um inteiro N que indica a quantidade de casos de teste que vem a seguir.
+Cada caso de teste consiste de uma única linha contendo de um a 50 caracteres, formado por letras minúsculas (‘a’-‘z’) ou espaços (‘ ’).
+Atenção para possíveis espaços no início ou no final do texto!
+
+Nota: No exemplo de entrada os espaços foram substituídos por pequenos pontos (‘·’) para facilitar o entendimento dos exemplos.
+
+Saída
+Para cada caso de teste imprima a mensagem oculta no texto de entrada.
+
+*/
 using namespace std;
 
 int main()
 {
+    int N, k;
+    string mensagem, codigo;
+
+    cin>>N;
+    cin.ignore();
+
+    for(int i = 0; i < N; i++)
+    {
+        getline(cin, mensagem);
+        string codigo; //usa codigo.clear pra limpar a string a cada iteração
+        k=0;
+
+        if(mensagem[0] != ' ')
+        {
+            codigo.push_back(mensagem[0]);
+            k++;
+        }
+
+        for(int j = 0; j < mensagem.size();j++)
+        {
+            if(j!=0 && mensagem[j-1] == ' ' && mensagem[j] != ' ')
+            {
+                codigo.push_back(mensagem[j]);
+                k++;
+            }
+        }
+        cout<<codigo<<endl;
+    }
 
     return 0;
 }
