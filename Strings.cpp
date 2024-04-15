@@ -1,6 +1,7 @@
 #include <iostream>
 
-#define ex10
+#define ex12
+//refazer o 12
 
 #ifdef ex01
 
@@ -619,21 +620,163 @@ int main()
 #endif
 
 #ifdef ex11
+
+/*
+
+Seu irmão mais novo aprendeu a escrever apenas um, dois e três, em Inglês. Ele escreveu muitas dessas palavras em um papel e a sua tarefa é reconhecê-las.
+Nota-se que o seu irmão mais novo é apenas uma criança, então ele pode fazer pequenos erros: para cada palavra, pode haver, no máximo, uma letra errada.
+ O comprimento de palavra é sempre correto. É garantido que cada palavra que ele escreveu é em letras minúsculas, e cada palavra que ele escreveu tem uma interpretação única.
+
+Entrada
+A primeira linha contém o número de palavras que o seu irmão mais novo escreveu. Cada uma das linhas seguintes contém uma única palavra com todas as letras em minúsculo.
+As palavras satisfazem as restrições acima: no máximo uma letra poderia estar errada, mas o comprimento da palavra está sempre correto. Haverá, no máximo, 1000 palavras de entrada.
+
+Saída
+Para cada caso de teste, imprima o valor numérico da palavra.
+
+*/
+
 using namespace std;
 
 int main()
 {
+
+    int N, cont1, cont2;
+    cin>>N;
+
+    string palavras[] = {"one", "two"};
+    string palavra;
+
+    for(int i = 0; i <N; i++)
+    {
+        cin>>palavra;
+        cont1 = cont2 = 0;
+        if(palavra.size()>3)
+        {
+            cout<<"3"<<endl;
+            continue;
+        }
+        else
+        {
+            for(int j = 0; j<2;j++)
+            {
+                cont1 = 0;
+                for(int k = 0; k < palavras[j].size(); k++)
+                {
+                    if(palavras[j][k] == palavra[k])
+                    {
+                        cont1++;
+                    }
+                    if(palavras[j] == "one" && cont1>=2)
+                    {
+                        cout<<"1"<<endl;
+                        break;
+                    }
+                    else if(palavras[j] == "two" && cont1>=2)
+                    {
+                        cout<<"2"<<endl;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex12
+
+/*
+
+Rafael encontrou um novo hobbie: fazer desenhos usando caracteres do teclado. Por mais simples ou limitada que essa nova forma de arte possa parecer,
+basta criatividade para se fazer os mais diferentes tipos de desenhos.
+
+Após fazer alguns desenhos, Rafael imaginou como seriam se eles fossem redimensionados, porém ter que refazer todo o desenho pareceu meio cansativo.
+Para isso, Rafael pediu sua ajuda.
+
+Em um redimensionamento, uma imagem com N linhas e M colunas passa a ter A linhas e B colunas, e, dado que as novas dimensões da imagem redimensionada
+é maior do que as dimensões da imagem original, alguns caracteres terão que se repetir.
+
+Digamos que A seja 3 vezes maior que N. Nesse caso, cada linha terá que se repetir 3 vezes, para que a imagem seja redimensionada de forma correta.
+
+Dado um desenho feito por Rafael, imprima como seria se o desenho fosse redimensionado para uma determinada nova dimensão.
+
+Entrada
+Haverá diversos casos de teste. Cada caso de teste inicia com dois inteiros N e M (1 ≤ N, M ≤ 50), representando, respectivamente, a altura e a
+largura do desenho de Rafael.
+
+A seguir haverá N linhas, contendo M caracteres cada, representando o desenho feito por Rafael. Após, haverá dois inteiros A e B (N < A ≤ 100,
+M < B ≤ 100, A é múltiplo de N, e B é multiplo de M), representando, respectivamente, a nova altura e largura que Rafael deseja que seu desenho tenha.
+
+O último caso de teste é indicado quando N = M = 0, o qual não deverá ser processado.
+
+Saída
+Para cada caso de teste, imprima A linhas, contendo B caracteres cada, representando o desenho de Rafael redimensionado.
+
+Após cada caso de teste, imprima uma linha em branco.
+
+*/
+
+
 using namespace std;
 
 int main()
 {
+    int N,M,A,B;
 
+    cin>>N>>M;
+
+    char imagemOriginal[N][M];
+
+    while(N!=0 && M !=0)
+    {
+        //recebe a imagem
+        for(int i = 0; i < N; i++)
+        {
+            for(int j = 0; j < M; j++)
+            {
+                cin>>imagemOriginal[i][j];
+            }
+        }
+
+        cin>>A>>B;
+
+        int multA, multB;
+
+        multA = A/N;
+        multB = B/M;
+
+    for(int i = 0; i < N; i++)
+        {
+            for(int k = 0; k < multA; k++)
+            {
+                for(int j = 0; j < M; j++)
+                {
+                    for(int p = 0; p<multB; p++)
+                    {
+                        cout<<imagemOriginal[i][j];
+                    }
+                }
+                cout<<endl;
+            }
+        }
+
+        /*for(int i = 0; i < N*multA; i++)
+        {
+            for(int j = 0; j < M*multB; j++)
+            {
+                cout<<imagemOriginal[i / multA][j / multB];
+            }
+            cout<<endl;
+        }*/
+
+        cin>>N>>M;
+        char imagemOriginal[N][M];
+    }
     return 0;
 }
 #endif
