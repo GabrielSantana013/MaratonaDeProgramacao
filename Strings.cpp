@@ -1017,52 +1017,125 @@ A saída é dada em uma única linha e corresponde a string decodificada.
 Inclua o caractere de fim-de-linha após a string.
 
 */
+#include <cstdlib>
+#include <string>
+
 
 using namespace std;
 
 int main()
 {
     char matring[4][81];
-    string n;
+    string n, f="", l="";
+    int F, L;
 
     getline(cin, n);
 
     for(int i = 0; i < n.size(); i++)
     {
         matring[0][i] = n[i];
+
+        if(i == 0)
+        {
+           f+= matring[0][i];
+        }
+        if(i == n.size()-1)
+        {
+            //cout<<matring[0][i]<<endl;
+            l += matring[0][n.size()-1];
+        }
     }
 
     for(int i = 1; i < 4; i ++)
     {
         for(int j = 0; j < n.size() ; j++)
         {
-            cin>> matring[i][j];
+         cin>> matring[i][j];
+
+            if(j == 0)
+            {
+                //cout<<matring[i][j]<<endl;
+                f += matring[i][j];
+            }
+
+            if(j+1 == n.size())
+            {
+                //cout<<matring[i][j]<<endl;
+                l += matring[i][j];
+            }
         }
     }
 
+    F = stoi(f);
+    L = stoi(l);
+    char c;
 
 
-    /*for(int i = 0; i < 4; i ++)
+    for(int i = 0; i < n.size(); i ++)
     {
-        for(int j = 0; j < n.size(); j++)
-        {
-            cout<<matring[i][j];
-        }
-        cout<<endl;
-    }*/
+        int Mi = stoi(matring[1+i][i+1]);
+        c = (F*Mi+L)%257;
+        cout << c;
+    }
 
-
-
+    cout<<endl;
 
     return 0;
 }
 #endif
 
 #ifdef ex17
+
+/*
+
+Um dia o Prof. Humberto José Roberto fez o seguinte questionamento: Se o zero a esquerda de um número não tem valor algum,
+por que teria em outras posições de um número? Analisando da seguinte forma, ele pede sua ajuda para, ao somar dois valores inteiros,
+que o resultado seja exibido segundo o raciocínio dele, ou seja, sem os Zeros. Por exemplo, ao somar 15 + 5, o
+resultado seria 20, mas com esta nova ideia, o novo resultado seria 2, e, ao somar 99 + 6, o resultado seria 105, mas com esta nova ideia,
+ o novo resultado seria 15.
+
+Escreva um programa que, dado dois números inteiros, sem o algarismo zero, some os mesmos e, caso o resultado tenha algum algarismo zero,
+ que os retire antes de exibir.
+
+Entrada
+Haverá diversos casos de teste. Cada caso de teste inicia com dois inteiros M e N (1 ≤ M ≤ N ≤ 999.999.999).
+
+O último caso de teste é indicado quando N = M = 0, sendo que este caso não deve ser processado.
+
+Saída
+Para cada caso de teste, imprima o resultado da soma dos dois valores, sem os Zeros.
+
+*/
+
 using namespace std;
 
 int main()
 {
+    int M, N;
+    int c;
+
+    cin>>M>>N;
+
+    while(M!=0 && N!=0)
+    {
+        c = M+N;
+        string resultado = to_string(c);
+
+        for(int i = 0; i <resultado.size();i++)
+        {
+            if(resultado[i]!='0')
+            {
+                cout<<resultado[i];
+            }
+            else
+            {
+                continue;
+            }
+        }
+    cout<<endl;
+
+        cin>>M>>N;
+    }
 
     return 0;
 }
