@@ -1,7 +1,7 @@
 #include <iostream>
 
-#define ex12
-//refazer o 12
+#define ex16
+//refazer o 16
 
 #ifdef ex01
 
@@ -730,7 +730,7 @@ int main()
 
     cin>>N>>M;
 
-    char imagemOriginal[N][M];
+    char imagemOriginal[100][100];
 
     while(N!=0 && M !=0)
     {
@@ -764,58 +764,295 @@ int main()
                 cout<<endl;
             }
         }
-
-        /*for(int i = 0; i < N*multA; i++)
-        {
-            for(int j = 0; j < M*multB; j++)
-            {
-                cout<<imagemOriginal[i / multA][j / multB];
-            }
-            cout<<endl;
-        }*/
-
+        cout<<endl;
         cin>>N>>M;
-        char imagemOriginal[N][M];
+        char imagemOriginal[100][100];
     }
     return 0;
 }
 #endif
 
 #ifdef ex13
+
+/*
+
+Seu professor de português não para de trazer coisas novas para a sala, e hoje não foi diferente.
+Existe uma cidade, segundo seu professor, onde as pessoas levam muito a sério a forma como elas se comunicam.
+Em especial, quando duas pessoas estão conversando, elas pensam muito nas frases antes de dizê-las,
+de forma a garantir que tal frase seja uma “frase completa”, ou talvez uma “frase quase completa”.
+
+Considerando o nosso alfabeto de 26 letras, uma frase é dita “completa” quando ela contém todas as
+letras do alfabeto contidas nela. De modo semelhante, uma frase é dita “quase completa” se ela não é
+completa, porém contém ao menos metade das letras do alfabeto contidas nela. Quando uma frase não é
+“completa” e nem “quase completa”, ela é dita “mal elaborada”.
+
+Seu professor lhe deu uma tarefa muito difícil: dadas várias frases trocadas entre vários habitantes
+da cidade citada, diga em qual das categorias acima a frase se encaixa.
+
+Entrada
+A primeira linha contém um inteiro N, indicando o número de casos de teste a seguir.
+
+Cada caso de teste contém uma linha, contendo letras minúsculas, espaços em branco e/ou vírgulas.
+O número de caracteres de cada linha é no mínimo 3 e no máximo 1000, contando com os espaços.
+
+Saída
+Para cada caso de teste, imprima uma linha contendo uma das seguintes frases: “frase completa”,
+quando a frase é considerada completa; “frase quase completa”, quando a frase não é completa,
+mas é considerada quase completa; ou “frase mal elaborada”, quando ela não é completa e nem quase completa.
+
+*/
+
+#include <set>
+
 using namespace std;
 
-int main()
-{
+    int main()
+    {
+
+        string frase;
+
+        //.insert ele ignora as coisas repetidas
+        int N;
+
+        cin>>N;
+        cin.ignore();
+        for(int i = 0; i < N; i++)
+        {
+            set <char> letrasDigitadas;
+
+            getline(cin, frase);
+
+            for(int j = 0; j< frase.size(); j++)
+            {
+                if(frase[j] >= 'a' && frase[j] <= 'z')
+                {
+                    letrasDigitadas.insert(frase[j]);
+                }
+            }
+
+                if(letrasDigitadas.size() >= 26)
+                {
+                    cout<<"frase completa"<<endl;
+                }
+                else if(letrasDigitadas.size() > 13)
+                {
+                    cout<<"frase quase completa"<<endl;
+                }
+                else
+                {
+                    cout<<"frase mal elaborada"<<endl;
+
+                }
+        }
+
 
     return 0;
 }
 #endif
 
 #ifdef ex14
+
+/*
+
+Rafael recentemente recebeu uma bolsa de estudos e está fazendo intercâmbio fora do Brasil, onde conheceu várias
+pessoas de várias nacionalidades diferentes. O idioma nativo desse país é o Inglês, e todas as pessoas que Rafael
+conheceu falam inglês como primeira ou segunda língua.
+
+Como aprender um segundo idioma é uma tarefa difícil e cansativa, as pessoas preferem falar seu idioma nativo sempre que possível.
+Uma exceção à essa regra é quando há duas pessoas no grupo que não tem o mesmo idioma nativo. Nesse tipo de situação, o idioma utilizado é o inglês.
+
+Por exemplo, se em um grupo há só brasileiros, o idioma falado será o português, mas caso haja um espanhol entre os brasileiros, o idioma falado será o inglês.
+
+Rafael as vezes fica confuso sobre qual idioma deveria ser falado em cada grupo de pessoas, e para isso pediu sua ajuda.
+
+Entrada
+A primeira linha contém um inteiro N, indicando o número de casos de testes a seguir.
+
+Cada caso de teste inicia com um inteiro K (2 ≤ K ≤ 100), representando o número de pessoas no grupo. Em seguida haverá K linhas,
+contendo uma string S cada, representando o idioma nativo de cada uma dessas K pessoas.
+
+Cada string conterá no mínimo 1 e no máximo 20 caracteres, entre eles apenas letras minúsculas (a-z).
+
+Saída
+Imprima uma linha, contendo uma string S, representando o idioma mais apropriado para a conversa.
+
+*/
+
 using namespace std;
 
 int main()
 {
+    int N, K, contaIdioma = 0;
+    string idioma[100];
+
+    cin>>N;
+
+    for(int i = 0; i <N; i++)
+    {
+        contaIdioma = 0;
+        cin>>K;
+
+        for(int j = 0; j < K; j++)
+        {
+            cin>>idioma[j];
+                if(j>0 && idioma[j] != idioma[j-1])
+                {
+                    contaIdioma++;
+                }
+        }
+
+        if(contaIdioma !=0)
+            {
+                cout<<"ingles"<<endl;
+            }
+            else
+            {
+                cout<<idioma[0]<<endl;
+            }
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex15
+
+/*
+
+É dado na entrada uma string A e outra B. Em uma operação você pode escolher uma letra da primeira string e avançar esta letra.
+Avançar uma letra significa transformá-la na próxima letra do alfabeto, veja que a próxima letra depois de z vem a letra a novamente!
+
+Por exemplo, podemos transformar a string ab em bd em no mínimo 3 operações: ab -> bb -> bc -> bd.
+Podemos aplicar operações nas letras em qualquer ordem, outra possibilidade seria: ab -> ac -> bc -> bd.
+
+Dadas as duas strings, calcule o mínimo número de operações necessárias para transformar a primeira na segunda.
+
+Entrada
+Na primeira linha terá um inteiro T (T ≤ 100) indicando o número de casos de teste.
+
+Para cada caso, na única linha teremos as duas strings A (1 ≤ |A| ≤ 100* ou 1 ≤ |A| ≤ 104** - sendo que |A|
+significa o tamanho da string A) e B (|B| = |A|* ou |B| = |A​|**) separadas por um espaço.
+Ambas as strings são compostas por letras do alfabeto minúsculas apenas e são do mesmo tamanho.
+
+*Ocorre em aproximadamente 90% dos casos de teste;
+
+**Ocorre nos demais casos de teste.
+
+Saída
+Para cada caso imprima o número mínimo de operações.
+
+*/
+
+
+
 using namespace std;
 
 int main()
 {
+    int T, trocas;
+    string a, b;
+
+    cin>>T;
+    cin.ignore();
+
+    for(int k = 0; k < T; k++)
+    {
+        trocas = 0;
+        cin>>a>>b;
+
+        for(int i = 0; i < a.size(); i++)
+        {
+            if(a[i] != b[i])
+            {
+                int maior, menor;
+                maior = b[i];
+                menor = a[i];
+
+                if(maior < menor)
+                {
+                    trocas += 26 + maior-menor;
+                }
+                else
+                {
+                    trocas += maior-menor;
+                }
+
+            }
+        }
+        cout<<trocas<<endl;
+
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex16
+
+/*
+
+Matring é uma mistura de Matriz e String. Ela foi desenvolvida pela UNILA
+(União dos Nerds para Integração da Lógica e da Aventura) para manter mensagens seguras de escutas.
+
+A primeira e última coluna de uma matring guarda a chave para traduzi-la na mensagem original.
+As colunas restantes de uma matring representam uma string codificada em ASCII, uma coluna por caractere.
+
+Para uma mensagem com N caracteres, a matring correspondente é uma matriz 4x(N+2) de dígitos.
+Cada coluna é lida como um número de 4 dígitos; uma sequência de dígitos de cima para baixo é o
+mesmo que uma sequência de dígitos da esquerda para a direita na horizontal.
+
+Seja o primeiro número F, o último número L e os restantes uma sequência de números Mi, onde 1 ≤ i ≤ N.
+A primeira coluna de uma matring é indexada por zero.
+
+Para decodificar uma matring para uma string, calculamos: Ci = (F * Mi + L) mod 257,
+onde Ci é o caractere em ASCII na posição i da mensagem original.
+
+Sua tarefa é desenvolver um algoritmo para decodificar matrings.
+
+Entrada
+A entrada é uma matring, ou seja, uma matriz 4x(N+2) de dígitos (de 0 a 9) com 0 < N < 80.
+
+Saída
+A saída é dada em uma única linha e corresponde a string decodificada.
+Inclua o caractere de fim-de-linha após a string.
+
+*/
+
 using namespace std;
 
 int main()
 {
+    char matring[4][81];
+    string n;
+
+    getline(cin, n);
+
+    for(int i = 0; i < n.size(); i++)
+    {
+        matring[0][i] = n[i];
+    }
+
+    for(int i = 1; i < 4; i ++)
+    {
+        for(int j = 0; j < n.size() ; j++)
+        {
+            cin>> matring[i][j];
+        }
+    }
+
+
+
+    /*for(int i = 0; i < 4; i ++)
+    {
+        for(int j = 0; j < n.size(); j++)
+        {
+            cout<<matring[i][j];
+        }
+        cout<<endl;
+    }*/
+
+
+
 
     return 0;
 }
