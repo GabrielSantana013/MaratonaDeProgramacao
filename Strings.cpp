@@ -1069,11 +1069,22 @@ int main()
     F = stoi(f);
     L = stoi(l);
     char c;
+    int Mi;
+    string mi="";
 
-
-    for(int i = 0; i < n.size(); i ++)
+    for(int k = 0; k < n.size()-2; k++)
     {
-        int Mi = stoi(matring[1+i][i+1]);
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 1; j < n.size()-1; j++)
+            {
+                if(j+i == i+1)
+                {
+                    mi += matring[i][j];
+                }
+            }
+        }
+        Mi = stoi(mi);
         c = (F*Mi+L)%257;
         cout << c;
     }
