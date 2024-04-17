@@ -1,7 +1,7 @@
 #include <iostream>
 
 #define ex16
-//refazer o 16
+
 
 #ifdef ex01
 
@@ -1017,78 +1017,42 @@ A saída é dada em uma única linha e corresponde a string decodificada.
 Inclua o caractere de fim-de-linha após a string.
 
 */
-#include <cstdlib>
+#include <vector>
 #include <string>
-
 
 using namespace std;
 
-int main()
-{
-    char matring[4][81];
+int main(){
+
     string n, f="", l="";
     int F, L;
-
     getline(cin, n);
+    vector<string> matring(n.size()-2);
 
-    for(int i = 0; i < n.size(); i++)
+    for(int i = 0; i < 4; i ++)
     {
-        matring[0][i] = n[i];
-
-        if(i == 0)
+        f += n[0];
+        l += n[n.size()-1];
+        
+        for(int j = 1; j < n.size()-1; j++)
         {
-           f+= matring[0][i];
+            matring[j-1] += n[j];
         }
-        if(i == n.size()-1)
+        if(i<3)
         {
-            //cout<<matring[0][i]<<endl;
-            l += matring[0][n.size()-1];
-        }
-    }
-
-    for(int i = 1; i < 4; i ++)
-    {
-        for(int j = 0; j < n.size() ; j++)
-        {
-         cin>> matring[i][j];
-
-            if(j == 0)
-            {
-                //cout<<matring[i][j]<<endl;
-                f += matring[i][j];
-            }
-
-            if(j+1 == n.size())
-            {
-                //cout<<matring[i][j]<<endl;
-                l += matring[i][j];
-            }
+            getline(cin,n);
         }
     }
 
     F = stoi(f);
     L = stoi(l);
-    char c;
-    int Mi;
-    string mi="";
 
-    for(int k = 0; k < n.size()-2; k++)
+    for(int i = 0; i < n.size()-2; i++)
     {
-        for(int i = 0; i < 4; i++)
-        {
-            for(int j = 1; j < n.size()-1; j++)
-            {
-                if(j+i == i+1)
-                {
-                    mi += matring[i][j];
-                }
-            }
-        }
-        Mi = stoi(mi);
-        c = (F*Mi+L)%257;
-        cout << c;
+        int mi = stoi(matring[i]);
+        char c = (F*mi+L) %257;
+        cout<<c;
     }
-
     cout<<endl;
 
     return 0;
@@ -1153,30 +1117,212 @@ int main()
 #endif
 
 #ifdef ex18
+
+/*
+
+
+
+Pedra-papel-tesoura-lagarto-Spock é uma expansão do clássico método de seleção em jogo de pedra-papel-tesoura. 
+Atua sob o mesmo princípio básico, mas inclui outras duas armas adicionais: o lagarto (formado pela mão igual a uma boca de fantoche) 
+e Spock (formada pela saudação dos vulcanos em Star Trek). Isso reduz as chances de uma rodada terminar em um empate. 
+O jogo foi inventado por Sam Kass e Karen Bryla, como "Rock Paper Scissors Lizard Spock". As regras de vantagem são as seguintes:
+
+    Tesoura corta papel
+    Papel cobre pedra
+    Pedra derruba lagarto
+    Lagarto adormece Spock
+    Spock derrete tesoura
+    Tesoura prende lagarto
+    Lagarto come papel
+    Papel refuta Spock
+    Spock vaporiza pedra
+    Pedra quebra tesoura
+
+Um dia, dois amigos, Rajesh e Sheldon, decidiram apostar quem pagaria um almoço para o outro, com esta brincadeira. 
+Sua missão será fazer um algoritmo que, baseado no que eles escolherem, informe quem irá ganhar ou se dará empate.
+Entrada
+
+Haverá diversos casos de teste. O primeiro número a ser lido será um inteiro C, 
+representando a quantidade de casos de teste. Cada caso de teste tem duas palavras, representando a escolha de Rajesh e de Sheldon, respectivamente.
+Saída
+
+Para cada caso de teste, imprima quem venceu, ou se houve empate.
+
+
+*/
 using namespace std;
 
 int main()
 {
+    int C;
+    cin>>C;
+
+    for(int i = 0; i < C; i++)
+    {
+        string Sheldon, Rajesh;
+        cin>>Rajesh>>Sheldon;
+
+        if(Sheldon == Rajesh)
+        {
+            cout<<"empate"<<endl;
+        }
+        else if(Rajesh == "tesoura")
+        {
+            if(Sheldon == "papel" || Sheldon == "lagarto")
+            {
+                cout<<"rajesh"<<endl;
+            }
+            else if(Sheldon == "pedra" || Sheldon == "spock")
+            {
+                cout<<"sheldon"<<endl;
+            }
+        }
+        else if(Rajesh == "pedra")
+        {
+            if(Sheldon == "lagarto" || Sheldon == "tesoura")
+            {
+                cout<<"rajesh"<<endl;
+            }
+            else if (Sheldon == "papel" || Sheldon == "spock")
+            {
+                cout<<"sheldon"<<endl;
+            }
+        }
+        else if(Rajesh == "papel")
+        {
+            if(Sheldon == "pedra" || Sheldon == "spock")
+            {
+                cout<<"rajesh"<<endl;
+            }
+            else if (Sheldon == "tesoura" || Sheldon == "lagarto")
+            {
+                cout<<"sheldon"<<endl;
+            }
+        }
+        else if(Rajesh == "lagarto")
+        {
+            if(Sheldon == "spock" || Sheldon == "papel")
+            {
+                cout<<"rajesh"<<endl;
+            }
+            else if (Sheldon == "tesoura" || Sheldon == "pedra")
+            {
+                cout<<"sheldon"<<endl;
+            }
+        }
+        else if(Rajesh == "spock")
+        {
+            if(Sheldon == "tesoura" || Sheldon == "pedra")
+            {
+                cout<<"rajesh"<<endl;
+            }
+            else if (Sheldon == "lagarto" || Sheldon == "papel")
+            {
+                cout<<"sheldon"<<endl;
+            }
+
+        }
+    }
 
     return 0;
 }
 #endif
 
 #ifdef ex19
+
+/*
+O microblog Twitter é conhecido por limitar as postagens em 140 caracteres. 
+Conferir se um texto vai caber em um tuíte é sua tarefa.
+Entrada
+
+A entrada é uma linha de texto T (1 ≤ |T| ≤ 500).
+Saída
+
+A saída é dada em uma única linha. Ela deve ser "TWEET" (sem as aspas) se a linha de texto T tem até 140 caracteres. 
+Se T tem mais de 140 caracteres, a saída deve ser "MUTE".
+*/
+
 using namespace std;
+#include <vector>
+
 
 int main()
 {
+    string tweet;
 
+    getline(cin,tweet);
+
+    if(tweet.size()<=140)
+    {
+        cout<<"TWEET"<<endl;
+    }
+    else
+    {
+        cout<<"MUTE"<<endl;
+    }
     return 0;
 }
 #endif
 
 #ifdef ex20
+
+/*
+Em chats, é muito comum entre jovens e adolescentes utilizar sequências de letras, que parecem muitas vezes aleatórias, para representar risadas. 
+Alguns exemplos comuns são:
+
+huaauhahhuahau
+hehehehe
+ahahahaha
+jaisjjkasjksjjskjakijs
+huehuehue
+
+Cláudia é uma jovem programadora que ficou intrigada pela sonoridade das “risadas digitais”. 
+Algumas delas ela nem mesmo consegue pronunciar! Mas ela percebeu que algumas delas parecem transmitir melhor 
+o sentimento da risada que outras. A primeira coisa que ela percebeu é que as consoantes não interferem no quanto as risadas digitais 
+influenciam na transmissão do sentimento. A segunda coisa que ela percebeu é que as risadas digitais mais engra¸cadas são 
+aquelas em que as sequências de vogais são iguais quando lidas na ordem natural (da esquerda para a direita) 
+ou na ordem inversa (da direita para a esquerda), ignorando as consoantes. Por exemplo, “hahaha” e “huaauhahhuahau” estão
+entre as risadas mais engraçadas, enquanto “riajkjdhhihhjak” e “huehuehue” não estão entre as mais engraçadas.
+
+
+Cláudia está muito atarefada com a análise estatística das risadas digitais e pediu sua ajuda para escrever um programa que determine, 
+para uma risada digital, se ela é das mais engraçadas ou não.
+Entrada
+
+A entrada é composta por uma linha, contendo uma sequência de no máximo 50 caracteres, formada apenas por letras minúsculas sem acentuação. 
+As vogais são as letras ‘a’,‘e’,‘i’,‘o’,‘u’. A sequência contém pelo menos uma vogal.
+Saída
+
+Seu programa deve produzir uma linha contendo um caractere, “S” caso a risada seja das mais engra¸cadas, ou “N” caso contrário.
+*/
 using namespace std;
 
 int main()
 {
+
+    string risada, vogais;
+
+    cin>>risada;
+
+    for(int i = 0; i < risada.size(); i++)
+    {
+        if(risada[i] == 'a' || risada[i] == 'e' || risada[i] == 'i' || risada[i] == 'o' || risada[i] == 'u')
+        {
+            vogais += risada[i];
+        }
+    }
+    for(int i = 1; i <= vogais.size();i++)
+    {
+        if(vogais[vogais.size()-i] != vogais[i-1])
+        {
+            cout<<"N"<<endl;
+            break;
+        }
+        else if(vogais[vogais.size()-i] == vogais[i-1] && i == vogais.size())
+        {
+            cout<<"S"<<endl;
+        }
+    }
 
     return 0;
 }
