@@ -1,8 +1,9 @@
 #include <iostream>
 #include <bits/stdc++.h> //importa tudo (stl, string, set, map)
 
-#define ex04
+#define ex07
 //pulou o 2
+//pulou o 5
 
 #ifdef ex01
 
@@ -258,6 +259,35 @@ Você deve imprimir a quantidade de diamantes possíveis de serem extraídos em 
 using namespace std;
 int main()
 {
+    int N, diamantes;
+    string mina;
+
+    cin>>N;
+
+    while(N>0)
+    {
+        cin>>mina;
+        diamantes = 0;
+        queue<char>busca;
+
+        for(int i = 0; i < mina.size(); i++)
+        {
+            if(mina[i] == '<')
+            {
+                busca.push(mina[i]);
+            }
+            else if(mina[i] == '>' && !busca.empty())
+            {
+                busca.pop();
+                diamantes++;
+            }
+        }
+        cout<<diamantes<<endl;
+        N--;
+    }
+
+    /* <..><.<..>> */
+
 
     return 0;
 }
@@ -268,13 +298,41 @@ int main()
 
 /*
 
+O Professor solicitou que você escreva um programa que converta uma expressão na forma infixa (como usualmente conhecemos) para uma expressão na forma posfixa.
+Como você sabe, os termos in (no meio) e pos (depois) se referem à posição dos operadores.
+O programa terá que lidar somente com operadores binários +,-,*,/,^, parênteses, letras e números. Um exemplo seria uma expressão como:
+(A*B+2*C^3)/2*A. O programa deve converter esta expressão (infixa) para a expressão posfixa: AB*2C3^*+2/A*
 
+
+Entrada
+A primeira linha da entrada contém um valor inteiro N (N < 1000), que indica o número de casos de teste.
+Cada caso de teste a seguir é uma expressão válida na forma infixa, com até 300 caracteres.
+
+Saída
+Para cada caso, apresente a expressão convertida para a forma posfixa.
 
 */
 
 using namespace std;
 int main()
 {
+    int N;
+
+    cin>>N;
+
+    while(N >0)
+    {
+        string expressao;
+        cin>>expressao;
+
+
+
+
+        N--;
+    }
+
+
+
 
     return 0;
 }
@@ -285,13 +343,65 @@ int main()
 
 /*
 
+Dada uma pilha de n cartas enumeradas de 1 até n com a carta 1 no topo e a carta n na base.
+A seguinte operação é ralizada enquanto tiver 2 ou mais cartas na pilha.
 
+Jogue fora a carta do topo e mova a próxima carta (a que ficou no topo) para a base da pilha.
+
+Sua tarefa é encontrar a sequência de cartas descartadas e a última carta remanescente.
+
+Cada linha de entrada (com exceção da última) contém um número n ≤ 50. A última linha contém 0 e não deve ser processada.
+Cada número de entrada produz duas linhas de saída. A primeira linha apresenta a sequência de cartas descartadas e a segunda linha apresenta a carta remanescente.
+
+Entrada
+A entrada consiste em um número indeterminado de linhas contendo cada uma um valor de 1 até 50. A última linha contém o valor 0.
+
+Saída
+Para cada caso de teste, imprima duas linhas. A primeira linha apresenta a sequência de cartas descartadas, cada uma delas separadas por uma vírgula e um espaço.
+A segunda linha apresenta o número da carta que restou. Nenhuma linha tem espaços extras no início ou no final. Veja exemplo para conferir o formato esperado.
 
 */
 
 using namespace std;
 int main()
 {
+
+    int nCartas, qttCartas, inicio;
+
+    cin>>nCartas;
+
+    while(nCartas!= 0)
+    {
+        queue<int> cartas;
+        qttCartas = nCartas;
+
+        //preenche a fila
+        for(int i = 0; i < nCartas; i++)
+        {
+            cartas.push(i+1);
+        }
+
+        cout<<"Discarded cards: ";
+        while(qttCartas>=2)
+        {
+            if(qttCartas!=2)
+            {
+                cout<<cartas.front()<<", ";
+                cartas.pop();
+                cartas.push(cartas.front());
+                cartas.pop();
+            }
+            else
+            {
+                cout<<cartas.front()<<endl;
+                cartas.pop();
+            }
+            qttCartas--;
+
+        }
+        cout<<"Remaining card: "<<cartas.front()<<endl;;
+        cin>>nCartas;
+    }
 
     return 0;
 }
@@ -302,13 +412,65 @@ int main()
 
 /*
 
+Devido ao grande número de reclamações, a companhia telefônica de São Petersburgo está sendo obrigada a investir pesado na melhora de seus serviços.
+Para isso a companhia decidiu diminuir o orçamento de alguns setores para aumentar o de outros mais essenciais.
+Um dos setores que terá seu orçamento reduzido é o de impressão de listas telefônicas.
 
+Com um orçamento reduzido, o setor de impressão de listas telefônicas não consegue comprar toner suficiente para imprimir as listas completas.
+Como os números de telefone são impressos alinhados na vertical, foi sugerida a seguinte solução: a partir do segundo número de telefone impresso,
+os dígitos iniciais do próximo número a ser impresso que coincidirem com os do número acima são omitidos, ficando apenas um espaço em branco.
+Por exemplo, para os números 535456, 535488, 536566 e 835456 a impressão é a seguinte:
+
+
+5 3 5 4 5 6
+        8 8
+    6 5 6 6
+8 3 5 4 5 6
+
+
+Note que esta impressão economizou a impressão de 6 caracteres. A companhia telefonica cogitou também não imprimir os sufixos repetidos,
+mas nos testes feitos viram que a resposta não foi boa para o usuário e decidiram, portanto, fazer apenas a eliminação em prefixos.
+Para saber se a economia será suficiente, o setor de impressão quer saber o número máximo de caracteres que podem ser omitidos.
+No entanto, como em qualquer cidade grande, são vários os números telefônicos e eles não querem gastar homens-hora para calcular manualmente este valor.
+Então cabe a você, novo empregado da companhia, automatizar a economia feita pelo toner, no número de caracteres.
+
+Entrada
+A entrada é composta por diversas instâncias e termina com final de arquivo (EOF). Cada caso de teste contém um inteiro N,
+que informa o número de telefones na lista. As próximas N (1 ≤ N ≤ 105) linhas possuem, cada uma delas, um telefone Xi, de até 200 caracteres.
+Para um mesmo caso de teste os números de telefone têm a mesma quantidade de caracteres. Um número de telefone pode começar com o caracter ’0’.
+
+Saída
+Para cada caso de teste imprima uma linha informando o maior número possível de caracteres economizados por este processo.
 
 */
 
 using namespace std;
 int main()
 {
+    int N;
+    while(cin>>N)
+    {
+        vector<string> numeros(N);
+        string num;
+        for(int i = 0; i < N; i ++)
+        {
+            cin>>numeros[i];
+        }
+
+        sort(numeros.begin(), numeros.end());
+
+        for(int i = 0; i < numeros.size(); i++)
+        {
+            for(int j = 0; j < numeros[i].size();j++)
+            {
+               if(numeros[i][j] != numeros[i+1][j])
+               {
+                   cout<<numeros[i+1][j];
+               }
+            }
+        }
+    }
+
 
     return 0;
 }
