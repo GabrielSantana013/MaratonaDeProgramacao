@@ -450,8 +450,10 @@ int main()
     int N;
     while(cin>>N)
     {
+        int contador = 0;
         vector<string> numeros(N);
         string num;
+
         for(int i = 0; i < N; i ++)
         {
             cin>>numeros[i];
@@ -459,15 +461,18 @@ int main()
 
         sort(numeros.begin(), numeros.end());
 
-        for(int i = 0; i < numeros.size(); i++)
+        for(int i = 0; i < N-1; i++)
         {
-            for(int j = 0; j < numeros[i].size();j++)
-            {
-               if(numeros[i][j] != numeros[i+1][j])
+           string telefone = numeros[i];
+
+           for(int j = 0; j < telefone.size(); j++)
+           {
+               if(telefone[j] == numeros[i+1][j])
                {
-                   cout<<numeros[i+1][j];
+                   cout<<"cu";
+                   contador++;
                }
-            }
+           }
         }
     }
 
