@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h> //importa tudo (stl, string, set, map)
 
-#define ex10
+#define ex16
 //pulou o 2
 //pulou o 5
 //pulou o 8
@@ -660,13 +660,87 @@ int main()
 
 /*
 
+A. C. Marcos está dando os primeiros passos para ser um compositor de jingles.
+Ele está tendo alguns problemas, mas ao menos ele está criando melodias agradáveis e ritmos atrativos.
 
+Na música, uma nota tem um tom (sua frequência, resultando em quão grave ou agudo é o som) e uma duração
+(por quanto tempo a nota soa). Neste problema, estamos interessados apenas na duração das notas.
+
+Um jingle é dividido em uma sequência de compassos, e um compasso é formado de uma série de notas.
+
+A duração de uma nota é indicada pela sua forma. Neste problema, iremos utilizar letras maiúsculas para indicar a duração de uma nota.
+A seguinte tabela lista todas as notas disponíveis:
+
+​
+
+A duração de um compasso é a soma da duração de suas notas. Nos jingles de Marcos, cada compasso tem a mesma duração.
+Como Marcos é apenas um iniciante, seu famoso professor Johann Sebastian III o ensinou que a duração de um compasso deve ser sempre 1.
+
+Por exemplo, Marcos escreveu uma composição contendo cinco compassos, dentre os quais quatro possuem a duração correta e um está errado.
+No exemplo abaixo, cada compasso é delimitado com barras e cada nota é representada como na tabela acima.
+
+/HH/QQQQ/XXXTXTEQH/W/HW/
+
+Marcos gosta de computadores assim como de música. Ele quer que você escreva um programa que determine, para cada uma de suas composições,
+quantos compassos possuem a duração correta.
+
+Entrada
+A entrada contém vários casos de teste. Cada caso de teste é descrito em uma única linha contendo uma string cujo tamanho está entre 3 e 200 caracteres,
+inclusive, representando uma composição. Uma composição começa e termina com uma barra '/'. Compassos em uma composição são separados por uma barra '/'.
+Cada nota em um compasso é representada pela letra correspondente segundo a descrição acima.
+Você pode assumir que cada composição contém ao menos um compasso e que cada compasso contém ao menos uma nota.
+Todos os caracteres na entrada serão barras ou uma das sete letras maiúsculas usadas para representar as notas.
+
+O último caso de teste é seguido por uma linha contendo um único asterisco.
+
+Saída
+Para cada caso de teste, seu programa deve imprimir uma única linha contendo um único inteiro, o número de compassos que possuem a duração correta.
 
 */
 
 using namespace std;
 int main()
 {
+    map<char,float> notas;
+    notas.insert({'W', 1.0});
+    notas.insert({'H', 0.5});
+    notas.insert({'Q', 0.25});
+    notas.insert({'E', 0.125});
+    notas.insert({'S', 0.0625});
+    notas.insert({'T', 0.03125});
+    notas.insert({'X', 0.015625});
+
+
+    string entrada;
+    cin>>entrada;
+
+    while(entrada != "*")
+    {
+        float contador = 0;
+        int compassos = 0;
+
+        for(int i = 0; i < entrada.size(); i++)
+        {
+            if(entrada[i] != '/')
+            {
+                contador += notas[entrada[i]];
+                //cout<<"Contador"<<contador<<endl;
+                //cout<<"valor map: "<<notas[entrada[i]]<<endl;
+            }
+            else
+            {
+                if(contador == 1)
+                {
+                    compassos++;
+                }
+                contador = 0;
+            }
+
+        }
+        cout<<compassos<<endl;
+        compassos = 0;
+        cin>>entrada;
+    }
 
     return 0;
 }
@@ -694,13 +768,48 @@ int main()
 
 /*
 
+Dona Maria é uma senhora que está aposentada e faz doces. Ela começou a fazer bolos para complementar a renda da família.
 
+Para fazer um bolo, Dona Maria precisa de certa quantidade de alguns ingredientes diferentes. Cada ingrediente tem um custo fixo por unidade.
+Ela tem uma quantia de dinheiro D máxima para gastar na compra dos ingredientes. Dentre os tipos de bolos que existem, você deve escolher apenas um tipo,
+de maneira a maximizar a quantia de bolos.
+
+Calcule o número máximo de bolos de um único tipo que podem ser confeccionados.
+
+Entrada
+Na primeira linha terá um inteiro T (T ≤ 100) indicando o número de casos de teste.
+
+Para cada cada caso de teste, na primeira linha haverá três números inteiros D (1 ≤ D ≤ 109), I (1 ≤ I ≤ 100) e B (1 ≤ B ≤ 100) indicando o dinheiro que
+Dona Maria tem, o número de ingredientes existentes e a quantidade de tipo de bolos existentes, respectivamente. A próxima linha conterá I números inteiros
+indicando o preço da unidade de cada ingrediente. Seguem B linhas seguirão descrevendo cada bolo. O i-ésimo bolo é descrito da seguinte maneira:
+inicialmente há um número Qi (1 ≤ Qi ≤ 100) que indicará quantos ingredientes diferentes serão necessários.
+Logo em seguida teremos Qi pares de números indicando respectivamente o índice do ingrediente e a quantidade necessária,
+todos na mesma linha separados por espaços.
+
+A quantia de cada ingrediente em um bolo poderá variar de 1 até 1000. Cada unidade de um ingrediente custará entre 1 e 1000.
+Os ingredientes na descrição de cada bolo serão diferentes. Os identificadores de ingrediente vão de 0 até I-1.
+
+Saída
+Para cada caso imprima o número máximo de bolos do mesmo tipo que podem ser confeccionados.
 
 */
 
 using namespace std;
 int main()
 {
+    int T, D, I, B;
+    //d = dinheiro
+    //i = n de ingredientes existentes
+    //b = qtt de tipos de bolos
+    cin>>T;
+
+    while(T--)
+    {
+        cin>>D>>I>>B;
+
+
+
+    }
 
     return 0;
 }
@@ -728,13 +837,94 @@ int main()
 
 /*
 
+Nicolau já está bastante cansado e sua memória não é mais a mesma. Você, como navegador, deverá auxiliar o Papai Noel a gritar a frase "Feliz Natal"
+no idioma correto de cada país de que trenó está sobrevoando.
 
+Como você é um elfo muito esperto, você já criou um pequeno app no seu celular (sim, elfos tem celular) que irá lhe informar a frase
+no idioma correto dado o nome do país. Como o trenó é moderno (foi atualizado no ano 2000) ele exibe no painel de navegação o nome do país atual.
+
+
+
+Os dados inseridos no seu app foram:
+
+brasil              Feliz Natal!
+alemanha            Frohliche Weihnachten!
+austria             Frohe Weihnacht!
+coreia              Chuk Sung Tan!
+espanha             Feliz Navidad!
+grecia              Kala Christougena!
+estados-unidos      Merry Christmas!
+inglaterra          Merry Christmas!
+australia           Merry Christmas!
+portugal            Feliz Natal!
+suecia              God Jul!
+turquia             Mutlu Noeller
+argentina           Feliz Navidad!
+chile               Feliz Navidad!
+mexico              Feliz Navidad!
+antardida           Merry Christmas!
+canada              Merry Christmas!
+irlanda             Nollaig Shona Dhuit!
+belgica             Zalig Kerstfeest!
+italia              Buon Natale!
+libia               Buon Natale!
+siria               Milad Mubarak!
+marrocos            Milad Mubarak!
+japao               Merii Kurisumasu!
+Para não correr o risco de infomar o nome errado você decidiu testar o aplicativo mais algumas vezes.
+
+Entrada
+Você irá testar o seu aplicativo com diversos nomes de paises, simulando os dados informados pelo painel de navegação do trenó.
+
+Saída
+O seu aplicativo deverá mostrar na tela a frase no idioma correto. Caso ela não esteja cadastrada, você deverá exibir a
+mensagem "--- NOT FOUND ---" para que depois dos testes você possa completar o banco de dados.
 
 */
 
 using namespace std;
 int main()
 {
+    map<string,string> tradutor;
+    tradutor.insert({"brasil", "Feliz Natal!"});
+    tradutor.insert({"alemanha", "Frohliche Weihnachten!"});
+    tradutor.insert({"austria", "Frohe Weihnacht!"});
+    tradutor.insert({"coreia", "Chuk Sung Tan!"});
+    tradutor.insert({"espanha", "Feliz Navidad!"});
+    tradutor.insert({"grecia", "Kala Christougena!"});
+    tradutor.insert({"estados-unidos", "Merry Christmas!"});
+    tradutor.insert({"inglaterra", "Merry Christmas!"});
+    tradutor.insert({"australia", "Merry Christmas!"});
+    tradutor.insert({"portugal", "Feliz Natal!"});
+    tradutor.insert({"suecia", "God Jul!"});
+    tradutor.insert({"turquia", "Mutlu Noeller"});
+    tradutor.insert({"argentina", "Feliz Navidad!"});
+    tradutor.insert({"chile", "Feliz Navidad!"});
+    tradutor.insert({"mexico", "Feliz Navidad!"});
+    tradutor.insert({"antardida", "Merry Christmas!"});
+    tradutor.insert({"canada", "Merry Christmas!"});
+    tradutor.insert({"irlanda", "Nollaig Shona Dhuit!"});
+    tradutor.insert({"belgica", "Zalig Kerstfeest!"});
+    tradutor.insert({"italia", "Buon Natale!"});
+    tradutor.insert({"libia", "Buon Natale!"});
+    tradutor.insert({"siria", "Milad Mubarak!"});
+    tradutor.insert({"marrocos", "Milad Mubarak!"});
+    tradutor.insert({"japao", "Merii Kurisumasu!"});
+
+    string pais;
+
+    while(cin>>pais)
+    {
+        if(tradutor[pais] != "\0")
+        {
+            cout<<tradutor[pais]<<endl;
+        }
+        else
+        {
+            cout<<"--- NOT FOUND ---"<<endl;
+        }
+    }
+
 
     return 0;
 }
@@ -745,13 +935,35 @@ int main()
 
 /*
 
+No jogo O Bruxo, Sigismund Dijkstra é o líder do Serviço Secreto Redaniano, por causa disso ele é uma das pessoas mais importantes do mundo.
 
+Além disso Dijkstra possui um grande tesouro, o qual possui diversos tipos de jóias.
+
+Dijkstra está muito curioso para saber quantos tipos de jóias diferentes seu tesouro possui.
+
+Sabendo que você é o melhor programador do continente Dijkstra te contratou para verificar quantos tipos de jóias distintas ele tem em seu tesouro.
+
+Entrada
+A entrada consiste de várias linhas e cada uma contém uma string que descreve uma das jóias de Dijkstra.
+Essa string é composta apenas dos caracteres '(' e ')', a soma do tamanho de todas as string não excede 106.
+
+Saída
+Imprima quantos tipos de jóias distintas Dijkstra tem.
 
 */
 
 using namespace std;
 int main()
 {
+    set<string> joias;
+
+    string joia;
+    while(cin>> joia)
+    {
+        joias.insert(joia);
+    }
+    cout<<joias.size()<<endl;
+
 
     return 0;
 }
