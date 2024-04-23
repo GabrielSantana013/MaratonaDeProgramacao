@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h> //importa tudo (stl, string, set, map)
 
-#define ex16
+#define ex13
 //pulou o 2
 //pulou o 5
 //pulou o 8
@@ -751,13 +751,84 @@ int main()
 
 /*
 
+Pedro está trabalhando em um novo emprego em uma loja de parafusos e porcas. Toda semana ele irá receber novas encomendas de parafusos mistos em grandes caixas
+e precisa saber onde ele deve armazenar esses produtos.
 
+Mango, que é supervisor de Pedro, pediu-lhe para organizar todos os parafusos e porcas em um rack enorme, de forma que seja fácil de responder onde é
+possível encontrar cada predeterminado lote de parafusos e quanto de cada um destes lotes a loja tem.
+
+Pedro recebe todos os parafusos e porcas em caixas etiquetadas com o intervalo de tamanho dos produtos.
+Por exemplo, duas caixas com os respectivos intervalos (1, 2) e (4, 8) representam lotes de produtos com tamanho {1, 2, 4, 5, 6, 7, 8}.
+Um número de parafuso e porca pode estar presente em mais de uma caixa, e ele aparece na lista uma vez para cada intervalo.
+Por exemplo, três caixas com os respectivos intervalos (1, 3), (2, 4) e (3,5) representam lotes de parafusos e porcas com tamanho {1, 2, 2, 3, 3, 3, 4, 4, 5}.
+
+Entrada
+A entrada contém vários casos de teste e termina com EOF. Cada caso de teste é composto por várias linhas.
+A primeira linha contém um inteiro positivo N (N < 100) que indica a quantidade de caixas de parafusos.
+Seguem N linhas, cada uma delas com dois valores X e Y (1 ≤ X < Y ≤ 100) que representam os tamanhos dos lotes de parafusos
+e porcas presentes naquela caixa. A próxima linha de entrada conterá um único inteiro positivo Num (1 ≤ Num ≤ 100),
+que indica o número que Mango deseja pesquisar após todos os produtos serem organizados na estante ou rack.
+
+Obs. A estante ou rack possui prateleiras enumeradas de 0 a P, sendo que este P não deve ser superior a 10000.
+
+Saída
+Cada caso de entrada deverá produzir uma única linha de saída, indicando as posições da prateleira nas quais o
+parafuso de tamanho Num se encontra ou indicando que não foi possível encontrar o parafuso, conforme o exemplo abaixo.
 
 */
 
 using namespace std;
 int main()
 {
+    int N;
+
+    while(cin>>N)
+    {
+        multiset<int> intervalo;
+        int X, Y, num;
+
+       for(int i = 0; i < N; i++)
+       {
+           cin>>X>>Y;
+           for(int j = X; j <= Y; j++)
+           {
+               intervalo.insert(j);
+           }
+       }
+
+        multiset<int>::iterator i;
+        cin>>num;
+        int repetidos = intervalo.count(num);
+        int contador = 0;
+
+        for(i = intervalo.begin(); i != intervalo.end(); i++)
+        {
+
+            if(*i != num)
+            {
+               contador++;
+            }
+            else
+            {
+                if(*i == num)
+                {
+                    break;
+                }
+            }
+        }
+
+        if(contador == intervalo.size())
+        {
+            cout<<num<<" not found"<<endl;
+        }
+        else
+        {
+            cout<<num<<" found from "<<contador<<" to "<<contador+repetidos-1<<endl;
+        }
+    }
+
+
+
 
     return 0;
 }
@@ -974,15 +1045,66 @@ int main()
 
 /*
 
+A FACE em 2015 está apoiando a terceira edição da Maratona de Programação, mas desta vez a organização solicitou sua ajuda para criar um sistema de sorteio utilizando
+as letras da palavra FACE. Como a feira utiliza uma proposta diferenciada e alegre, cada participante que entra na feira ganha 4 letras,
+uma de cada cor e em formato de bloco de madeira, conforme Figura 1, e deve inserí-las num painel. Se, no momento da inserção,
+as 4 letras formarem o contrário das 4 últimas letras, o visitante ganhará um brinde.
 
+Brinde_FACE
+
+Figura 1 - Entrada de FACE no painel seguido de ACEF.
+
+Por exemplo: suponha que já tiveram 3 participantes que entraram na feira e o painél ficou da seguinte forma: F A C E E C F A A C F E A C E F.
+Note que sempre que o painél fica vazio, assim como no início do evento, as letras F A C E são inseridas pela organização do evento.
+Agora, na entrada do quarto participante, ele inseriu as letras F E C A e, com isso, receberá um brinde por fechar o contrário de A C E F.
+Após essa situação, o painél deve ficar F A C E E C F A A C F E.
+
+Escreva um algoritmo que, dadas as letras recebidas e inseridas pelos participantes, diga quantos participantes ganharam brindes.
+Lembre-se que sempre que o painel fica vazio as letras F A C E são inseridas pela organização do evento.
+
+Entrada
+A primeira linha de cada caso de teste contém um inteiro N (1 ≤ N ≤ 100), representando o número de visitantes que vão receber as letras.
+Em cada uma das N linhas seguintes deve ser informada a combinação das 4 letras que o visitante deseja inserir no painel, separadas por espaço.
+
+Saída
+Para cada grupo de visitantes, deve ser informado quantos destes receberão brindes.
 
 */
 
 using namespace std;
 int main()
 {
+    int N;
+    cin>>N;
+    cin.ignore();
 
-    return 0;
+    stack<string> painel;
+
+    int contador = 0;
+
+    for(int i = 0; i < N; i ++)
+    {
+        if(painel.empty())
+        {
+            painel.push("F A C E");
+        }
+        string entrada;
+        getline(cin, entrada);
+        reverse(entrada.begin(), entrada.end());
+
+        if(entrada == painel.top())
+        {
+            painel.pop();
+            contador ++;
+        }
+        else
+        {
+            reverse(entrada.begin(), entrada.end());
+            painel.push(entrada);
+        }
+    }
+    cout<<contador<<endl;
+return 0;
 }
 #endif
 
