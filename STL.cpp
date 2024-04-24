@@ -1,8 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h> //importa tudo (stl, string, set, map)
 
-#define ex13
-//pulou o 2
+#define ex02
 //pulou o 5
 //pulou o 8
 
@@ -158,13 +157,68 @@ O ultimo zero dos testes de entrada não devem ser processados.
 */
 
 using namespace std;
+
 int main()
 {
+    /*while(N != 0 && Y != 0)
+    {
+        for(int i = 0; i < Y; i++)
+        {
+            chegada.push(N);
+            cin>>N;
+        }
+        cin>>N;
+    }*/
+    while(true)
+    {
+        int N;
+        cin>>N;
 
+        if(N == 0)
+            break;
+
+            stack<int> resposta;
+
+        while(true)
+        {
+            queue<int> chegada;
+            int num;
+            for(int i = 0; i < N; i++)
+            {
+                cin>>num;
+                if(num == 0) break;
+                chegada.push(num);
+            }
+
+            if(num == 0) break;
+
+         //preenchendo resposta de acordo com N
+        for(int i = 1; i <= N; i++)
+        {
+            resposta.push(i);
+            while(!chegada.empty() && !resposta.empty() && chegada.front() == resposta.top())
+            {
+                chegada.pop();
+                resposta.pop();
+            }
+
+        }
+
+            cout << (chegada.empty() ? "Yes" : "No") << endl;
+
+            /*
+
+            chegada: 1 2 3 4 5
+            resposta: 1 2 3 4 5
+
+            */
+
+        }
+        cout<<endl;
+    }
     return 0;
 }
 #endif
-
 
 #ifdef ex03
 
@@ -877,9 +931,40 @@ int main()
     while(T--)
     {
         cin>>D>>I>>B;
+        map<int,int> custoIngrediente;
+
+        for (int i = 0; i < I; i++)
+        {
+            int custo;
+            cin >> custo;
+            custoIngrediente.insert({i, custo});
+        }
 
 
-
+            int custo = 0, menorCusto = 0;
+        for( int j = 0; j < B; j++ )
+        {
+            int npares;
+            cin>>npares;
+            for(int i = 0; i <npares; i++)
+            {
+                int indice; cin>>indice;
+                int qtt; cin>>qtt;
+                custo += custoIngrediente[indice]*qtt;
+                //cout<<"custo"<<custoIngrediente[indice]<<qtt<<endl;
+            }
+                if(j == 0)
+                {
+                    menorCusto = custo;
+                }
+                else if(custo<menorCusto)
+                {
+                    menorCusto = custo;
+                }
+                custo = 0;
+        }
+        cout<<D/menorCusto<<endl;
+        menorCusto = 0;
     }
 
     return 0;
@@ -891,13 +976,28 @@ int main()
 
 /*
 
+Sua tarefa é escrever um programa que realiza uma simples Codificação Run-Length, como descrita nas regras abaixo.
+Qualquer sequencia entre 2 e 9 caracteres idênticos é codificada por dois caracteres.
+O primeiro caractere é a largura da sequência, representada por um dos caracteres entre 2 a 9.
+O segundo caractere é o valor do caractere repetido. Uma sequência de mais de 9 caracteres identicos repetidos é resolvida com primeiro codificando
+9 caracteres, depois os caracteres restantes.
 
+Qualquer sequência de caracteres que não contém repetições consecutivas de qualquer caracteres é representada por um caractere
+'1' seguido da sequência de caracteres e terminado com outro '1'. Se um '1' aparecer como parte da sequencia,
+ ele será terminado com um '1', tendo então dois caracteres '1' como saída.
+Entrada
+A entrada consiste de letras(maiúsculas e minúsculas), digitos, espaços e pontuação. Toda linha é terminada com um caractere terminador de linha.
+Saída
+Cada linha da entrada é codificada separadamente como descrito acima. A nova linha no final de cada linha
+não é codificada, mas é passada diretamente para a saída.
 
 */
 
 using namespace std;
 int main()
 {
+
+
 
     return 0;
 }
@@ -1105,56 +1205,5 @@ int main()
     }
     cout<<contador<<endl;
 return 0;
-}
-#endif
-
-
-#ifdef ex18
-
-/*
-
-
-
-*/
-
-using namespace std;
-int main()
-{
-
-    return 0;
-}
-#endif
-
-
-#ifdef ex19
-
-/*
-
-
-
-*/
-
-using namespace std;
-int main()
-{
-
-    return 0;
-}
-#endif
-
-
-#ifdef ex20
-
-/*
-
-
-
-*/
-
-using namespace std;
-int main()
-{
-
-    return 0;
 }
 #endif
