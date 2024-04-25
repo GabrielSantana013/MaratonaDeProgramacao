@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h> //importa tudo (stl, string, set, map)
 
-#define ex02
+#define ex05
 //pulou o 5
 //pulou o 8
 
@@ -160,15 +160,6 @@ using namespace std;
 
 int main()
 {
-    /*while(N != 0 && Y != 0)
-    {
-        for(int i = 0; i < Y; i++)
-        {
-            chegada.push(N);
-            cin>>N;
-        }
-        cin>>N;
-    }*/
     while(true)
     {
         int N;
@@ -205,14 +196,6 @@ int main()
         }
 
             cout << (chegada.empty() ? "Yes" : "No") << endl;
-
-            /*
-
-            chegada: 1 2 3 4 5
-            resposta: 1 2 3 4 5
-
-            */
-
         }
         cout<<endl;
     }
@@ -545,14 +528,64 @@ int main()
 
 /*
 
+Foi descoberta uma espécie alienígena de ácido ribonucleico (popularmente conhecido como RNA).
+Os cientistas, por falta de criatividade, batizaram a descoberta de ácido ribonucleico alienígena (RNAA).
+Similar ao RNA que conhecemos, o RNAA é uma fita composta de várias bases. As bases são B C F S e podem ligar-se em pares.
+Os únicos pares possíveis são entre as bases B e S e as bases C e F.
+Enquanto está ativo, o RNAA dobra vários intervalos da fita sobre si mesma, realizando ligações entre suas bases. Os cientistas perceberam que:
 
+- Quando um intervalo da fita de RNAA se dobra, todas as bases neste intervalo se ligam com suas bases correspondentes;
+- Cada base pode se ligar a apenas uma outra base;
+- As dobras ocorrem de forma a maximizar o número de ligações feitas sobre fitas;
+
+As figuras abaixo ilustram dobras e ligacões feitas sobre fitas.
+
+
+
+
+Sua tarefa será, dada a descrição de uma tira de RNAA, determinar quantas ligações serão realizadas entre suas bases se a tira ficar ativa.
+
+Entrada
+A entrada é composta por diversos casos de teste e termina com EOF. Cada caso de teste possui uma linha descrevendo a sequência de bases da fita de RNAA.
+Uma fita de RNAA na entrada contém pelo menos 1 e no máximo 300 bases. Não existem espaços entre bases de uma fita da entrada. As bases são 'B', 'C', 'F' e 'S'.
+
+Saída
+Para cada instância imprima uma linha contendo o número total de ligações que ocorre quando a fita descrita é ativada.
 
 */
 
 using namespace std;
 int main()
 {
+    //B e S, C e F
+    string rna;
 
+    map<char, char> bases;
+
+    bases.insert({'S', 'B'});
+    bases.insert({'B', 'S'});
+    bases.insert({'C', 'F'});
+    bases.insert({'F', 'C'});
+
+    while(cin>>rna)
+    {
+        stack<char>fitaRna;
+
+        int ligacoes = 0;
+        for(int i = 0; i < rna.size(); i++)
+        {
+                if(!fitaRna.empty() && rna[i] == bases[fitaRna.top()])
+                {
+                    fitaRna.pop();
+                    ligacoes++;
+                }
+                else
+                {
+                    fitaRna.push(rna[i]);
+                }
+        }
+        cout<<ligacoes<<endl;
+    }
     return 0;
 }
 #endif
