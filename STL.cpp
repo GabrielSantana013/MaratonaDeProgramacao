@@ -1,9 +1,9 @@
 #include <iostream>
 #include <bits/stdc++.h> //importa tudo (stl, string, set, map)
 
-#define ex05
+#define ex14
 //pulou o 5
-//pulou o 8
+//14 incompleto
 
 #ifdef ex01
 
@@ -1029,11 +1029,104 @@ não é codificada, mas é passada diretamente para a saída.
 using namespace std;
 int main()
 {
+    string entrada;
+    while(cin>>entrada)
+    {
+        //vector<pair<int, char>>saida;
+        vector<char> saida;
+        int contador = 1;
 
+        for(int i = 0; i < entrada.size(); i++)
+        {
+            if(i==0 && entrada[i] == entrada[i+1])
+                contador++;
+
+            if(entrada[i] == entrada[i+1] && i > 0)
+            {
+                contador++;
+
+                if(contador>=9)
+                {
+                    saida.push_back(contador+'0');
+                    saida.push_back(entrada[i]);
+                    contador = 0;
+                }
+            }
+
+            else if (entrada[i] != entrada[i+1] && i >= 0)
+            {
+
+
+                while(i <entrada.size() && entrada[i] != entrada[i+1])
+                {
+                   // cout<<"entrou";
+                    if(entrada[i] == '1')
+                    {
+                        cout<<"achou 1";
+                        saida.push_back(entrada[i]);
+                        saida.push_back('1');
+                        i++;
+                    }
+                    else
+                    {
+                        cout<<"cu";
+                        saida.push_back(contador+'0');
+                        saida.push_back(entrada[i]);
+                        contador = 1;
+                        i++;
+                    }
+                }
+                contador = 1;
+            }
+
+        }
+
+        for(int i = 0; i < saida.size(); i++)
+        {
+            cout << saida[i];
+        }
+
+    }
 
 
     return 0;
 }
+//            if(i==0 && entrada[i] == entrada[i+1])
+//            {
+//                contador++;
+//            }
+//
+//            if(entrada[i] == entrada[i+1] && i>0)
+//            {
+//                //cout<<"ingual"<<endl;
+//                contador++;
+//            }
+//            else if(entrada[i] != entrada[i+1] && i >= 0)
+//            {
+//                if(entrada[i] != entrada[i+1] && contador == 1)
+//                {
+//                    //cout<<"puxei:" <<entrada[i]<<endl;
+//                    saida.push_back(contador+'0');
+//                    saida.push_back(entrada[i]);
+//
+//                    if(entrada[i] == '1')
+//                    {
+//                        saida.push_back(contador+'0');
+//                    }
+//                    saida.push_back(contador+'0');
+//                    contador = 1;
+//                }
+//
+//                ///12344
+//                ///1123144
+//                else
+//                {
+//                    //cout<<"puxei B:" <<entrada[i]<<endl;
+//                    saida.push_back(contador+'0');
+//                    saida.push_back(entrada[i]);
+//                    contador = 1;
+//                }
+//            }
 #endif
 
 
