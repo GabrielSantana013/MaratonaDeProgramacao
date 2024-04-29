@@ -3,7 +3,6 @@
 
 #define ex14
 //pulou o 5
-//14 incompleto
 
 #ifdef ex01
 
@@ -1030,67 +1029,133 @@ using namespace std;
 int main()
 {
     string entrada;
-    while(cin>>entrada)
+
+    while(getline(cin,entrada))
     {
-        //vector<pair<int, char>>saida;
-        vector<char> saida;
+
+        vector<pair<int, char>>saida;
         int contador = 1;
 
         for(int i = 0; i < entrada.size(); i++)
         {
-            if(i==0 && entrada[i] == entrada[i+1])
-                contador++;
-
-            if(entrada[i] == entrada[i+1] && i > 0)
+            if(entrada[i] == entrada[i+1] && contador < 9)
             {
                 contador++;
-
-                if(contador>=9)
-                {
-                    saida.push_back(contador+'0');
-                    saida.push_back(entrada[i]);
-                    contador = 0;
-                }
             }
-
-            else if (entrada[i] != entrada[i+1] && i >= 0)
+            else
             {
-
-
-                while(i <entrada.size() && entrada[i] != entrada[i+1])
-                {
-                   // cout<<"entrou";
-                    if(entrada[i] == '1')
-                    {
-                        cout<<"achou 1";
-                        saida.push_back(entrada[i]);
-                        saida.push_back('1');
-                        i++;
-                    }
-                    else
-                    {
-                        cout<<"cu";
-                        saida.push_back(contador+'0');
-                        saida.push_back(entrada[i]);
-                        contador = 1;
-                        i++;
-                    }
-                }
+                saida.push_back({contador, entrada[i]});
                 contador = 1;
             }
-
         }
 
-        for(int i = 0; i < saida.size(); i++)
+        int i = 0;
+        while(true)
         {
-            cout << saida[i];
+            if(i == saida.size())
+            {
+                break;
+            }
+            if(saida[i].first == 1)
+            {
+                if(saida[i].second == '1')
+                {
+                    cout<<"1";
+                }
+                cout<<saida[i].first<<saida[i].second;
+                i++;
+               // cout<<"I: "<<i<<endl;
+                while(saida[i].first == 1 && i < saida.size())
+                {
+                    if(saida[i].second == '1')
+                    {
+                        cout<<"1";
+                    }
+                    //cout<<"I: "<<i<<endl;
+                    cout<<saida[i].second;
+                    i++;
+                    //cout<<"I: "<<i<<endl;
+                }
+                cout<<"1";
+            }
+
+            else if (saida[i].first != 1)
+            {
+                cout << saida[i].first<<saida[i].second;
+                i++;
+                //cout<<"I: "<<i<<endl;
+            }
+
         }
 
+    cout<<endl;
     }
-
-
     return 0;
 }
+
+
+
+//        for(int i = 0; i < entrada.size(); i++)
+//        {
+//
+//            if(i==0 && entrada[i] == entrada[i+1])
+//                contador++;
+//
+//            if(entrada[i] == entrada[i+1] && i > 0)
+//            {
+//                contador++;
+//
+//                if(contador>=9)
+//                {
+//                    saida.push_back(contador+'0');
+//                    saida.push_back(entrada[i]);
+//                    contador = 0;
+//                }
+//            }
+//
+//            else if (entrada[i] != entrada[i+1] && i >= 0)
+//            {
+//
+//                while(i <entrada.size() && entrada[i] != entrada[i+1])
+//                {
+//                   // cout<<"entrou";
+//                    if(entrada[i] == '1')
+//                    {
+//                        cout<<"achou 1";
+//                        saida.push_back(entrada[i]);
+//                        saida.push_back('1');
+//                        i++;
+//                    }
+//                    else if(contaIgual == 0)
+//                    {
+//                        //cout<<"cu";
+//                        saida.push_back(contador+'0');
+//                        saida.push_back(entrada[i]);
+//                        contador = 1;
+//                        contaIgual ++;
+//                        i++;
+//                    }
+//                }
+//                contador = 1;
+//            }
+//
+//            if(contaIgual == 0 && entrada[i] != entrada[i+1])
+//            {
+//                saida.push_back(entrada[i]);
+//                saida.push_back('1');
+//
+//            }
+//
+//        }
+//
+//        for(int i = 0; i < saida.size(); i++)
+//        {
+//            cout << saida[i];
+//        }
+//
+//    }
+
+
 //            if(i==0 && entrada[i] == entrada[i+1])
 //            {
 //                contador++;
