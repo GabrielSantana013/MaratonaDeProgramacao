@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 
-#define ex04
+#define ex02
 
 #ifdef ex01
 /*
@@ -64,13 +64,68 @@ int main()
 #ifdef ex02
 /*
 
+Dada uma linha de texto, você deve encontrar as frequências de cada um dos caracteres presentes nela. As linhas fornecidas não conterão nenhum dos primeiros 32 ou dos últimos 128 caracteres da tabela ASCII.
+ É claro que não estamos levando em conta o caracter de fim de linha.
 
+Entrada
+A entrada contém vários casos de teste. Cada caso de teste é composto por uma única linha de texto com até 1000 caracteres.
+
+Saída
+Imprima o valor ASCII de todos os caracteres presentes e a sua frequência de acordo com o formato abaixo. Uma linha em branco deverá separar 2 conjuntos de saída. Imprima os caracteres ASCII em ordem ascendente de frequência.
+Se dois caracteres estiverem presentes com a mesma quantidade de frequência, imprima primeiro o caracter que tem valor ASCII maior. A entrada é terminada por final de arquivo (EOF).
 
 */
 using namespace std;
 
+bool cmp(pair<int, int> n1, pair<int,int> n2)
+{
+    if(n1.second==n2.second)
+    {
+        return n1.first>n2.first;
+    }
+    else
+    {
+        return n1.second<n2.second;
+    }
+
+}
+
 int main()
 {
+    string entrada;
+    bool primeira = true;
+    while(getline(cin,entrada))
+    {
+        int contaIgual = 0;
+        vector<pair<int,int>> frequencia;
+
+        for(int i = 0; i < entrada.size(); i++)
+        {
+            contaIgual++;
+            if(i+1 > entrada.size())
+            break;
+            if(entrada[i] != entrada[i+1])
+            {
+                frequencia.push_back(make_pair(entrada[i],contaIgual));
+                contaIgual = 0;
+            }
+
+        }
+        sort(frequencia.begin(), frequencia.end(), cmp);
+        for(auto c: frequencia)
+        {
+            cout<<c.first<<" "<<c.second<<endl;
+        }
+
+        if(primeira)
+        {
+            primeira = false;
+        }
+        else
+        {
+            cout<<endl;
+        }
+    }
 
     return 0;
 }
@@ -79,13 +134,87 @@ int main()
 #ifdef ex03
 /*
 
+O professor Rolien organizou junto às suas turmas de Ciência da Computação a confecção de uma camiseta polo que fosse ao mesmo tempo bonita e barata.
+Após algumas conversas, ficou decidido com os alunos que seriam feitas somente camisetas da cor preta, o que facilitaria a confecção.
+Os alunos poderiam escolher entre o logo do curso e os detalhes em branco ou vermelho. Assim sendo,
+Rolien precisa de sua ajuda para organizar as listas de quem quer a camiseta em cada uma das turmas, relacionando estas camisetas pela cor do logo do curso,
+tamanho (P, M ou G) e por último pelo nome.
 
+Entrada
+A entrada contém vários casos de teste. Cada caso de teste inicia com um valor N, (1 ≤ N ≤ 60) inteiro e positivo, que indica a quantidade de
+camisetas a serem feitas para aquela turma. As próximas N*2 linhas contém informações de cada uma das camisetas (serão duas linhas de informação
+para cada camiseta). A primeira linha irá conter o nome do estudante e a segunda linha irá conter a cor do logo da camiseta ("branco" ou "vermelho")
+seguido por um espaço e pelo tamanho da camiseta "P" "M" ou "G". A entrada termina quando o valor de N for igual a zero (0) e esta valor não deverá ser processado.
+
+Saída
+Para cada caso de entrada deverão ser impressas as informações ordenadas pela cor dos detalhes em ordem ascendente,
+seguido pelos tamanhos em ordem descendente e por último por ordem ascendente de nome, conforme o exemplo abaixo.
+
+Obs.: Deverá ser impressa uma linha em branco entre dois casos de teste.
 
 */
 using namespace std;
 
-int main()
+/*typedef struct encomendas{
+
+    string cor;
+    char tamanho;
+    string nome;
+};*/
+
+/*void trocaEncomendas(encomendas &e1, encomendas &e2){
+
+    encomendas temp = e1;
+    e1 = e2;
+    e2 = temp;
+}*/
+
+/*bool cmp(pair<int, int> a, pair<int, int> b)
 {
+    return a.second < b.second;
+}*/
+
+
+int main() {
+
+    int g=0;
+    while (true) {
+        int N;
+        cin >> N;
+        if (N == 0)
+        {
+            break;
+        }
+        else if (g>0)
+        {
+             cout << endl;
+        }
+
+        vector<pair<string, pair<char,string>>> estudantes;
+
+        for (int i = 0; i < N; i++)
+        {
+            string nome, cor;
+            char tamanho;
+
+            cin.ignore();
+            getline(cin, nome);
+            cin >> cor >> tamanho;
+            estudantes.push_back(make_pair(cor, make_pair(abs(tamanho - 'P'), nome))); //faz o par de par e organiza pra pegar o valor de variavel -P
+        }
+
+        sort(estudantes.begin(), estudantes.end());
+
+        map<char, char> tamanhos;
+        tamanhos.insert({{0, 'P'}, {3, 'M'}, {9, 'G'}});
+
+        for(auto c : estudantes)
+        {
+            cout<< c.first << " " << tamanhos[c.second.first] <<" "<<c.second.second<<endl;
+        }
+            g++;
+
+    }
 
     return 0;
 }
