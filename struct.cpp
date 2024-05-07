@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 
-#define ex02
+#define ex09
 
 #ifdef ex01
 /*
@@ -77,45 +77,25 @@ Se dois caracteres estiverem presentes com a mesma quantidade de frequência, im
 */
 using namespace std;
 
-bool cmp(pair<int, int> n1, pair<int,int> n2)
-{
-    if(n1.second==n2.second)
-    {
-        return n1.first>n2.first;
-    }
-    else
-    {
-        return n1.second<n2.second;
-    }
-
-}
-
 int main()
 {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
     string entrada;
     bool primeira = true;
+
     while(getline(cin,entrada))
     {
-        int contaIgual = 0;
-        vector<pair<int,int>> frequencia;
+        vector<pair<int,int>> frequencia(129,{0,0});
 
         for(int i = 0; i < entrada.size(); i++)
         {
-            contaIgual++;
-            if(i+1 > entrada.size())
-            break;
-            if(entrada[i] != entrada[i+1])
-            {
-                frequencia.push_back(make_pair(entrada[i],contaIgual));
-                contaIgual = 0;
-            }
-
+                frequencia[entrada[i]].first++;
+                frequencia[entrada[i]].second = -(int)entrada[i];
         }
-        sort(frequencia.begin(), frequencia.end(), cmp);
-        for(auto c: frequencia)
-        {
-            cout<<c.first<<" "<<c.second<<endl;
-        }
+        sort(frequencia.begin(), frequencia.end());
 
         if(primeira)
         {
@@ -124,6 +104,13 @@ int main()
         else
         {
             cout<<endl;
+        }
+        for(int i = 0; i < 129; i++)
+        {
+            if(frequencia[i].first > 0)
+            {
+                cout<<abs(frequencia[i].second) << " " << frequencia[i].first<<endl;
+            }
         }
     }
 
@@ -351,14 +338,115 @@ int main()
 #ifdef ex09
 /*
 
+No painel de controle de um grande anfiteatro existem N interruptores, numerados de 1 a N, que controlam as M lâmpadas do local, numeradas de 1 a M.
+Note que o número de interruptores e lâmpadas não é necessariamente o mesmo e isso acontece porque cada interruptor está associado a um conjunto de lâmpadas
+e não apenas a uma lâmpada. Quando um interruptor é acionado, o estado de cada uma das lâmpadas associadas a ele é invertido. Quer dizer,
+aquelas apagadas acendem e as acesas se apagam.
 
+Algumas lâmpadas estão acesas inicialmente e o zelador do anfiteatro precisa apagar todas as lâmpadas. Ele começou tentando acionar interruptores aleatoriamente mas,
+como não estava conseguindo apagar todas as lâmpadas ao mesmo tempo, decidiu seguir uma seguinte estratégia fixa.
+Ele vai acionar os interruptores na sequência 1, 2, 3, . . . , N, 1, 2, 3, . . . ou seja, toda vez após acionar o interruptor de número N,
+ele recomeça a sequência a partir do interruptor 1. Ele pretende acionar interruptores, seguindo essa estratégia,
+até que todas as lâmpadas estejam apagadas ao mesmo tempo (momento em que ele para de acionar os interruptores). Será que essa estratégia vai funcionar?
+
+Neste problema, dadas as lâmpadas acesas inicialmente e dados os conjuntos de lâmpadas que estão associados a cada interruptor,
+seu programa deve computar o número de vezes que o zelador vai acionar os interruptores. Caso a estratégia do zelador nunca apague todas
+as lâmpadas ao mesmo tempo, seu programa deve imprimir −1.
+
+Entrada
+A primeira linha contém dois inteiros N e M (1 ≤ N, M ≤ 1000) representando, respectivamente, o número de interruptores e o número de lâmpadas.
+A segunda linha contém um inteiro L (1 ≤ L ≤ M) seguido por L inteiros distintos Xi (1 ≤ Xi ≤ M), representando as lâmpadas acesas inicialmente.
+Cada uma das N linhas seguintes contém um inteiro Ki (1 ≤ Ki ≤ M) seguido por Ki inteiros distintos Yi (1 ≤ Yi ≤ M),
+representando as lâmpadas associadas ao interruptor i (1 ≤ i ≤ N).
+
+Saída
+Se programa deve produzir uma única linha contendo um inteiro representando o número de vezes que o zelador vai acionar os interruptores,
+seguindo a estratégia descrita, até todas as lâmpadas estarem apagadas ao mesmo tempo. Caso isso nunca vá acontecer, imprima −1.
 
 */
 using namespace std;
 
+
+bool estadoFinal(vector<bool> lampadas)
+{
+    for(auto a : lampadas)
+    {
+        if(a)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main()
 {
+    int N, M;
+    cin>>N>>M;
 
+    vector<bool> lampadas(M, false);
+
+    int L; cin>>L;
+
+    for(int i = 0 ; i < L; i++)
+    {
+        int num;
+        cin>>num;
+        num --; //pra começar do 0
+        lampadas[num] = true;
+    }
+
+    vector<bool> estadoLampadas = lampadas;
+    vector<vector<int>> matrizAcoes(N);
+
+    for(int i = 0; i < N; i++)
+    {
+        int num; cin>>num;
+
+        for(int j = 0; j <num; j++)
+        {
+            int operacao; cin>>operacao;
+            operacao --; //pra comecar do 0
+            matrizAcoes[i].push_back(operacao);
+        }
+    }
+
+    bool saida = false;
+    int contador = 0;
+    int idx = 0;
+
+    while(!estadoFinal(lampadas))
+    {
+        for(auto a : matrizAcoes[idx])
+        {
+            lampadas[a] = !lampadas[a];
+        }
+        idx++;
+
+        if(idx == matrizAcoes.size())
+        {
+            if(lampadas == estadoLampadas)
+            {
+                saida = true;
+                break;
+            }
+            else
+            {
+                idx = 0;
+                contador ++;
+            }
+        }
+
+    }
+
+    if(saida)
+    {
+        cout<< -1 <<endl;
+    }
+    else
+    {
+        cout<<contador*N+idx<<endl;
+    }
     return 0;
 }
 #endif
