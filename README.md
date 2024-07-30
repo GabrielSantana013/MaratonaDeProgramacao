@@ -3,7 +3,10 @@
 ### Repositório destinado aos exercícios de treino para a maratona de programação!
 
 
-<img src = "https://beecrowd.io/wp-content/uploads/2021/08/beecrowd__roxoHorClean-small-PNG-1.png" alt="Beecrowd logo">
+<p align="center">
+<a href="https://www.beecrowd.com.br">
+<img  width="240"  height="150"  src="https://resources.beecrowd.com.br/judge/img/5.0/logo-beecrowd.png?1635097036">
+</p>
 
 
 **Plataforma utilizada**: <a href="https://judge.beecrowd.com/pt"> Beecrowd</a>
