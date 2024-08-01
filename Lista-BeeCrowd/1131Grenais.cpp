@@ -42,9 +42,9 @@ int main(){
     } while (status != 2);
     
     std::cout<<confrontos<<" grenais"<<std::endl;
-    std::cout<<"Inter: "<<inter<<std::endl;
-    std::cout<<"Gremio: "<<gremio<<std::endl;
-    std::cout<<"Empates: "<<empate<<std::endl;
+    std::cout<<"Inter:"<<inter<<std::endl;
+    std::cout<<"Gremio:"<<gremio<<std::endl;
+    std::cout<<"Empates:"<<empate<<std::endl;
 
     if(inter>gremio){std::cout<<"Inter venceu mais"<<std::endl;}
     else{std::cout<<"Gremio venceu mais"<<std::endl;}    
