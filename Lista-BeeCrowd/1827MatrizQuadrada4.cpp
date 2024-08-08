@@ -27,15 +27,15 @@ int main() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (i == meio && j == meio) {
-                    std::cout << "4 ";
+                    std::cout << "4";
                 } else if (i >= rodaMeio && i < N - rodaMeio && j >= rodaMeio && j < N - rodaMeio) {
-                    std::cout << "1 ";
+                    std::cout << "1";
                 } else if (i == j) {
-                    std::cout << "2 ";
+                    std::cout << "2";
                 } else if (j + i == N - 1) {
-                    std::cout << "3 ";
+                    std::cout << "3";
                 } else {
-                    std::cout << "0 ";
+                    std::cout << "0";
                 }
 
                
