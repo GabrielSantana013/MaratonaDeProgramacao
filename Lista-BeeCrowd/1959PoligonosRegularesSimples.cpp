@@ -16,7 +16,7 @@ A saída é o perímetro P do polígono regular em uma única linha.
 
 int main(){
 
-    int N, L;
+    long int N, L;
     std::cin>>N>>L;
     unsigned long long int P = N*L;
 
