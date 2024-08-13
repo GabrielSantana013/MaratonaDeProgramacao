@@ -16,7 +16,6 @@ ou ‘N’ caso não seja possível formar o triângulo.
 */
 
 #include <iostream>
-#include <algorithm>
 
 int main()
 {
