@@ -351,28 +351,105 @@ Para cada caso, apresente a expressão convertida para a forma posfixa.
 */
 
 using namespace std;
-int main()
+
+bool isOperator(char t){
+    return (t == '+' || t == '-' || t == '*'|| t == '/' || t == '^');
+}
+
+int operatorOrder(char t){
+
+    map<char, int> operators{{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}};
+    return operators[t];
+}
+
+bool comparePairs(const pair<int,char> & a, const pair<int,char> &b)
 {
-    int N;
+    return a.second > b.second;
+}
 
-    cin>>N;
 
-    while(N >0)
+void solution(int T){
+
+    for(int i = 0; i < T; i++)
     {
-        string expressao;
-        cin>>expressao;
+        queue<pair<char,int>> operators;
+        queue<char> values;
+        stack<bool> parentheses;
+        string equation; cin>>equation;
 
+        for(int j = 0; j < equation.size(); j++)
+        {
+            if(equation[j] == '(') parentheses.push(true);
+            else if(equation[j] == ')') parentheses.pop();
+            else if(isOperator(equation[j]))
+            {
+                operators.push({equation[j], operatorOrder(equation[j]) + (3*(parentheses.size()+1))});
+            }
+            else
+            {
+                values.push(equation[j]);
+            }
+        }
 
+        string answer = "";
 
+        vector<pair<char, int>> fila;
+        answer += values.front(); values.pop();
+        while(!values.empty())
+        {
+            answer += values.front(); values.pop();
+            fila.push_back(operators.front()); operators.pop();
+            while(!operators.empty() && operators.front().second > fila.back().second)
+            {
+                answer += values.front(); values.pop();
+                fila.push_back(operators.front()); operators.pop();
+            }
 
-        N--;
+            vector<pair<char,int>>::iterator it = fila.begin();
+
+            if(!operators.empty())
+            {
+
+                sort(fila.begin(), fila.end(), comparePairs);
+                while(it != fila.end() && fila.size()>0)
+                {
+
+                    if(it->second >= operators.front().second)
+                    {
+
+                        answer += it->first;
+                        it = fila.erase(it);
+                    }
+                    else
+                    {
+                        it++;
+                    }
+                }
+            }
+        }
+
+        sort(fila.begin(), fila.end(), comparePairs);
+        for(int j = 0; j < fila.size(); j++)
+        {
+
+            answer += fila[j].first;
+        }
+        cout<<answer<<endl;
     }
 
+}
 
+int main()
+{
 
+    int T; cin>>T;
+
+    solution(T);
 
     return 0;
 }
+
+
 #endif
 
 
