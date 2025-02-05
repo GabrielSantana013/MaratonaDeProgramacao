@@ -281,13 +281,64 @@ int main()
 
 
 */
+
 using namespace std;
+
+void solution(int T){
+
+
+    //minuto de chegada, minuto crítico
+    queue<pair<int,int>> filaSuS;
+    int chegadaMinutos, criticoMinutos;
+    for(int i = 0; i < T; i++)
+    {
+        int h,m,c;
+        cin>>h>>m>>c;
+        chegadaMinutos = (h-7)*60 + m;
+        criticoMinutos = chegadaMinutos + c;
+        filaSuS.push({chegadaMinutos, criticoMinutos});
+    }
+
+    int pacientesCriticos = 0, tempo = 0;
+
+    while(!filaSuS.empty())
+    {
+        if(tempo <= filaSuS.front().first)
+        {
+
+            tempo = filaSuS.front().first;
+            if(tempo % 30 != 0)
+            {
+                tempo += 30 - (tempo % 30);
+            }
+        }
+        if(tempo > filaSuS.front().second)
+        {
+            pacientesCriticos++;
+        }
+
+        filaSuS.pop();
+        tempo +=30;
+    }
+
+    cout<< pacientesCriticos << endl;
+}
 
 int main()
 {
 
+    int T;
+
+    while(cin>>T)
+    {
+        solution(T);
+    }
+
+
     return 0;
 }
+
+
 #endif
 
 #ifdef ex06
