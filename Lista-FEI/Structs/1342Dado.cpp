@@ -9,15 +9,54 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
+
 void solution(int players, int quadrados){
 
-	int t1,t2,t3; cin>>t1,t2,t3;
+	int t1,t2,t3; cin>>t1>>t2>>t3;
+	
+	vector<pair<int,bool>> playersOrder(players, {0,false});
+	vector<bool> armadilhas(quadrados,false);
+
+	for(int i = 0; i < 3; i ++){
+		int armadilha; cin>>armadilha;
+		armadilhas[armadilha] = true;
+	}
+
 	int nRolagem; cin>>nRolagem;
+	queue<int>movimentos;
 	
 	for(int i = 0; i < nRolagem; i++)
 	{
+		int d1,d2; cin>>d1>>d2;
+		movimentos.push(d1+d2);
+	}
+
+
+	int i = 0;
+	int winner;
+	while(!movimentos.empty())
+	{
+
+		if(!playersOrder[i].s)
+		{
+			playersOrder[i].f += movimentos.front(); movimentos.pop();
+			if(playersOrder[i].f > quadrados) {
+				winner = i+1;
+				}
+		
+			if(armadilhas[playersOrder[i].f])
+				playersOrder[i].s = true;
+		}
+		else{
+			
+			playersOrder[i].s = false;
+		}
+		i++;
+		if(i == players) 
+			i = 0;
 		
 	}
+	cout<<winner<<endl;
 }
 
 
@@ -25,9 +64,13 @@ int main(){
     _;
 
 	int players, quadrados;
-	while(cin>>players>>quadrados)
-		solution(players, quadrados);
-	
+	while(cin>>players>>quadrados){
+		if(players == 0 && quadrados == 0)
+		{
+			break;
+		}
 
+		solution(players, quadrados);	
+	}
     return 0;
 }
