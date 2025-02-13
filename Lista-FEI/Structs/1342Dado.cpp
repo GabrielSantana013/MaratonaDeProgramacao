@@ -10,12 +10,17 @@ const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
 
-void solution(int players, int quadrados){
+void solution(){
 
-	int t1,t2,t3; cin>>t1>>t2>>t3;
+
+	while(true)
+	{
+		int players, quadrados; cin>>players>>quadrados;
+
+		if(players==0 and quadrados==0) break;
 	
-	vector<pair<int,bool>> playersOrder(players, {0,false});
-	vector<bool> armadilhas(quadrados,false);
+		vector<pair<int,bool>> playersOrder(players, {0,false});
+		vector<bool> armadilhas(quadrados,false);
 
 	for(int i = 0; i < 3; i ++){
 		int armadilha; cin>>armadilha;
@@ -36,7 +41,6 @@ void solution(int players, int quadrados){
 	int winner;
 	while(!movimentos.empty())
 	{
-
 		if(!playersOrder[i].s)
 		{
 			playersOrder[i].f += movimentos.front(); movimentos.pop();
@@ -55,22 +59,16 @@ void solution(int players, int quadrados){
 		if(i == players) 
 			i = 0;
 		
+		}
+		cout<<winner<<endl;
 	}
-	cout<<winner<<endl;
 }
 
 
 int main(){
     _;
 
-	int players, quadrados;
-	while(cin>>players>>quadrados){
-		if(players == 0 && quadrados == 0)
-		{
-			break;
-		}
-
-		solution(players, quadrados);	
-	}
+	solution();	
+	
     return 0;
 }
