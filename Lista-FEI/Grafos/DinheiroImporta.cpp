@@ -14,21 +14,45 @@ bool solution(int n, int m){
 	vector<vector<int>> graph(n);
 	vector<bool> visited(n, false);
 	
+	
 	vector<int>values(n);
 
 	for(int i = 0; i < values.size(); i++)
 	{
-		int n, cin>>n;
-		values.push_back(n);
+		int n; cin>>n;
+		values[i] = n;
 	}
 	
-	for(int i = 0; i < n; i++)
+	for(int i = 0; i < m; i++)
 	{
 		int u, v; cin>>u>>v;
 		graph[u].push_back(v);
-		graph(v).push_back(u);
+		graph[v].push_back(u);
 	}
 
+	ll total = 0;
+
+	function<void(int)> dfs = [&](int nodo)
+	{
+		total += values[nodo];	
+		visited[nodo] = true;
+
+		for(auto v: graph[nodo]){
+		if(!visited[v]){dfs(v);}
+		}
+	};
+
+	
+	bool paga = true;
+	for(int i = 0; i < n and paga; i++){
+		
+		if(!visited[i]){
+			dfs(i);
+			paga &= total ==0;
+		};
+	}
+	
+	return paga;
 }
 
 
@@ -36,9 +60,10 @@ int main(){
     _;
 
 	int n,m; cin>>n>>m;
-	bool stats = solution(n,m);
+	bool res = solution(n,m);
+	cout<< (res ? "POSSIBLE" : "IMPOSSIBLE")<<endl;
+	
 
-
-
+	
     return 0;
 }
