@@ -9,40 +9,73 @@ const int INF = 0x3f3f3f3f;
 const ll LINF = 0x3f3f3f3f3f3f3f3fll;
 using namespace std;
 
-void solution(){
+const int MAX = 50;
 
+int n,m;
+vector<vector<char>> M(MAX, vector<char>(MAX));
 
-	int n, m; cin>>n>>m;
-	vector<vector<char>> M(n, vector<char>(m));
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			cin >> M[i][j];
-		}
-	}
-	
-	vector<pair<int, int>> movs = {
+vector<pair<int, int>> movs = {
 		{1, 0},
 		{0, 1},
 		{-1, 0},
 		{0, -1},
-	};
+};
 
-//	// para lista de adj:
-//		int u;
-//		for (int v : g[u]) {
-//			if (!visitado[v]);
-//
-//		}
-//
-//	// para matriz:
-//		int i, j;
-//		for (auto mov : movs) {
-//			int ni = i + mov.f;	
-//			int nj = j + mov.s;
-//			
-//			if (valido(ni, nj) and !visitado[ni][nj]);
-//		}
+bool valida_pos(pair<int,int> pos){
+	
+	int i = pos.f, j = pos.s;
+	return(i>=0 && j >=0 && i < n && j < m && M[i][j] == 'A');
+}
+
+
+void bfs(vector<pair<int,int>> fontes){
+
+	queue<pair<int,int>> q;
+	for(auto i : fontes)
+		q.push(i);
+
+	while(!q.empty()){
+		pair<int,int> v = q.front();
+		q.pop();
+		for(auto u: movs){
+			u.f += v.f, u.s += v.s;
+			if(valida_pos(u)){
+			
+				q.push(u);
+				M[u.f][u.s] = 'T';
+				}
+		}
+	
+	}
+
+}
+
+
+void solution(){
+
+	while(true){
+	    cin>>n>>m;
+		if(n==0 and m ==0) break;
+
+		vector<pair<int,int>> contamina;
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < m; j++) {
+				cin >> M[i][j];
+				if(M[i][j] == 'T') contamina.emplace_back(i,j);
+			}
+		}
+
+		bfs(contamina);
+
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++)
+				cout<< M[i][j];
+			cout<<endl;
+		}
+	cout<<endl;
+	
+	}
+
 }
 
 
