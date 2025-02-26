@@ -11,7 +11,7 @@ using namespace std;
 
 vector<vector<int>> cam(5, vector<int>(5));
 
-bool valida_pos(pair<int,int> pos, vector<vector<bool>> & visited){
+int valida_pos(pair<int,int> pos, vector<vector<int>> & visited){
 
 	int i = pos.f, j = pos.s;
 	return (i>=0 && j>=0 && i< 5 && j< 5 && cam[i][j] == 0 && !visited[i][j]);
@@ -31,7 +31,8 @@ void solution(){
 	auto bfs = [&](pair<int,int> inicio){
 
 		queue<pair<int,int>> q;
-		vector<vector<bool>> visited(5, vector<bool>(5, false));
+		vector<vector<int>> visited(5, vector<int>(5, 0));
+		visited[0][0] = 1;
 
 		q.push(inicio);
 		while(!q.empty()){
@@ -42,11 +43,19 @@ void solution(){
 				for(auto u: movs){
 					u.f += v.f, u.s += v.s;
 					if(valida_pos(u, visited)){
-						visited[u.f][u.s] = true;
+						visited[u.f][u.s] = 1;
 						q.push(u);
 						}
 				}
 			}
+
+			//for (int i = 0; i < 5; i++) {
+			//	for (int j = 0; j < 5; j++) {
+			//		cout << (visited[i][j] ? '1' : '0');
+			//	}
+			//	cout << endl;
+			//}
+			//cout << endl;
 		return visited[4][4];
 	};
 
@@ -58,12 +67,12 @@ void solution(){
 		for(int j = 0; j < 5; j++){
 			cin>>cam[i][j];
 		}
-
-		if(bfs({0,0}))
-			cout<<"COOPS"<<endl;
-		else
-				cout<<"ROBBERS"<<endl;
-	
+		
+		if (bfs({0, 0})) {
+			cout << "COPS" << endl;
+		} else {
+			cout << "ROBBERS" << endl;
+		}
 	}	
 
 }
